@@ -23,7 +23,7 @@
     shellAliases = {
       ll = "ls -alh";
       v = "nvim";
-      update = "sudo nixos-rebuild switch";
+      update = "home-manager -f ~/nixos-config/ switch --flake .#user --impure";
     };
     zplug = {
       enable = true;
@@ -59,6 +59,9 @@
     inputs.xremap-flake.homeManagerModules.default
     ./home/gui/kitty.nix
     ./home/gui/hyprland.nix
+    ./home/gui/waybar.nix
+    ./home/gui/wlogout.nix
+    ./home/gui/rofi.nix
   ];
 
 
@@ -161,6 +164,7 @@
     font-awesome
     powerline-fonts
     powerline-symbols
+    pavucontrol
     (nerdfonts.override { fonts = [ "Hack" ]; })
 
     # Misc

@@ -9,13 +9,6 @@ let
     sleep 1
   '';
 in {
-  programs.waybar = {
-    enable = true;
-  };
-
-  programs.rofi = {
-    enable = true;
-  };
 
   programs.swaylock = {
     enable = true;
@@ -66,48 +59,6 @@ in {
     };
   };
 
-  programs.wlogout = {
-    enable = true;
-    layout = [
-      {
-        label = "lock";
-        action = "swaylock";
-        text = "Lock";
-        keybind = "l";
-      }
-      {
-        label = "hibernate";
-        action = "systemctl hibernate";
-        text = "Hibernate";
-        keybind = "h";
-      }
-      {
-        label = "logout";
-        action = "loginctl terminate-user $USER";
-        text = "Logout";
-        keybind = "e";
-      }
-      {
-        label = "shutdown";
-        action = "systemctl poweroff";
-        text = "Shutdown";
-        keybind = "s";
-      }
-      {
-        label = "suspend";
-        action = "systemctl syspend";
-        text = "Suspend";
-        keybind = "u";
-      }
-      {
-        label = "reboot";
-        action = "systemctl reboot";
-        text = "Reboot";
-        keybind = "r";
-      }
-    ];
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -129,24 +80,38 @@ in {
       bind = [
         "$mod, b, exec, brave" # Browser
         ", Print, exec, grimblast copy area"
-        "$mod, K, exec, kitty"
-        "$mod, E, exec, dolphin"
+        "$mod, T, exec, kitty" # term
         "$mod, V, togglefloating"
         "$mod, F, exec, rofi -show drun -show-icons"
+        "$mod, M, fullscreen"
         "$mod, Q, killactive"
         "$mod, X, exec, wlogout"
+
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
+        "$mod, H, movefocus, l"
+        "$mod, L, movefocus, r"
+        "$mod, K, movefocus, u"
+        "$mod, J, movefocus, d"
+
         "$mod, 1, workspace, 1"
-        "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod, 2, workspace, 2"
-        "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod, 3, workspace, 3"
-        "$mod SHIFT, 3, movetoworkspace, 3"
         "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
         "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+
+        "ALT, TAB, cyclenext"
+        "ALT, TAB, bringactivetotop"
+        "SHIFT ALT, TAB, cyclenext, prev"
       ];
       exec-once = ''${startupScript}/bin/start'';
     };
