@@ -8,13 +8,13 @@
     systemSettings = {
       system = "x86_64-linux";
       hostname = "nixos"; 
-      machine = "personal";
+      machine = "desktop";
       timezone = "Asia/Taipei";
       locale = "zh_TW.UTF-8";
     };
     # ----- USER SETTINGS ----- #
     userSettings = rec {
-      username = "jason9075nixos"; # username
+      username = "jason9075"; # username
       name = "jason9075"; # name/identifier
       dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
       theme = "uwunicorn-yt"; # selcted theme from my themes directory (./themes/)
@@ -26,7 +26,13 @@
       term = "kitty"; # Default terminal command;
       editor = "nvim"; # Default editor;
     };
-    pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+    # pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+    pkgs = import nixpkgs {
+      system = systemSettings.system;
+      config = {
+        allowUnfree = true;
+      };
+    };
     lib = nixpkgs.lib;
   in {
     homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
@@ -59,6 +65,10 @@
     };
 
     hyprland.url = "github:hyprwm/hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     xremap-flake.url = "github:xremap/nix-flake";
   };
