@@ -10,7 +10,7 @@ let
 
     "modules-left"= ["hyprland/workspaces"];
     "modules-center"= ["clock"];
-    "modules-right"= ["cpu" "temperature" "memory" "backlight" "pulseaudio" "tray" "custom/power"];
+    "modules-right"= ["custom/mpd" "cpu" "temperature" "memory" "backlight" "pulseaudio" "tray" "custom/power"];
 
     "hyprland/workspaces"= {
       "on-click"= "activate";
@@ -62,9 +62,8 @@ let
     };
     "clock"= {
         "interval"= 60;
-        "format"= "  {:%a %b %d  %I:%M %p}";
+        "format"= "  {:%b %d %a  %p %I:%M}";
         "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        "format-alt"= "{:%Y-%m-%d}";
     };
     "temperature"= {
          "critical-threshold"= 80;
@@ -74,19 +73,19 @@ let
     };
     "cpu"= {
         "interval"= 2;
-        "format"= "{usage}% ";
+        "format"= "  {usage}%";
         "tooltip"= false;
     };
     "memory"= {
         "interval"= 2;
-        "format"= "{}% ";
+        "format"= " {}%";
     };
     "disk"= {
          "interval"= 15;
-         "format"= "{percentage_used}% 󰋊";
+         "format"= "󰋊 {percentage_used}%";
     };
     "backlight"= {
-        "format"= "{percent}% {icon}";
+        "format"= "{icon} {percent}%";
         "format-icons"= ["" "" "" "" "" "" "" "" ""];
     };
     "battery"= {
@@ -95,10 +94,10 @@ let
             "warning"= 30;
             "critical"= 15;
         };
-        "format"= "{capacity}% {icon}";
-        "format-charging"= "{capacity}% ";
-        "format-plugged"= "{capacity}% ";
-        "format-alt"= "{time} {icon}";
+        "format"= "{icon} {capacity}%";
+        "format-charging"= " {capacity}%";
+        "format-plugged"= " {capacity}%";
+        "format-alt"= "{icon} {time}";
         "format-icons"= ["" "" "" "" ""];
     };
     "battery#bat2"= {
@@ -106,20 +105,20 @@ let
     };
     "network"= {
         "format-wifi"= " :{ipaddr}";
-        "format-ethernet"= "{ipaddr}/{cidr} ";
-        "tooltip-format-wifi"= "{essid} ({signalStrength}%) ";
-        "tooltip-format"= "{ifname} via {gwaddr} ";
-        "format-linked"= "{ifname} (No IP) ";
-        "format-disconnected"= "Disconnected ⚠";
+        "format-ethernet"= " {ipaddr}/{cidr}";
+        "tooltip-format-wifi"= " {essid} ({signalStrength}%)";
+        "tooltip-format"= " {ifname} via {gwaddr}";
+        "format-linked"= " {ifname} (No IP)";
+        "format-disconnected"= "⚠ Disconnected";
         "format-alt"= "{ifname}: {ipaddr}/{cidr}";
     };
     "pulseaudio"= {
         # "scroll-step"= 1; 
-        "format"= "{volume}% {icon}"; 
-        "format-bluetooth"= "{volume}% {icon} 󰂯"; 
-        "format-bluetooth-muted"= "󰖁 {icon} 󰂯"; 
+        "format"= "{icon} {volume}%"; 
+        "format-bluetooth"= "{icon} {volume}% 󰂯"; 
+        "format-bluetooth-muted"= "{icon} 󰖁 󰂯"; 
         "format-muted"= "󰖁 {format_source}";
-        "format-source"= "{volume}% ";
+        "format-source"= " {volume}%";
         "format-source-muted"= "";
         "format-icons"= {
             "headphone"= "󰋋";
@@ -137,6 +136,16 @@ let
       "format-icons"= "";
       "exec-on-event"= "true";
       "on-click"= "wlogout";
+    };
+    "custom/mpd"= {
+        "exec"= "mpc current";
+        "interval"= 1;
+        "format"= "🎵 {} ";
+        "format-alt"= "mpc toggle";
+        "on-click"= "mpc toggle";
+        "on-click-right"= "mpc next";
+        "on-click-middle"= "mpc prev";
+        "tooltip"= false;
     };
   };
   waybarStyle = ''
@@ -254,13 +263,20 @@ let
     #mode,
     #idle_inhibitor,
     #scratchpad,
-    #custom-power,
-    #mpd {
+    #custom-power {
       padding: 0px 5px;
       padding-right: 10px;
       margin: 3px 3px;
       color: @fg;
-      /* background-color: #252428; */
+    }
+    
+    #custom-mpd {
+      animation: blinker 4s ease-in infinite;
+    }
+    @keyframes blinker {
+        50% {
+            opacity: 0.8;
+        }
     }
     
     #custom-power {
@@ -293,6 +309,7 @@ let
     
     #clock {
       color: @nordblue;
+      font-weight: bold;
     }
     
     #battery {

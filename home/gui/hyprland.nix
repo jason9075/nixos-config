@@ -3,62 +3,11 @@
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
     waybar &
-    swww init &
     swayidle -w timeout 300 'swaylock -f' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
 
     sleep 1
   '';
 in {
-
-  programs.swaylock = {
-    enable = true;
-    package = pkgs.swaylock-effects;
-    settings = {
-      screenshots = true;
-      clock = true;
-      timestr = "%R";
-      datestr = "%Y / %m / %d";
-      fade-in = 0.3;
-      grace = 3;
-      effect-blur = "20x6";
-      indicator= true;
-      indicator-radius = 300;
-      indicator-thickness = 10;
-      indicator-caps-lock = true;
-      key-hl-color = "00000066";
-      separator-color = "00000000";
-
-      inside-color = "00000033";
-      inside-clear-color = "ffffff00";
-      inside-caps-lock-color="ffffff00";
-      inside-ver-color="ffffff00";
-      inside-wrong-color="ffffff00";
-      
-      ring-color="ffffff";
-      ring-clear-color="ffffff";
-      ring-caps-lock-color="ffffff";
-      ring-ver-color="ffffff";
-      ring-wrong-color="ffffff";
-      
-      line-color="00000000";
-      line-clear-color="ffffffFF";
-      line-caps-lock-color="ffffffFF";
-      line-ver-color="ffffffFF";
-      line-wrong-color="ffffffFF";
-      
-      text-color="ffffff";
-      text-clear-color="ffffff";
-      text-ver-color="ffffff";
-      text-wrong-color="ffffff";
-      
-      bs-hl-color="ffffff";
-      caps-lock-key-hl-color="ffffffFF";
-      caps-lock-bs-hl-color="ffffffFF";
-      disable-caps-lock-text = true;
-      text-caps-lock-color="ffffff";
-    };
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -81,6 +30,7 @@ in {
         "$mod, b, exec, brave" # Browser
         ", Print, exec, grimblast copy area"
         "$mod, T, exec, kitty" # term
+        "$mod, E, exec, thunar" # file manager
         "$mod, V, togglefloating"
         "$mod, F, exec, rofi -show drun -show-icons"
         "$mod, M, fullscreen"
@@ -112,6 +62,17 @@ in {
         "ALT, TAB, cyclenext"
         "ALT, TAB, bringactivetotop"
         "SHIFT ALT, TAB, cyclenext, prev"
+      ];
+      # use "hyprctl clients" to show class
+      windowrulev2 = [
+
+        "workspace 1, class:^(kitty)$"
+        "workspace 2, class:^(firefox)$"
+        "workspace 2, class:^(brave-browser)$"
+        "workspace 3, class:^(Slack)$"
+        "workspace 4, class:^(discord)$"
+        "workspace 4, class:^(WebCord)$"
+        "workspace 5, class:^(thunderbird)$"
       ];
       exec-once = ''${startupScript}/bin/start'';
     };

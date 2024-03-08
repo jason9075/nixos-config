@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, systemSettings, userSettings, ... }:
 
 {
   home.username = builtins.getEnv "USER";
@@ -18,50 +18,24 @@
     '';
   };
 
-  programs.zsh = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -alh";
-      v = "nvim";
-      update = "home-manager -f ~/nixos-config/ switch --flake .#user --impure";
-    };
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-completions";}
-        { name = "zsh-users/zsh-autosuggestions"; } 
-        { name = "zsh-users/zsh-syntax-highlighting"; }
-        { name = "zsh-users/zsh-history-substring-search"; }
-        { name = "jeffreytse/zsh-vi-mode"; }
-        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
-      ];
-    };
-    initExtraBeforeCompInit = ''
-      # p10k instant prompt
-      P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
-      [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-    '';
-    initExtra = ''
-      bindkey -v
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-      ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp)
-      bindkey -M vicmd 'k' history-substring-search-up
-      bindkey -M vicmd 'j' history-substring-search-down
-      bindkey '^g' autosuggest-accept
-      export ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
-      export BAT_THEME="Nord"
-
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
-  };
-
   imports = [
     inputs.xremap-flake.homeManagerModules.default
-    ./home/gui/kitty.nix
+
+    # CLI
+    ./home/cli/zsh.nix
+    ./home/cli/lazygit.nix
+
+    # GUI
     ./home/gui/hyprland.nix
+    ./home/gui/kitty.nix
     ./home/gui/waybar.nix
+    ./home/gui/swaylock.nix
     ./home/gui/wlogout.nix
     ./home/gui/rofi.nix
+    ./home/gui/mako.nix
+
+    # Audio
+    ./home/audio/mpd.nix
   ];
 
 
@@ -78,14 +52,14 @@
         }
       ];
       keymap = [
-        {
-          name = "kitty";
-          remap = {
-            super-i = {
-                launch = [ "kitty" ];
-            };
-          };
-        }
+        # {
+        #   name = "kitty";
+        #   remap = {
+        #     super-i = {
+        #         launch = [ "kitty" ];
+        #     };
+        #   };
+        # }
         # { 
         #   name = "Ctrl+h to Left";
         #   remap = {
@@ -115,7 +89,6 @@
     };
   };
 
-
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
@@ -127,6 +100,7 @@
 
     # CLI
     htop
+    nvtop
     ripgrep
     fd
     bat
@@ -140,17 +114,19 @@
     fzf
     kitty
     neofetch
+    tree
 
     # GUI
-    waybar
     hyprland
-    swww
     swayidle
+    xfce.thunar
 
     # Communication
     discord
     slack
     zoom-us
+    webcord
+    thunderbird
 
     # Web Browser
     google-chrome
@@ -168,8 +144,9 @@
     (nerdfonts.override { fonts = [ "Hack" ]; })
 
     # Misc
-    xclip
+    wl-clipboard
     tree-sitter
+    mpd
     
   ];
 

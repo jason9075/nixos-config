@@ -37,10 +37,12 @@
   in {
     homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = { inherit inputs; };
-      modules = [ 
-        ./home.nix 
-      ];
+      modules = [ ./home.nix ];
+      extraSpecialArgs = {
+        inherit inputs;
+        inherit systemSettings;
+        inherit userSettings;
+      };
     };
     nixosConfigurations = {
       system = lib.nixosSystem {
@@ -71,6 +73,8 @@
     };
 
     xremap-flake.url = "github:xremap/nix-flake";
+
+
   };
 
 }
