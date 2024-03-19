@@ -62,7 +62,7 @@ let
     };
     "clock"= {
         "interval"= 60;
-        "format"= "  {:%b %d %a  %p %I:%M}";
+        "format"= " {:%b %d %a  %p %I:%M}";
         "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
     };
     "temperature"= {

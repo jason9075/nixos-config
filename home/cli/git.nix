@@ -1,10 +1,10 @@
-{ pkgs, userSettings...}:
+{ userSettings, ...}:
 
 {
   programs.git = {
     enable = true;
-    userName = userSettings.userName;
-    userEmail = userSettings.userName + "@users.noreply.github.com";
+    userName = userSettings.username;
+    userEmail = userSettings.username + "@users.noreply.github.com";
     extraConfig = {
       core.editor = "nvim";
       init.defaultBranch = "main";

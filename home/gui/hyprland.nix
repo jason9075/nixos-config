@@ -4,6 +4,7 @@ let
   startupScript = pkgs.writeShellScriptBin "start" ''
     waybar &
     swayidle -w timeout 300 'swaylock -f' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
+    swww init &
 
     sleep 1
   '';
@@ -35,6 +36,7 @@ in {
         "$mod, F, exec, rofi -show drun -show-icons"
         "$mod, M, fullscreen"
         "$mod, Q, killactive"
+        "$mod, W, exec, ~/nixos-config/scripts/swww_randomize.sh"
         "$mod, X, exec, wlogout"
 
         "$mod, left, movefocus, l"
@@ -64,8 +66,8 @@ in {
         "SHIFT ALT, TAB, cyclenext, prev"
       ];
       # use "hyprctl clients" to show class
+      # https://wiki.hyprland.org/Configuring/Window-Rules/
       windowrulev2 = [
-
         "workspace 1, class:^(kitty)$"
         "workspace 2, class:^(firefox)$"
         "workspace 2, class:^(brave-browser)$"
@@ -73,6 +75,7 @@ in {
         "workspace 4, class:^(discord)$"
         "workspace 4, class:^(WebCord)$"
         "workspace 5, class:^(thunderbird)$"
+        "opacity 0.9 0.7, class:^(thunar)"
       ];
       exec-once = ''${startupScript}/bin/start'';
     };

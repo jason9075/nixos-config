@@ -26,9 +26,11 @@
     ./home/cli/git.nix
     ./home/cli/lazygit.nix
     ./home/cli/mu.nix
+    ./home/cli/xremap.nix
 
     # GUI
     ./home/gui/hyprland.nix
+    ./home/gui/gtk.nix
     ./home/gui/kitty.nix
     ./home/gui/waybar.nix
     ./home/gui/swaylock.nix
@@ -39,57 +41,6 @@
     # Audio
     ./home/audio/mpd.nix
   ];
-
-
-  services.xremap = {
-    debug = true;
-    withWlroots = true;
-    config = {
-      modmap = [
-        {
-          name = "CapsLock to Ctrl";
-          remap = {
-            "CapsLock" = "Ctrl_L";
-          };
-        }
-      ];
-      keymap = [
-        # {
-        #   name = "kitty";
-        #   remap = {
-        #     super-i = {
-        #         launch = [ "kitty" ];
-        #     };
-        #   };
-        # }
-        # { 
-        #   name = "Ctrl+h to Left";
-        #   remap = {
-        #       C-h = "left";
-        #   };
-        # }
-        # { 
-        #   name = "Ctrl+j to down";
-        #   remap = {
-        #       C-j = "down";
-        #   };
-        # }
-        # { 
-        #   name = "Ctrl+k to up";
-        #   remap = {
-        #       C-k = "up";
-        #   };
-        # }
-        # { 
-        #   name = "Ctrl+l to right";
-        #   remap = {
-        #       C-l = "right";
-        #   };
-        # }
-      ];
-
-    };
-  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -119,6 +70,7 @@
 
     # GUI
     hyprland
+    swww
     swayidle
     xfce.thunar
 
@@ -147,7 +99,6 @@
     # Misc
     wl-clipboard
     tree-sitter
-    mpd
     
   ];
 

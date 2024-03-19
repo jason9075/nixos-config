@@ -17,6 +17,7 @@
   };
 
   home.packages = with pkgs; [
+    mpd
     cava
     ffmpeg
     mpc-cli
