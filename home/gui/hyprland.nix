@@ -38,15 +38,20 @@ in {
         "$mod, Q, killactive"
         "$mod, W, exec, ~/nixos-config/scripts/swww_randomize.sh"
         "$mod, X, exec, wlogout"
-
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
+        "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%"
+        "$mod, minus, exec, pactl -- set-sink-volume 0 -10%"
+        "$mod, left,  resizeactive, -80 0"
+        "$mod, right, resizeactive, 80 0"
+        "$mod, up,    resizeactive, 0 -80"
+        "$mod, down,  resizeactive, 0 80"
         "$mod, H, movefocus, l"
         "$mod, L, movefocus, r"
         "$mod, K, movefocus, u"
         "$mod, J, movefocus, d"
+        "$mod SHIFT, H, movewindow, l"
+        "$mod SHIFT, L, movewindow, r"
+        "$mod SHIFT, K, movewindow, u"
+        "$mod SHIFT, J, movewindow, d"
 
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
@@ -60,6 +65,10 @@ in {
         "$mod SHIFT, 4, movetoworkspace, 4"
         "$mod SHIFT, 5, movetoworkspace, 5"
         "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+        "$mod SHIFT, 10, movetoworkspace, 10"
 
         "ALT, TAB, cyclenext"
         "ALT, TAB, bringactivetotop"
@@ -69,13 +78,14 @@ in {
       # https://wiki.hyprland.org/Configuring/Window-Rules/
       windowrulev2 = [
         "workspace 1, class:^(kitty)$"
+        "opacity 1.0 0.95, class:^(kitty)$"
         "workspace 2, class:^(firefox)$"
         "workspace 2, class:^(brave-browser)$"
         "workspace 3, class:^(Slack)$"
         "workspace 4, class:^(discord)$"
         "workspace 4, class:^(WebCord)$"
         "workspace 5, class:^(thunderbird)$"
-        "opacity 0.9 0.7, class:^(thunar)"
+        "opacity 0.9 0.8, class:^(thunar)"
       ];
       exec-once = ''${startupScript}/bin/start'';
     };

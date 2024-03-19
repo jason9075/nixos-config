@@ -3,14 +3,14 @@
 let
   waybarConfig = builtins.toJSON {
     "layer"="top";
-    "height"= 32;
-    "margin-top"= 3;
+    "height"= 36;
+    "margin-top"= 4;
     "margin-left"= 10;
     "margin-right"= 10;
 
-    "modules-left"= ["hyprland/workspaces"];
-    "modules-center"= ["clock"];
-    "modules-right"= ["custom/mpd" "cpu" "temperature" "memory" "backlight" "pulseaudio" "tray" "custom/power"];
+    "modules-left"= ["hyprland/workspaces" "custom/mpd"];
+    "modules-center"= ["clock" "custom/wallpaper"];
+    "modules-right"= ["cpu" "temperature" "memory" "disk" "backlight" "pulseaudio" "tray" "custom/power"];
 
     "hyprland/workspaces"= {
       "on-click"= "activate";
@@ -37,115 +37,121 @@ let
        };
     };
     "keyboard-state"= {
-        "numlock"= true;
-        "capslock"= true;
-        "format"= "{name} {icon}";
-        "format-icons"= {
-            "locked"= "";
-            "unlocked"= "";
-        };
+      "numlock"= true;
+      "capslock"= true;
+      "format"= "{name} {icon}";
+      "format-icons"= {
+          "locked"= "";
+          "unlocked"= "";
+      };
     };
     "wlr/taskbar"= {
-        "format"= "{icon}";
-        "icon-size"= 18;
-        "tooltip-format"= "{title}";
-        "on-click"= "activate";
-        "on-click-middle"= "close";
-        "ignore-list"= [
-           "kitty"
-        ];
+      "format"= "{icon}";
+      "icon-size"= 18;
+      "tooltip-format"= "{title}";
+      "on-click"= "activate";
+      "on-click-middle"= "close";
+      "ignore-list"= [
+         "kitty"
+      ];
     };
     "tray"= {
-        "icon-size"= 18;
-        "spacing"= 5;
-        "show-passive-items"= true;
+      "icon-size"= 18;
+      "spacing"= 5;
+      "show-passive-items"= true;
     };
     "clock"= {
-        "interval"= 60;
-        "format"= " {:%b %d %a  %p %I:%M}";
-        "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+      "interval"= 60;
+      "format"= "  {:%b %d %a  %p %I:%M}";
+      "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
     };
     "temperature"= {
-         "critical-threshold"= 80;
-         "interval"= 2;
-         "format"= "{temperatureC}°C ";
-         "format-icons"= ["" "" ""];
+      "critical-threshold"= 80;
+      "interval"= 2;
+      "format"= "{temperatureC}°C ";
+      "format-icons"= ["" "" ""];
     };
     "cpu"= {
-        "interval"= 2;
-        "format"= "  {usage}%";
-        "tooltip"= false;
+      "interval"= 2;
+      "format"= "  {usage}%";
+      "tooltip"= false;
     };
     "memory"= {
-        "interval"= 2;
-        "format"= " {}%";
+      "interval"= 2;
+      "format"= " {}%";
     };
     "disk"= {
-         "interval"= 15;
-         "format"= "󰋊 {percentage_used}%";
+      "interval"= 15;
+      "format"= "󰋊 {percentage_used}%";
     };
     "backlight"= {
-        "format"= "{icon} {percent}%";
-        "format-icons"= ["" "" "" "" "" "" "" "" ""];
+      "format"= "{icon} {percent}%";
+      "format-icons"= ["" "" "" "" "" "" "" "" ""];
     };
     "battery"= {
-        "states"= {
-            "good"= 95;
-            "warning"= 30;
-            "critical"= 15;
-        };
-        "format"= "{icon} {capacity}%";
-        "format-charging"= " {capacity}%";
-        "format-plugged"= " {capacity}%";
-        "format-alt"= "{icon} {time}";
-        "format-icons"= ["" "" "" "" ""];
+      "states"= {
+          "good"= 95;
+          "warning"= 30;
+          "critical"= 15;
+      };
+      "format"= "{icon} {capacity}%";
+      "format-charging"= " {capacity}%";
+      "format-plugged"= " {capacity}%";
+      "format-alt"= "{icon} {time}";
+      "format-icons"= ["" "" "" "" ""];
     };
     "battery#bat2"= {
-        "bat"= "BAT2";
+      "bat"= "BAT2";
     };
     "network"= {
-        "format-wifi"= " :{ipaddr}";
-        "format-ethernet"= " {ipaddr}/{cidr}";
-        "tooltip-format-wifi"= " {essid} ({signalStrength}%)";
-        "tooltip-format"= " {ifname} via {gwaddr}";
-        "format-linked"= " {ifname} (No IP)";
-        "format-disconnected"= "⚠ Disconnected";
-        "format-alt"= "{ifname}: {ipaddr}/{cidr}";
+      "format-wifi"= " :{ipaddr}";
+      "format-ethernet"= " {ipaddr}/{cidr}";
+      "tooltip-format-wifi"= " {essid} ({signalStrength}%)";
+      "tooltip-format"= " {ifname} via {gwaddr}";
+      "format-linked"= " {ifname} (No IP)";
+      "format-disconnected"= "⚠ Disconnected";
+      "format-alt"= "{ifname}: {ipaddr}/{cidr}";
     };
     "pulseaudio"= {
-        # "scroll-step"= 1; 
-        "format"= "{icon} {volume}%"; 
-        "format-bluetooth"= "{icon} {volume}% 󰂯"; 
-        "format-bluetooth-muted"= "{icon} 󰖁 󰂯"; 
-        "format-muted"= "󰖁 {format_source}";
-        "format-source"= " {volume}%";
-        "format-source-muted"= "";
-        "format-icons"= {
-            "headphone"= "󰋋";
-            "hands-free"= "󱡒";
-            "headset"= "󰋎";
-            "phone"= "";
-            "portable"= "";
-            "car"= "";
-            "default"= ["" "" ""];
-        };
-        "on-click"= "pavucontrol";
+      # "scroll-step"= 1; 
+      "format"= "{icon} {volume}%"; 
+      "format-bluetooth"= "{icon} {volume}% 󰂯"; 
+      "format-bluetooth-muted"= "{icon} 󰖁 󰂯"; 
+      "format-muted"= "󰖁 {format_source}";
+      "format-source"= " {volume}%";
+      "format-source-muted"= "";
+      "format-icons"= {
+        "headphone"= "󰋋";
+        "hands-free"= "󱡒";
+        "headset"= "󰋎";
+        "phone"= "";
+        "portable"= "";
+        "car"= "";
+        "default"= ["" "" ""];
+      };
+      "on-click"= "pavucontrol";
+    };
+    "custom/wallpaper"={
+      "format"= " {icon} ";
+      "format-icons"= "󰸉";
+      "on-click"= "~/nixos-config/scripts/swww_randomize.sh";
+      "tooltip"= false;
     };
     "custom/power"= {
-      "format"= "{icon}";
+      "format"= "{icon} ";
       "format-icons"= "";
       "exec-on-event"= "true";
       "on-click"= "wlogout";
     };
     "custom/mpd"= {
-        "exec"= "mpc current";
-        "interval"= 1;
-        "format"= "🎵 {} ";
-        "format-alt"= "mpc toggle";
-        "on-click"= "mpc toggle";
-        "on-click-right"= "mpc next";
-        "on-click-middle"= "mpc prev";
-        "tooltip"= false;
+      "exec"= "mpc current";
+      "interval"= 1;
+      "format"= "🎵 {} ";
+      "format-alt"= "mpc toggle";
+      "on-click"= "mpc toggle";
+      "on-click-right"= "mpc next";
+      "on-click-middle"= "mpc prev";
+      "tooltip"= false;
     };
   };
   waybarStyle = ''
@@ -164,8 +170,7 @@ let
       min-height: 0;
       font-family: "Hack Nerd Font", FontAwesome, Roboto,
         Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      /* background-color: #04142d; */
+      font-size: 15px;
     }
     
     window#waybar {
@@ -176,7 +181,7 @@ let
     }
     
     window#waybar.empty {
-      opacity: 0.4;
+      opacity: 0.6;
     }
     
     .modules-left {
@@ -190,6 +195,8 @@ let
     
     .modules-right {
       background: @bg;
+      border: 1px solid @bordercolor;
+      border-radius: 8px;
     
       padding-right: 5px;
       padding-left: 5px;
@@ -197,6 +204,8 @@ let
     
     .modules-center {
       background: @bg;
+      border: 1px solid @bordercolor;
+      border-radius: 8px;
     
       padding-right: 5px;
       padding-left: 5px;
@@ -274,13 +283,17 @@ let
       animation: blinker 4s ease-in infinite;
     }
     @keyframes blinker {
-        50% {
-            opacity: 0.8;
-        }
+      50% {
+          opacity: 0.8;
+      }
     }
-    
+
     #custom-power {
       color: @nordgray;
+    }
+
+    #custom-wallpaper {
+      color: @nordblue;
     }
     
     #cpu {
