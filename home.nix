@@ -23,7 +23,9 @@
 
     # CLI
     ./home/cli/zsh.nix
+    ./home/cli/git.nix
     ./home/cli/lazygit.nix
+    ./home/cli/mu.nix
 
     # GUI
     ./home/gui/hyprland.nix
@@ -108,7 +110,6 @@
     wget
     killall
     unzip
-    git
     jq
     yq
     fzf
