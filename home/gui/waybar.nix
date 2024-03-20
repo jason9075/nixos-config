@@ -75,6 +75,10 @@ let
       "interval"= 2;
       "format"= "  {usage}%";
       "tooltip"= false;
+      "states" = {
+        "mid"= 90;
+        "high"= 95;
+      };
     };
     "memory"= {
       "interval"= 2;
@@ -83,6 +87,10 @@ let
     "disk"= {
       "interval"= 15;
       "format"= "󰋊 {percentage_used}%";
+      "states"= {
+        "mid"= 90;
+        "high"= 95;
+      };
     };
     "backlight"= {
       "format"= "{icon} {percent}%";
@@ -90,9 +98,9 @@ let
     };
     "battery"= {
       "states"= {
-          "good"= 95;
-          "warning"= 30;
-          "critical"= 15;
+        "good"= 95;
+        "warning"= 30;
+        "critical"= 15;
       };
       "format"= "{icon} {capacity}%";
       "format-charging"= " {capacity}%";
@@ -158,12 +166,13 @@ let
     @define-color bg rgba(4, 20, 45, 0.50);
     @define-color bg-alt #252428;
     @define-color fg #f5f5f5;
-    @define-color alert #f53c3c;
+    @define-color alert #bf616a;
     @define-color disabled #a5a5a5;
     @define-color bordercolor #4b4950;
     @define-color highlight #FBD47F;
     @define-color activegreen #8fb666;
     @define-color nordblue #81a1c1;
+    @define-color nordyellow #ebcb8b;
     @define-color nordgray #abb1bb;
     
     * {
@@ -299,9 +308,21 @@ let
     #cpu {
       color: @nordblue;
     }
+
+    #cpu.mid {
+      color: @nordtyellow;
+    }
+
+    #cpu.high {
+      color: @alert;
+    }
     
     #temperature {
       color: @nordblue;
+    }
+    
+    #temperature.critical {
+      background-color: @alert;
     }
     
     #memory {
@@ -309,7 +330,15 @@ let
     }
     
     #disk {
-      color: #979618;
+      color: @nordblue;
+    }
+
+    #disk.mid {
+      background-color: @nordyellow;
+    }
+
+    #disk.high {
+      background-color: @alert;
     }
     
     #backlight {

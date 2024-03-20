@@ -152,6 +152,7 @@
      vim 
      git
      wayland
+     pulseaudio
      (sddm-chili-theme.override {
         themeConfig = {
           ScreenWidth = 1920;

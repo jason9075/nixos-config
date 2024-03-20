@@ -50,6 +50,7 @@
     gdb
     gnumake
     cmake
+    nodejs
 
     # CLI
     htop
@@ -73,6 +74,9 @@
     swww
     swayidle
     xfce.thunar
+    grim
+    slurp
+    swappy
 
     # Communication
     discord
@@ -89,6 +93,9 @@
     # Game
     steam
 
+    # Multimedia
+    gimp
+
     # Fonts
     font-awesome
     powerline-fonts
@@ -98,6 +105,7 @@
 
     # Misc
     wl-clipboard
+    wtype
     tree-sitter
     
   ];

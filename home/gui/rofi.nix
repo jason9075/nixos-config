@@ -2,6 +2,20 @@
 
 let
   rofiConfig = ''
+  /* Key Bindings */
+  configuration {
+      kb-select-1: "Ctrl+1";
+      kb-select-2: "Ctrl+2";
+      kb-select-3: "Ctrl+3";
+      kb-select-4: "Ctrl+4";
+      kb-select-5: "Ctrl+5";
+      kb-select-6: "Ctrl+6";
+      kb-select-7: "Ctrl+7";
+      kb-select-8: "Ctrl+8";
+      kb-select-9: "Ctrl+9";
+      kb-select-10: "Ctrl+0";
+      modes: [window,drun,run,ssh,emoji,calc];
+  }
   /*******************************************************************************
   * ROUNDED THEME FOR ROFI 
   * User                 : LR-Tech               
@@ -30,7 +44,7 @@ let
 
   window {
     location:       center;
-    width:          480;
+    width:          640;
     border-radius:  24px;
     background-color:   @bg0;
   }
@@ -56,7 +70,7 @@ let
   }
 
   entry {
-      placeholder:        "Search";
+      placeholder:        "...";
       placeholder-color:  @fg3;
   }
 
@@ -75,7 +89,7 @@ let
       background-color:   transparent;
   
       margin:     12px 0 0;
-      lines:      8;
+      lines:      10;
       columns:    1;
   
       fixed-height: false;
@@ -114,5 +128,9 @@ in {
   programs.rofi = {
     enable = true;
     theme = "nord.rasi";
+    plugins = [
+      pkgs.rofi-emoji
+      pkgs.rofi-calc
+    ];
   };
 }

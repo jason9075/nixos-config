@@ -5,6 +5,7 @@ let
     waybar &
     swayidle -w timeout 300 'swaylock -f' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     swww init &
+    $HOME/nixos-config/scripts/swww_randomize.sh
 
     sleep 1
   '';
@@ -28,8 +29,9 @@ in {
         "$mod ALT, mouse:272, resizewindow"
       ];
       bind = [
-        "$mod, b, exec, brave" # Browser
-        ", Print, exec, grimblast copy area"
+        ", Print, exec, grim -g \"\$(slurp)\""
+        "$mod, Print, exec, grim -g - \"\$(slurp)\" | swappy -f -"
+        "$mod, B, exec, brave" # Browser
         "$mod, T, exec, kitty" # term
         "$mod, E, exec, thunar" # file manager
         "$mod, V, togglefloating"
@@ -38,6 +40,8 @@ in {
         "$mod, Q, killactive"
         "$mod, W, exec, ~/nixos-config/scripts/swww_randomize.sh"
         "$mod, X, exec, wlogout"
+        "$mod SHIFT, E, exec, rofi -show emoji"
+        "$mod SHIFT, C, exec, rofi -show calc -no-show-match -no-sort"
         "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%"
         "$mod, minus, exec, pactl -- set-sink-volume 0 -10%"
         "$mod, left,  resizeactive, -80 0"
@@ -59,6 +63,10 @@ in {
         "$mod, 4, workspace, 4"
         "$mod, 5, workspace, 5"
         "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, workspace, 10"
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod SHIFT, 3, movetoworkspace, 3"
@@ -68,7 +76,7 @@ in {
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 10, movetoworkspace, 10"
+        "$mod SHIFT, 0, movetoworkspace, 10"
 
         "ALT, TAB, cyclenext"
         "ALT, TAB, bringactivetotop"
@@ -84,8 +92,12 @@ in {
         "workspace 3, class:^(Slack)$"
         "workspace 4, class:^(discord)$"
         "workspace 4, class:^(WebCord)$"
-        "workspace 5, class:^(thunderbird)$"
-        "opacity 0.9 0.8, class:^(thunar)"
+        "workspace 0, class:^(thunderbird)$"
+        "opacity 0.95 0.88, class:^(thunar)"
+      ];
+      bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
+      animation = [
+        "windows, 1, 8, myBeizer"
       ];
       exec-once = ''${startupScript}/bin/start'';
     };
