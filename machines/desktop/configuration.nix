@@ -38,17 +38,18 @@
     LC_TIME = systemSettings.locale;
   };
 
-  services.xserver = {
+  services.greetd = {
     enable = true;
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      enableHidpi = true;
-      theme = "chili";
+    restart = false;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = userSettings.username;
+      };
+      initial_session = {
+        command = "Hyprland";
+        user = userSettings.username;
+      };
     };
   };
 
