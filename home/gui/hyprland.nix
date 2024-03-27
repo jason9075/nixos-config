@@ -3,8 +3,9 @@
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
     waybar &
-    swayidle -w timeout 300 'swaylock -f' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
+    swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     swww init &
+    pypr &
     $HOME/nixos-config/scripts/swww_randomize.sh
 
     sleep 1
@@ -13,6 +14,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      "$mod" = "SUPER";
       general = {
         gaps_in = 2;
         gaps_out = 5;
@@ -21,7 +23,6 @@ in {
         shadow_offset = "0 5";
         "col.shadow" = "rgba(00000099)";
       };
-      "$mod" = "SUPER";
       monitor = ",highres,auto,1";
       bindm = [
         "$mod, mouse:272, movewindow"
@@ -56,6 +57,9 @@ in {
         "$mod SHIFT, L, movewindow, r"
         "$mod SHIFT, K, movewindow, u"
         "$mod SHIFT, J, movewindow, d"
+        # Scratchpads
+        "$mod, C, exec, pypr toggle chatgpt"
+        "$mod, I, exec, pypr toggle term"
 
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
@@ -85,15 +89,15 @@ in {
       # use "hyprctl clients" to show class
       # https://wiki.hyprland.org/Configuring/Window-Rules/
       windowrulev2 = [
-        "workspace 1, class:^(kitty)$"
+        "workspace 10, class:^(kitty)$"
+        "workspace 9, class:^(firefox)$"
+        "workspace 9, class:^(brave-browser)$"
+        "workspace 8, class:^(Slack)$"
+        "workspace 7, class:^(discord)$"
+        "workspace 7, class:^(WebCord)$"
+        "workspace 6, class:^(thunderbird)$"
         "opacity 1.0 0.95, class:^(kitty)$"
-        "workspace 2, class:^(firefox)$"
-        "workspace 2, class:^(brave-browser)$"
-        "workspace 3, class:^(Slack)$"
-        "workspace 4, class:^(discord)$"
-        "workspace 4, class:^(WebCord)$"
-        "workspace 0, class:^(thunderbird)$"
-        "opacity 0.95 0.88, class:^(thunar)"
+        "opacity 0.95 0.88, class:^(thunar)$"
       ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
       animation = [
@@ -102,4 +106,25 @@ in {
       exec-once = ''${startupScript}/bin/start'';
     };
   };
+
+  # https://github.com/hyprland-community/pyprland/wiki/scratchpads
+  home.file.".config/hypr/pyprland.toml".text = ''
+    [pyprland]
+    plugins = ["scratchpads"]
+
+    [scratchpads.chatgpt]
+    animation = "fromtop"
+    command = "firefox --name=chatgpt_app --no-remote -P chatgpt https://chat.openai.com"
+    class = "chatgpt_app"
+    size = "80% 85%"
+    margin = 50
+    lazy = true
+
+    [scratchpads.term]
+    animation = "fromtop"
+    command = "kitty --class term"
+    class = "term"
+    size = "80% 85%"
+    margin = 50
+  '';
 }

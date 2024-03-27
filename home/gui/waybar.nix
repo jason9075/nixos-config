@@ -30,10 +30,10 @@ let
       "format"= "{icon}";
       # https://www.nerdfonts.com/cheat-sheet
       "format-icons"= {
-          "1"= "";
-          "2"= "";
-          "3"= "󰒱";
-          "4"= "󰙯";
+          "10"= "";
+          "9"= "";
+          "8"= "󰒱";
+          "7"= "󰙯";
        };
     };
     "keyboard-state"= {

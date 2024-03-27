@@ -1,6 +1,12 @@
-{ pkgs, inputs, systemSettings, userSettings, ... }:
+{ pkgs, lib, inputs, systemSettings, userSettings, ... }:
 
-{
+with pkgs; let
+  # Patch trick: https://www.reddit.com/r/NixOS/comments/13bo4fw/how_to_set_flags_for_application/
+  patchDesktop = pkg: appName: from: to: (lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" {} ''
+    ${coreutils}/bin/mkdir -p $out/share/applications
+    ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop '')
+  );
+in {
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
 
@@ -8,25 +14,15 @@
 
   programs.home-manager.enable = true;
 
-  programs.neovim = {
-    enable = true;
-    # Add your Neovim configuration here. For example:
-    viAlias = true;
-    vimAlias = true;
-    extraConfig = ''
-      source ~/dotfiles/dot_config/nvim/init.lua
-    '';
-  };
-
   imports = [
     inputs.xremap-flake.homeManagerModules.default
 
     # CLI
     ./home/cli/zsh.nix
+    ./home/cli/nvim.nix
     ./home/cli/git.nix
     ./home/cli/lazygit.nix
     ./home/cli/mu.nix
-    ./home/cli/xremap.nix
 
     # GUI
     ./home/gui/hyprland.nix
@@ -40,9 +36,11 @@
 
     # Audio
     ./home/audio/mpd.nix
-  ];
 
-  nixpkgs.config.allowUnfree = true;
+    # Keyboards
+    ./home/keyboards/xremap.nix
+    ./home/keyboards/fcitx.nix
+  ];
 
   home.packages = with pkgs; [
     # Development
@@ -51,6 +49,7 @@
     gnumake
     cmake
     nodejs
+    postman
 
     # CLI
     htop
@@ -71,6 +70,7 @@
 
     # GUI
     hyprland
+    pyprland
     swww
     swayidle
     xfce.thunar
@@ -81,8 +81,10 @@
     # Communication
     discord
     slack
+    (patchDesktop slack "slack" "^Exec=${slack}/bin/slack -s %U" "Exec=${slack}/bin/slack --enable-wayland-ime -s %U")
     zoom-us
     webcord
+    (patchDesktop webcord "webcord" "^Exec=webcord" "Exec=webcord --enable-wayland-ime")
     thunderbird
 
     # Web Browser
@@ -95,6 +97,8 @@
 
     # Multimedia
     gimp
+    obs-studio
+    vlc
 
     # Fonts
     font-awesome
@@ -107,13 +111,8 @@
     wl-clipboard
     wtype
     tree-sitter
-    
   ];
 
   fonts.fontconfig.enable = true;
-
-  i18n.inputMethod.enabled = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-chewing ];
-
 }
 
