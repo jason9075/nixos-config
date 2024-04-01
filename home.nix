@@ -40,6 +40,9 @@ in {
     # Keyboards
     ./home/keyboards/xremap.nix
     ./home/keyboards/fcitx.nix
+
+    # Network
+    ./home/network/wireguard.nix
   ];
 
   home.packages = with pkgs; [
@@ -50,6 +53,7 @@ in {
     cmake
     nodejs
     postman
+    ansible
 
     # CLI
     htop
