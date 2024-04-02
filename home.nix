@@ -41,8 +41,6 @@ in {
     ./home/keyboards/xremap.nix
     ./home/keyboards/fcitx.nix
 
-    # Network
-    ./home/network/wireguard.nix
   ];
 
   home.packages = with pkgs; [
@@ -54,6 +52,7 @@ in {
     nodejs
     postman
     ansible
+    vpnc
 
     # CLI
     htop

@@ -14,6 +14,12 @@ let
       kb-select-8: "Ctrl+8";
       kb-select-9: "Ctrl+9";
       kb-select-10: "Ctrl+0";
+      kb-accept-entry: "Return,KP_Enter";
+      kb-remove-to-eol: "";
+      kb-row-down: "Ctrl+j,Ctrl+n,Down";
+      kb-row-up: "Ctrl+k,Ctrl+p,Up";
+      kb-cancel: "Escape,Ctrl+g,Ctrl+bracketleft";
+      
       modes: [window,drun,run,ssh,emoji,calc];
   }
   /*******************************************************************************

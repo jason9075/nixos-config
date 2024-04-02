@@ -43,7 +43,7 @@ in {
       v = "nvim";
       lg = "lazygit";
       update = "cd ~/nixos-config/ && home-manager switch --flake .#user --impure && cd -";
-      updateSystem = "cd ~/nixos-config/ && sudo nixos-generate-config --show-hardware-config > ~/nixos-config/system/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#system --impure && cd -";
+      updatesys = "cd ~/nixos-config/ && sudo nixos-generate-config --show-hardware-config > ~/nixos-config/system/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#system --impure && cd -";
       icat = "kitty +kitten icat";
     };
     zplug = {

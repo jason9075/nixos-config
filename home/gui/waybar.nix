@@ -9,8 +9,8 @@ let
     "margin-right"= 10;
 
     "modules-left"= ["hyprland/workspaces" "custom/mpd"];
-    "modules-center"= ["clock" "custom/wallpaper"];
-    "modules-right"= ["cpu" "temperature" "memory" "disk" "backlight" "pulseaudio" "tray" "custom/power"];
+    "modules-center"= ["clock" "custom/wallpaper" "custom/keybindings"];
+    "modules-right"= ["cpu" "temperature" "memory" "disk" "backlight" "pulseaudio" "custom/vpn" "tray" "custom/power"];
 
     "hyprland/workspaces"= {
       "on-click"= "activate";
@@ -62,7 +62,7 @@ let
     };
     "clock"= {
       "interval"= 60;
-      "format"= "  {:%b %d %a  %p %I:%M}";
+      "format"= " {:%b %d %a  %p %I:%M}";
       "tooltip-format"= "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
     };
     "temperature"= {
@@ -145,6 +145,12 @@ let
       "on-click"= "~/nixos-config/scripts/swww_randomize.sh";
       "tooltip"= false;
     };
+    "custom/keybindings"= {
+      "format"= " {icon} ";
+      "format-icons"= "󰍉";
+      "on-click"= "~/nixos-config/scripts/rofi_keybindings.sh";
+      "tooltip"= false;
+    };
     "custom/power"= {
       "format"= "{icon} ";
       "format-icons"= "";
@@ -161,6 +167,15 @@ let
       "on-click-middle"= "mpc prev";
       "tooltip"= false;
     };
+    "custom/vpn"= {
+      # "exec"= "~/nixos-config/scripts/vpn_status.sh";
+      "format"= "{icon} {}";
+      "format-icons"= "󰖂 ";
+      # "on-click"= "~/nixos-config/scripts/rofi_vpn.sh";
+      "on-click"= "sudo vpnc ~/.vpnc/astra.conf";
+      "tooltip"= false;
+    };
+
   };
   waybarStyle = ''
     @define-color bg rgba(4, 20, 45, 0.50);
@@ -302,6 +317,14 @@ let
     }
 
     #custom-wallpaper {
+      color: @nordblue;
+    }
+
+    #custom-keybindings {
+      color: @nordblue;
+    }
+
+    #custom-vpn {
       color: @nordblue;
     }
     
