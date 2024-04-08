@@ -102,13 +102,7 @@ in {
     gimp
     obs-studio
     vlc
-
-    # Fonts
-    font-awesome
-    powerline-fonts
-    powerline-symbols
-    pavucontrol
-    (nerdfonts.override { fonts = [ "Hack" ]; })
+    shotcut
 
     # Misc
     wl-clipboard
@@ -116,6 +110,5 @@ in {
     tree-sitter
   ];
 
-  fonts.fontconfig.enable = true;
 }
 
