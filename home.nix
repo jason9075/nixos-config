@@ -1,11 +1,12 @@
-{ pkgs, lib, inputs, systemSettings, userSettings, ... }:
+{ pkgs, xremap-flake, nixvim, systemSettings, userSettings, ... }:
 
-with pkgs; let
+with pkgs;
+let
   # Patch trick: https://www.reddit.com/r/NixOS/comments/13bo4fw/how_to_set_flags_for_application/
-  patchDesktop = pkg: appName: from: to: (lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" {} ''
-    ${coreutils}/bin/mkdir -p $out/share/applications
-    ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop '')
-  );
+  patchDesktop = pkg: appName: from: to:
+    (pkgs.lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" { } ''
+      ${coreutils}/bin/mkdir -p $out/share/applications
+      ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop ''));
 in {
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
@@ -15,14 +16,16 @@ in {
   programs.home-manager.enable = true;
 
   imports = [
-    inputs.xremap-flake.homeManagerModules.default
+    xremap-flake.homeManagerModules.default
+    nixvim.homeManagerModules.nixvim
 
     # CLI
     ./home/cli/zsh.nix
-    ./home/cli/nvim.nix
+    # ./home/cli/nvim.nix
     ./home/cli/git.nix
     ./home/cli/lazygit.nix
     ./home/cli/mu.nix
+    ./home/nixvim
 
     # GUI
     ./home/gui/hyprland.nix
@@ -56,7 +59,7 @@ in {
 
     # CLI
     htop
-    nvtop
+    nvtopPackages.full
     ripgrep
     fd
     bat
@@ -84,10 +87,12 @@ in {
     # Communication
     discord
     slack
-    (patchDesktop slack "slack" "^Exec=${slack}/bin/slack -s %U" "Exec=${slack}/bin/slack --enable-wayland-ime -s %U")
+    (patchDesktop slack "slack" "^Exec=${slack}/bin/slack -s %U"
+      "Exec=${slack}/bin/slack --enable-wayland-ime -s %U")
     zoom-us
     webcord
-    (patchDesktop webcord "webcord" "^Exec=webcord" "Exec=webcord --enable-wayland-ime")
+    (patchDesktop webcord "webcord" "^Exec=webcord"
+      "Exec=webcord --enable-wayland-ime")
     thunderbird
 
     # Web Browser
@@ -111,4 +116,3 @@ in {
   ];
 
 }
-
