@@ -1,9 +1,7 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
-  imports = [
-    ./keybindings
-  ];
+  imports = [ ./keybindings.nix ];
   programs.nixvim = {
     enable = true;
 
@@ -50,12 +48,12 @@
               function(args)
                   require('luasnip').lsp_expand(args.body)
                 end
-              '';
+            '';
           };
         };
       };
       cmp-buffer.enable = true;
-      cmp-nvim-lsp.enable = true; 
+      cmp-nvim-lsp.enable = true;
       cmp-path.enable = true;
       cmp-treesitter.enable = true;
       cmp_luasnip.enable = true;
@@ -112,7 +110,7 @@
           end
         '';
       };
-      treesitter.enable = true; 
+      treesitter.enable = true;
       treesitter-textobjects.enable = true;
       treesitter-refactor.enable = true;
 

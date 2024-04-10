@@ -1,13 +1,14 @@
 { config, pkgs, systemSettings, userSettings, ... }:
 
 {
-  imports =
-    [ 
-      ../../system/hardware-configuration.nix
-      ../../system/networking/wireguard.nix
-      ../../system/gui/nvidia.nix
-      ../../system/gui/font.nix
-    ];
+  imports = [
+    ../../system/hardware-configuration.nix
+    ../../system/networking/wireguard.nix
+    ../../system/gui/nvidia.nix
+    ../../system/gui/hyprland.nix
+    ../../system/gui/thunar.nix
+    ../../system/gui/font.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -40,30 +41,6 @@
     LC_TELEPHONE = systemSettings.locale;
     LC_TIME = systemSettings.locale;
   };
-
-  services.greetd = {
-    enable = true;
-    restart = false;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = userSettings.username;
-      };
-      initial_session = {
-        command = "Hyprland";
-        user = userSettings.username;
-      };
-    };
-  };
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
-  environment.variables.WLR_RENDERER_ALLOW_SOFTWARE = "1";
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1"; # This variable fixes electron apps in wayland
 
   # Enable OpenGL
   hardware.opengl = {
@@ -102,9 +79,7 @@
     description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      firefox
-    ];
+    packages = with pkgs; [ firefox ];
   };
 
   # Swaylock
@@ -117,20 +92,14 @@
     pam.services.login.enableGnomeKeyring = true;
   };
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-     vim 
-     git
-     wayland
-     pulseaudio
-  ];
+  environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
 
   # For xremap
   hardware.uinput.enable = true;
-  users.groups.uinput.members = [userSettings.username];
-  users.groups.input.members = [userSettings.username];
+  users.groups.uinput.members = [ userSettings.username ];
+  users.groups.input.members = [ userSettings.username ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -157,8 +126,8 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.allowed-users = [ "root" userSettings.username];
+  nix.settings.allowed-users = [ "root" userSettings.username ];
 
 }

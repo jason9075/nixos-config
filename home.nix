@@ -79,7 +79,6 @@ in {
     pyprland
     swww
     swayidle
-    xfce.thunar
     grim
     slurp
     swappy
