@@ -40,12 +40,12 @@ in {
         "$mod, M, fullscreen                                            # Toggle fullscreen"
         "$mod, V, togglefloating                                        # Toggle floating"
         "$mod, W, exec, ~/nixos-config/scripts/swww_randomize.sh        # Randomize wallpaper"
-        "$mod SHIFT, E, exec, rofi -show emoji                          # Emoji picker"
-        "$mod SHIFT, C, exec, rofi -show calc -no-show-match -no-sort   # Calculator"
         "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%            # Volume up"
         "$mod, minus, exec, pactl -- set-sink-volume 0 -10%             # Volume down"
-        ", Print, exec, grim -g \"\$(slurp)\"                           # Screenshot"
-        "$mod, Print, exec, grim -g - \"\$(slurp)\" | swappy -f -       # Screenshot with edit"
+        ''
+          , Print, exec, grim -g "$(slurp)"                           # Screenshot''
+        ''
+          $mod, Print, exec, grim -g - "$(slurp)" | swappy -f -       # Screenshot with edit''
         "$mod, left,  movewindow, l                                     # Move window left"
         "$mod, right, movewindow, r                                     # Move window right"
         "$mod, up,    movewindow, u                                     # Move window up"
@@ -101,10 +101,8 @@ in {
         "opacity 0.95 0.88, class:^(thunar)$"
       ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
-      animation = [
-        "windows, 1, 8, myBeizer"
-      ];
-      exec-once = ''${startupScript}/bin/start'';
+      animation = [ "windows, 1, 8, myBeizer" ];
+      exec-once = "${startupScript}/bin/start";
     };
   };
 
