@@ -48,6 +48,11 @@ in {
         "cd ~/nixos-config/ && sudo nixos-generate-config --show-hardware-config > ~/nixos-config/system/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#system --impure && cd -";
       icat = "kitty +kitten icat";
       act = "nix develop -c zsh";
+      nixclean = "nix-collect-garbage --delete-old";
+      nixlist =
+        "nix-env --list-generations --profile /nix/var/nix/profiles/system";
+      nixdel =
+        "nix-env --delete-generations --profile /nix/var/nix/profiles/system 7d";
     };
     zplug = {
       enable = true;

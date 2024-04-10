@@ -15,7 +15,9 @@
       completeopt = "menuone,noselect";
       timeoutlen = 300;
 
-      shiftwidth = 2;
+      tabstop = 4;
+      shiftwidth = 4;
+      expandtab = true;
     };
 
     # Plugins
@@ -58,11 +60,16 @@
       cmp-treesitter.enable = true;
       cmp_luasnip.enable = true;
 
-      lspsaga.enable = true;
+      lsp.enable = true;
+      lsp-format = {
+        enable = true;
+        setup = { gofmt = { force = true; }; };
+      };
       luasnip.enable = true;
       gitsigns.enable = true;
       none-ls = {
         enable = true;
+        enableLspFormat = true;
         diagnosticConfig = {
           virtual_text = false;
           signs = true;
@@ -72,9 +79,7 @@
         };
         sources = {
           formatting = {
-            gofumpt.enable = true;
-            goimports_reviser.enable = true;
-            golines.enable = true;
+            gofmt.enable = true;
             nixfmt.enable = true;
             hclfmt.enable = true;
             stylua.enable = true;
@@ -115,10 +120,13 @@
       treesitter-refactor.enable = true;
 
       noice.enable = true;
+      notify = {
+        enable = true;
+        topDown = false;
+      };
       tmux-navigator.enable = true;
       nvim-autopairs.enable = true;
       navic.enable = true;
-      notify.enable = true;
     };
 
     extraPlugins = with pkgs.vimPlugins; [
