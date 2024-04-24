@@ -5,7 +5,7 @@
   programs.nixvim = {
     enable = true;
 
-    colorschemes.nord.enable = true;
+    colorscheme = "nordfox";
 
     opts = {
       termguicolors = true;
@@ -18,6 +18,9 @@
       tabstop = 4;
       shiftwidth = 4;
       expandtab = true;
+      wrap = false;
+      smartcase = true;
+      smartindent = true;
     };
 
     # Plugins
@@ -34,7 +37,13 @@
       fzf-lua.enable = true;
       refactoring.enable = true;
       comment.enable = true;
-      copilot-vim.enable = true;
+      copilot-lua = {
+        enable = true;
+        suggestion = {
+          enabled = true;
+          autoTrigger = true;
+        };
+      };
 
       cmp = {
         enable = true;
@@ -131,6 +140,7 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       nvim-web-devicons
+      nightfox-nvim
       nvim-lspconfig
 
       nui-nvim

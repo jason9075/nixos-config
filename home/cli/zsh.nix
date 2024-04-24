@@ -42,6 +42,9 @@ in {
       ll = "ls -alh";
       v = "nvim";
       lg = "lazygit";
+      cat = "bat";
+      gd = "git diff";
+      gs = "git -c delta.side-by-side=true diff";
       update =
         "cd ~/nixos-config/ && home-manager switch --flake .#user --impure && cd -";
       updatesys =
