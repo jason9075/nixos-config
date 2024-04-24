@@ -27,6 +27,7 @@
     plugins = {
       bufferline.enable = true;
       lualine.enable = true;
+      project-nvim.enable = true;
       neo-tree = {
         enable = true;
         closeIfLastWindow = true;
