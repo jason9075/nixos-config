@@ -107,6 +107,7 @@ in {
     obs-studio
     vlc
     shotcut
+    blender
 
     # Misc
     wl-clipboard

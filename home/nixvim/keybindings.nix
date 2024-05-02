@@ -35,13 +35,13 @@
         mode = "n";
         key = "<S-j>";
         options.silent = true;
-        action = "<C-e>";
+        action = "5<C-e>";
       }
       {
         mode = "n";
         key = "<S-k>";
         options.silent = true;
-        action = "<C-y>";
+        action = "5<C-y>";
       }
       # Basic
       {
@@ -173,11 +173,7 @@
           "<leader>fg" = "Find grep";
         };
       };
-      copilot-lua = {
-        suggestion.keymap = {
-          accept = "<c-g>";
-        };
-      };
+      copilot-lua = { suggestion.keymap = { accept = "<c-g>"; }; };
       cmp.settings.mapping = {
         "<C-Space>" = "cmp.mapping.complete()";
         "<CR>" = "cmp.mapping.confirm({ select = true })";

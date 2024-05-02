@@ -16,13 +16,13 @@ in {
     settings = {
       "$mod" = "SUPER";
       general = {
-        gaps_in = 4;					# space between windows
-        gaps_out = "4,12,12,12";			# speace to monitor (top, right, bottom, left)
-	border_size = 2;  				# focus border
-	"col.active_border" = "rgba(ECEFF4EE)";		# focus border color
+        gaps_in = 4; # space between windows
+        gaps_out = "4,12,12,12"; # speace to monitor (top, right, bottom, left)
+        border_size = 2; # focus border
+        "col.active_border" = "rgba(ECEFF4EE)"; # focus border color
       };
       decoration = {
-	rounding = 4;
+        rounding = 4;
         shadow_offset = "4 4";
         "col.shadow" = "rgba(00000099)";
       };

@@ -49,6 +49,9 @@
     driSupport32Bit = true;
   };
 
+  # Enable docker daemon
+  virtualisation.docker.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -77,20 +80,13 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
 
   # Swaylock
-  security = {
-    pam.services.swaylock = {
-      text = ''
-        auth include login
-      '';
-    };
-    pam.services.login.enableGnomeKeyring = true;
-  };
+  security.pam.services.swaylock = { };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
