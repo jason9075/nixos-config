@@ -74,6 +74,13 @@
         options.silent = true;
         action = ":BufDel<CR>";
       }
+      # Lsp
+      {
+        mode = "n";
+        key = "<leader>l";
+        options.silent = true;
+        action = ":LspInfo<CR>";
+      }
       # Show
       {
         mode = "n";
@@ -159,6 +166,7 @@
           "<leader>w" = "Save";
           "<leader>x" = "Close buffer";
           "<leader>s" = "Show";
+          "<leader>l" = "LspInfo";
           "<leader>sl" = "Show diagnostics";
           "<leader>sh" = "Show hover";
           "<leader>r" = "Refactor";
