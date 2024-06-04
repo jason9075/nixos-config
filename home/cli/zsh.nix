@@ -24,7 +24,7 @@ let
     source "$(fzf-share)/key-bindings.zsh"
     source "$(fzf-share)/completion.zsh"
 
-    export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
+    export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden --exclude vendor'
     export FZF_DEFAULT_OPTS='--reverse --no-height --color=bg+:#343d46,gutter:-1,pointer:#bf616a,info:#ebcb8b,hl:#0dbc79,hl+:#23d18b'
 
     # find files
@@ -45,6 +45,7 @@ in {
       cat = "bat";
       gd = "git diff";
       gs = "git -c delta.side-by-side=true diff";
+      ssh = "kitty +kitten ssh";
       update =
         "cd ~/nixos-config/ && home-manager switch --flake .#user --impure && cd -";
       updatesys =

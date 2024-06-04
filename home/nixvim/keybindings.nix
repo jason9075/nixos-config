@@ -130,7 +130,7 @@
         mode = "n";
         key = "<leader>rf";
         options.silent = true;
-        action = ":LspZeroFormat<CR>";
+        action = ":Format<CR>";
       }
       {
         mode = "n";

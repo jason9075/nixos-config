@@ -26,7 +26,7 @@ in {
         shadow_offset = "4 4";
         "col.shadow" = "rgba(00000099)";
       };
-      monitor = ",highres,auto,1";
+      monitor = [ "HDMI-A-1,1920x1080@60,0x0,1" "Unknown-1,disable" ];
       bindm = [
         "$mod, mouse:272, movewindow                                    # Move window"
         "$mod, mouse:273, resizewindow                                  # Resize window"

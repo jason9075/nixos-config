@@ -22,6 +22,8 @@
       smartcase = true;
       ignorecase = true;
       smartindent = true;
+      scrolloff = 8;
+      sidescrolloff = 8;
     };
 
     # Plugins

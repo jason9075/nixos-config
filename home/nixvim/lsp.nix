@@ -9,6 +9,7 @@
         bashls = { enable = true; };
         dockerls = { enable = true; };
         gopls = { enable = true; };
+        clangd = { enable = true; };
       };
     };
 
@@ -58,7 +59,22 @@
           stylua.enable = true;
           prettierd.enable = true;
           yamlfmt.enable = true;
-          black.enable = true;
+          black = {
+            enable = true;
+            withArgs = ''
+              {
+                extra_args = { "--fast" },
+              }
+            '';
+          };
+          clang_format = {
+            enable = true;
+            withArgs = ''
+              {
+                extra_args = { "--style={BasedOnStyle: Google, ColumnLimit: 120}" },
+              }
+            '';
+          };
         };
         diagnostics = {
           dotenv_linter.enable = true;
