@@ -35,6 +35,7 @@
         enable = true;
         closeIfLastWindow = true;
         window.position = "right";
+        buffers = { followCurrentFile.enabled = true; };
       };
       indent-blankline.enable = true;
 

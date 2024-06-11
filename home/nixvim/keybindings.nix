@@ -17,7 +17,7 @@
         mode = "n";
         key = "<leader>e";
         options.silent = true;
-        action = ":Neotree toggle<CR>";
+        action = ":Neotree reveal toggle<CR>";
       }
       {
         mode = "n";
