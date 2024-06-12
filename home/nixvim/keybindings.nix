@@ -125,6 +125,12 @@
         options.silent = true;
         action = ":FzfLua live_grep<CR>";
       }
+      {
+        mode = "n";
+        key = "<leader>fs";
+        options.silent = true;
+        action = ":ClangdSwitchSourceHeader<CR>";
+      }
       # Refactor
       {
         mode = "n";
@@ -179,6 +185,7 @@
           "<leader>fr" = "Find references";
           "<leader>ff" = "Find files";
           "<leader>fg" = "Find grep";
+          "<leader>fs" = "Switch source header";
         };
       };
       copilot-lua = { suggestion.keymap = { accept = "<c-g>"; }; };
