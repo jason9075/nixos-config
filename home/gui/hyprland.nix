@@ -20,6 +20,7 @@ in {
         gaps_out = "4,12,12,12"; # speace to monitor (top, right, bottom, left)
         border_size = 2; # focus border
         "col.active_border" = "rgba(ECEFF4EE)"; # focus border color
+        layout = "master";
       };
       decoration = {
         rounding = 4;
@@ -46,13 +47,15 @@ in {
         "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%            # Volume up"
         "$mod, minus, exec, pactl -- set-sink-volume 0 -10%             # Volume down"
         ''
-          , Print, exec, grim -g "$(slurp)"                           # Screenshot''
+          , Print, exec, grim -g "$(slurp)"                             # Screenshot''
         ''
-          $mod, Print, exec, grim -g - "$(slurp)" | swappy -f -       # Screenshot with edit''
+          $mod, Print, exec, grim -g - "$(slurp)" | swappy -f -         # Screenshot with edit''
         "$mod, left,  movewindow, l                                     # Move window left"
         "$mod, right, movewindow, r                                     # Move window right"
         "$mod, up,    movewindow, u                                     # Move window up"
         "$mod, down,  movewindow, d                                     # Move window down"
+        "$mod SHIFT, bracketleft, movewindow, l                         # Move window left"
+        "$mod SHIFT, bracketright, movewindow, r                        # Move window right"
         "$mod, H, movefocus, l                                          # Focus left"
         "$mod, L, movefocus, r                                          # Focus right"
         "$mod, K, movefocus, u                                          # Focus up"
@@ -85,6 +88,9 @@ in {
         "$mod SHIFT, 8, movetoworkspace, 8                              # Move window to workspace 8"
         "$mod SHIFT, 9, movetoworkspace, 9                              # Move window to workspace 9"
         "$mod SHIFT, 0, movetoworkspace, 10                             # Move window to workspace 10"
+
+        "$mod, bracketright, workspace, +1                              # Switch to next workspace"
+        "$mod, bracketleft, workspace, -1                               # Switch to previous workspace"
 
         "ALT, TAB, cyclenext                                            # Cycle through windows"
         "ALT, TAB, bringactivetotop                                     # Bring window to top"
