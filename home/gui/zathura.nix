@@ -40,8 +40,7 @@ let
     set recolor-lightcolor          "#2E3440"
     set recolor-darkcolor           "#ECEFF4"
     set recolor                     "true"
-    set font                        "JetBrainsMono Nerd Font"
-    set guioptions                  none
+    set font                        "Hack Nerd Font"
   '';
 in {
   home.file.".config/zathura/zathurarc".text = zathuraConfig;
