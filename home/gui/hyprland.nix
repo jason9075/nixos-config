@@ -100,7 +100,8 @@ in {
         "workspace 7, class:^(discord)$"
         "workspace 7, class:^(WebCord)$"
         "workspace 6, class:^(thunderbird)$"
-        "opacity 1.0 0.95, class:^(kitty)$"
+        "opacity 1.0 0.93, class:^(kitty)$"
+        "opacity 1.0 0.93, class:^.*zathura$"
         "opacity 0.95 0.88, class:^(thunar)$"
       ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
