@@ -36,6 +36,7 @@ in {
     ./home/gui/wlogout.nix
     ./home/gui/rofi.nix
     ./home/gui/mako.nix
+    ./home/gui/zathura.nix # PDF Viewer
 
     # Audio
     ./home/audio/mpd.nix
@@ -79,10 +80,10 @@ in {
     pyprland
     swww
     swayidle
-    grim
-    slurp
-    swappy
-    imv
+    grim # Screenshot
+    slurp # Screenshot
+    swappy # Window switcher
+    imv # Image Viewer
 
     # Communication
     discord
