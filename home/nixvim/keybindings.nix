@@ -109,6 +109,12 @@
       }
       {
         mode = "n";
+        key = "<leader>fe";
+        options.silent = true;
+        action = ":lua vim.diagnostic.goto_next()<CR>";
+      }
+      {
+        mode = "n";
         key = "<leader>fr";
         options.silent = true;
         action = ":FzfLua lsp_references<CR>";
@@ -182,6 +188,7 @@
           "<leader>f" = "Find";
           "<leader>fD" = "Find declaration";
           "<leader>fd" = "Find definition";
+          "<leader>fe" = "Find next error";
           "<leader>fr" = "Find references";
           "<leader>ff" = "Find files";
           "<leader>fg" = "Find grep";

@@ -11,7 +11,7 @@ in {
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 
@@ -82,6 +82,7 @@ in {
     grim
     slurp
     swappy
+    imv
 
     # Communication
     discord
@@ -114,5 +115,4 @@ in {
     wtype
     tree-sitter
   ];
-
 }

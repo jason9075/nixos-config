@@ -46,10 +46,13 @@ in {
       gd = "git diff";
       gs = "git -c delta.side-by-side=true diff";
       ssh = "kitty +kitten ssh";
+      # old: cd ~/nixos-config/ && home-manager switch --flake .#user --impure && cd -
       update =
-        "cd ~/nixos-config/ && home-manager switch --flake .#user --impure && cd -";
+        ''FLAKE="$HOME/nixos-config" nh home switch -c user -- --impure'';
+      # old: cd ~/nixos-config/ && sudo nixos-generate-config --show-hardware-config > ~/nixos-config/system/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#system --impure && cd -
       updatesys =
-        "cd ~/nixos-config/ && sudo nixos-generate-config --show-hardware-config > ~/nixos-config/system/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#system --impure && cd -";
+        ''FLAKE="$HOME/nixos-config" nh os switch -H system -- --impure'';
+      delolder = "sudo nix-collect-garbage --delete-older-than 14d";
       icat = "kitty +kitten icat";
       act = "nix develop -c zsh";
       nixclean = "nix-collect-garbage --delete-old";
