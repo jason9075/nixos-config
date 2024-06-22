@@ -27,6 +27,8 @@ in {
         shadow_offset = "4 4";
         "col.shadow" = "rgba(00000099)";
       };
+      # check settings here https://wiki.hyprland.org/Configuring/Master-Layout/
+      master = { new_is_master = false; };
       monitor = [ "HDMI-A-1,1920x1080@60,0x0,1" "Unknown-1,disable" ];
       bindm = [
         "$mod, mouse:272, movewindow                                    # Move window"
