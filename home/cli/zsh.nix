@@ -1,40 +1,42 @@
 { pkgs, ... }:
 
 let
-  beforeRc = ''
-    # p10k instant prompt
-    P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
-    [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-  '';
-  extraRc = ''
-    bindkey -v
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp)
-    bindkey -M vicmd 'k' history-substring-search-up
-    bindkey -M vicmd 'j' history-substring-search-down
-    bindkey '^g' autosuggest-accept
-    export ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
-    export BAT_THEME="Nord"
+  beforeRc = # bash
+    ''
+      # p10k instant prompt
+      P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
+      [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
+    '';
+  extraRc = # bash
+    ''
+      bindkey -v
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+      ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern regexp)
+      bindkey -M vicmd 'k' history-substring-search-up
+      bindkey -M vicmd 'j' history-substring-search-down
+      bindkey '^g' autosuggest-accept
+      export ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+      export BAT_THEME="Nord"
 
-    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-    eval "$(zoxide init zsh)"
+      eval "$(zoxide init zsh)"
 
-    # FZF
-    source "$(fzf-share)/key-bindings.zsh"
-    source "$(fzf-share)/completion.zsh"
+      # FZF
+      source "$(fzf-share)/key-bindings.zsh"
+      source "$(fzf-share)/completion.zsh"
 
-    export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden --exclude vendor'
-    export FZF_DEFAULT_OPTS='--reverse --no-height --color=bg+:#343d46,gutter:-1,pointer:#bf616a,info:#ebcb8b,hl:#0dbc79,hl+:#23d18b'
+      export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden --exclude vendor'
+      export FZF_DEFAULT_OPTS='--reverse --no-height --color=bg+:#343d46,gutter:-1,pointer:#bf616a,info:#ebcb8b,hl:#0dbc79,hl+:#23d18b'
 
-    # find files
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_CTRL_T_OPTS='--preview "bat --color=always {}" --bind "alt-n:preview-down,alt-p:preview-up,alt-s:toggle-sort"'
+      # find files
+      export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+      export FZF_CTRL_T_OPTS='--preview "bat --color=always {}" --bind "alt-n:preview-down,alt-p:preview-up,alt-s:toggle-sort"'
 
-    # cd to dir
-    export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
-    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
-  '';
+      # cd to dir
+      export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
+      export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+    '';
 in {
   programs.zsh = {
     enable = true;
