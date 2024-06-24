@@ -8,6 +8,8 @@
     ../../system/gui/hyprland.nix
     ../../system/gui/thunar.nix
     ../../system/gui/font.nix
+    ../../system/keyboards/keyd.nix
+
   ];
 
   # Bootloader.
@@ -92,18 +94,12 @@
     clean.extraArgs = "--keep-since 14d --keep 3";
   };
 
-
   # Swaylock
   security.pam.services.swaylock = { };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
-
-  # For xremap
-  hardware.uinput.enable = true;
-  users.groups.uinput.members = [ userSettings.username ];
-  users.groups.input.members = [ userSettings.username ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

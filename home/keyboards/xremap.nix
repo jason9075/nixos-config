@@ -1,4 +1,4 @@
-{ userSettings, ...}:
+{ ... }:
 
 {
   services.xremap = {

@@ -1,4 +1,4 @@
-{ pkgs, xremap-flake, nixvim, systemSettings, userSettings, ... }:
+{ pkgs, nixvim, systemSettings, userSettings, ... }:
 
 with pkgs;
 let
@@ -16,7 +16,6 @@ in {
   programs.home-manager.enable = true;
 
   imports = [
-    xremap-flake.homeManagerModules.default
     nixvim.homeManagerModules.nixvim
 
     # CLI
@@ -42,7 +41,6 @@ in {
     ./home/audio/mpd.nix
 
     # Keyboards
-    ./home/keyboards/xremap.nix
     ./home/keyboards/fcitx.nix
 
   ];

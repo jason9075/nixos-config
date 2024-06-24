@@ -49,7 +49,6 @@
         modules = [ ./home.nix ];
         extraSpecialArgs = {
           inherit pkgs-stable;
-          inherit (inputs) xremap-flake;
           inherit (inputs) nixvim;
           inherit systemSettings;
           inherit userSettings;
@@ -91,8 +90,6 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    xremap-flake.url = "github:xremap/nix-flake";
 
     nixvim = {
       url = "github:nix-community/nixvim";
