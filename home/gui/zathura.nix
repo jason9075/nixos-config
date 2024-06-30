@@ -42,6 +42,8 @@ let
       set recolor-darkcolor           "#ECEFF4"
       set recolor                     "true"
       set font                        "Hack Nerd Font"
+
+      set selection-clipboard         "clipboard"
     '';
 in {
   home.file.".config/zathura/zathurarc".text = zathuraConfig;
