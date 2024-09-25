@@ -73,6 +73,7 @@
             withArgs = ''
               {
                 extra_args = { "--style={BasedOnStyle: Google, ColumnLimit: 120}" },
+                extra_filetypes = { "glsl" },
               }
             '';
           };

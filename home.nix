@@ -65,6 +65,7 @@ in {
     zoxide
     wget
     killall
+    zip
     unzip
     jq
     yq

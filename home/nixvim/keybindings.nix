@@ -74,6 +74,18 @@
         options.silent = true;
         action = ":BufDel<CR>";
       }
+      {
+        mode = "n";
+        key = "<leader>m";
+        options.silent = true;
+        action = ":make<CR>";
+      }
+      {
+        mode = "n";
+        key = "<leader>n";
+        options.silent = true;
+        action = ":Noice dismiss<CR>";
+      }
       # Lsp
       {
         mode = "n";
@@ -167,7 +179,6 @@
     ];
     plugins = {
       which-key = {
-        enable = true;
         registrations = {
           "<leader>e" = "Toggle file explorer";
           "<S-l>" = "Next buffer";
@@ -177,6 +188,8 @@
           "<leader>Q" = "Force quit";
           "<leader>w" = "Save";
           "<leader>x" = "Close buffer";
+          "<leader>m" = "Make";
+          "<leader>n" = "Noice dismiss";
           "<leader>s" = "Show";
           "<leader>l" = "LspInfo";
           "<leader>sl" = "Show diagnostics";

@@ -61,6 +61,11 @@
       tmux-navigator.enable = true;
       nvim-autopairs.enable = true;
       navic.enable = true;
+
+      which-key = {
+        enable = true;
+        # settings = { preset = "helix"; };
+      };
     };
 
     extraPlugins = with pkgs.vimPlugins; [
