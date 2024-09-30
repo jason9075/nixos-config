@@ -44,14 +44,7 @@
     };
     none-ls = {
       enable = true;
-      enableLspFormat = true;
-      diagnosticConfig = {
-        virtual_text = false;
-        signs = true;
-        update_in_insert = false;
-        underline = true;
-        severity_sort = true;
-      };
+      enableLspFormat = false;
       sources = {
         formatting = {
           gofmt.enable = true;
@@ -60,7 +53,7 @@
           stylua.enable = true;
           prettierd.enable = true;
           yamlfmt.enable = true;
-          black = {
+          black.settings = {
             enable = true;
             withArgs = ''
               {
@@ -68,7 +61,7 @@
               }
             '';
           };
-          clang_format = {
+          clang_format.settings = {
             enable = true;
             withArgs = ''
               {
@@ -84,7 +77,15 @@
         };
       };
 
-      onAttach = # lua
+      settings = {
+        diagnostic_config = {
+          virtual_text = false;
+          signs = true;
+          update_in_insert = false;
+          underline = true;
+          severity_sort = true;
+        };
+        on_attach = # lua
         ''
           function(client, bufnr)
             local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -103,6 +104,7 @@
             end
           end
         '';
+      };
     };
     treesitter.enable = true;
     treesitter-textobjects.enable = true;

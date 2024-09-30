@@ -15,12 +15,6 @@
       }
       {
         mode = "n";
-        key = "<leader>e";
-        options.silent = true;
-        action = ":Neotree reveal toggle<CR>";
-      }
-      {
-        mode = "n";
         key = "<S-l>";
         options.silent = true;
         action = ":bnext<CR>";
@@ -43,170 +37,140 @@
         options.silent = true;
         action = "5<C-y>";
       }
-      # Basic
-      {
-        mode = "n";
-        key = "<leader>/";
-        options.silent = true;
-        action = '':lua require("Comment.api").toggle.linewise.current()<CR>'';
-      }
-      {
-        mode = "n";
-        key = "<leader>q";
-        options.silent = true;
-        action = ":q<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>Q";
-        options.silent = true;
-        action = ":q!<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>w";
-        options.silent = true;
-        action = ":w<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>x";
-        options.silent = true;
-        action = ":BufDel<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>m";
-        options.silent = true;
-        action = ":make<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>n";
-        options.silent = true;
-        action = ":Noice dismiss<CR>";
-      }
-      # Lsp
-      {
-        mode = "n";
-        key = "<leader>l";
-        options.silent = true;
-        action = ":LspInfo<CR>";
-      }
-      # Show
-      {
-        mode = "n";
-        key = "<leader>sl";
-        options.silent = true;
-        action = ":lua vim.diagnostic.open_float()<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>sh";
-        options.silent = true;
-        action = ":lua vim.lsp.buf.hover()<CR>";
-      }
-      # Find
-      {
-        mode = "n";
-        key = "<leader>fD";
-        options.silent = true;
-        action = ":lua vim.lsp.buf.declaration()<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>fd";
-        options.silent = true;
-        action = ":lua vim.lsp.buf.definition()<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>fe";
-        options.silent = true;
-        action = ":lua vim.diagnostic.goto_next()<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>fr";
-        options.silent = true;
-        action = ":FzfLua lsp_references<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>ff";
-        options.silent = true;
-        action = ":FzfLua files<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>fg";
-        options.silent = true;
-        action = ":FzfLua live_grep<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>fs";
-        options.silent = true;
-        action = ":ClangdSwitchSourceHeader<CR>";
-      }
-      # Refactor
-      {
-        mode = "n";
-        key = "<leader>rf";
-        options.silent = true;
-        action = ":Format<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>rr";
-        options.silent = true;
-        action = ":lua vim.lsp.buf.rename()<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>ri";
-        options.silent = true;
-        action = ":lua require('refactoring').refactor('Inline Variable')<CR>";
-      }
-      # Visual
-      {
-        mode = "v";
-        key = "<leader>/";
-        options.silent = true;
-        action = ''
-          <ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>'';
-      }
     ];
     plugins = {
       which-key = {
-        registrations = {
-          "<leader>e" = "Toggle file explorer";
-          "<S-l>" = "Next buffer";
-          "<S-h>" = "Previous buffer";
-          "<leader>/" = "Comment";
-          "<leader>q" = "Quit";
-          "<leader>Q" = "Force quit";
-          "<leader>w" = "Save";
-          "<leader>x" = "Close buffer";
-          "<leader>m" = "Make";
-          "<leader>n" = "Noice dismiss";
-          "<leader>s" = "Show";
-          "<leader>l" = "LspInfo";
-          "<leader>sl" = "Show diagnostics";
-          "<leader>sh" = "Show hover";
-          "<leader>r" = "Refactor";
-          "<leader>rf" = "Format";
-          "<leader>rr" = "Rename";
-          "<leader>ri" = "Inline";
-          "<leader>f" = "Find";
-          "<leader>fD" = "Find declaration";
-          "<leader>fd" = "Find definition";
-          "<leader>fe" = "Find next error";
-          "<leader>fr" = "Find references";
-          "<leader>ff" = "Find files";
-          "<leader>fg" = "Find grep";
-          "<leader>fs" = "Switch source header";
-        };
+        settings.spec = [
+          {
+            __unkeyed-1 = "<leader>e";
+            __unkeyed-2 = ":Neotree reveal toggle<CR>";
+            desc = "Toggle file explorer";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>q";
+            __unkeyed-2 = ":q<CR>";
+            desc = "Quit";
+          }
+          {
+            __unkeyed-1 = "<leader>Q";
+            __unkeyed-2 = ":q!<CR>";
+            desc = "Force quit";
+          }
+          {
+            __unkeyed-1 = "<leader>w";
+            __unkeyed-2 = ":w<CR>";
+            desc = "Save";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>x";
+            __unkeyed-2 = ":BufDel<CR>";
+            desc = "Close buffer";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>m";
+            __unkeyed-2 = ":make<CR>";
+            desc = "Make";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>n";
+            __unkeyed-2 = ":Noice dismiss<CR>";
+            desc = "Noice dismiss";
+          }
+          {
+            __unkeyed-1 = "<leader>l";
+            __unkeyed-2 = ":LspInfo<CR>";
+            desc = "LspInfo";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>s";
+            group = "Show";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>sl";
+            __unkeyed-2 = ":lua vim.diagnostic.open_float()<CR>";
+            desc = "Show diagnostics";
+          }
+          {
+            __unkeyed-1 = "<leader>sh";
+            __unkeyed-2 = ":lua vim.lsp.buf.hover()<CR>";
+            desc = "Show hover";
+          }
+          {
+            __unkeyed-1 = "<leader>r";
+            group = "Refactor";
+            icon = "󰷉";
+          }
+          {
+            __unkeyed-1 = "<leader>rf";
+            __unkeyed-2 = ":Format<CR>";
+            desc = "Format";
+          }
+          {
+            __unkeyed-1 = "<leader>rr";
+            __unkeyed-2 = ":lua vim.lsp.buf.rename()<CR>";
+            desc = "Rename";
+          }
+          {
+            __unkeyed-1 = "<leader>ri";
+            __unkeyed-2 =
+              ":lua require('refactoring').refactor('Inline Variable')<CR>";
+            desc = "Inline";
+          }
+          {
+            __unkeyed-1 = "<leader>f";
+            group = "Find";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>fD";
+            __unkeyed-2 = ":lua vim.lsp.buf.declaration()<CR>";
+            desc = "Find declaration";
+          }
+          {
+            __unkeyed-1 = "<leader>fd";
+            __unkeyed-2 = ":lua vim.lsp.buf.definition()<CR>";
+            desc = "Find definition";
+          }
+          {
+            __unkeyed-1 = "<leader>fe";
+            __unkeyed-2 = ":lua vim.diagnostic.goto_next()<CR>";
+            desc = "Find next error";
+          }
+          {
+            __unkeyed-1 = "<leader>fr";
+            __unkeyed-2 = ":FzfLua lsp_references<CR>";
+            desc = "Find references";
+          }
+          {
+            __unkeyed-1 = "<leader>ff";
+            __unkeyed-2 = ":FzfLua files<CR>";
+            desc = "Find files";
+          }
+          {
+            __unkeyed-1 = "<leader>fg";
+            __unkeyed-2 = ":FzfLua live_grep<CR>";
+            desc = "Find grep";
+          }
+          {
+            __unkeyed-1 = "<leader>fs";
+            __unkeyed-2 = ":ClangdSwitchSourceHeader<CR>";
+            desc = "Switch source header";
+          }
+          {
+            __unkeyed-1 = "<leader>/";
+            __unkeyed-2 = ''
+              <ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>'';
+            desc = "Comment";
+            mode = [ "n" "v" ];
+            icon = "";
+          }
+        ];
       };
       copilot-lua = { suggestion.keymap = { accept = "<c-g>"; }; };
       cmp.settings.mapping = {

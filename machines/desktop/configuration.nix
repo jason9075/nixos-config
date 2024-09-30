@@ -1,4 +1,4 @@
-{ config, pkgs, systemSettings, userSettings, ... }:
+{ pkgs, pkgs-stable, systemSettings, userSettings, ... }:
 
 {
   imports = [
@@ -42,13 +42,6 @@
     LC_PAPER = systemSettings.locale;
     LC_TELEPHONE = systemSettings.locale;
     LC_TIME = systemSettings.locale;
-  };
-
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   # Enable docker daemon
@@ -118,7 +111,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];

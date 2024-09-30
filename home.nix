@@ -1,4 +1,4 @@
-{ pkgs, nixvim, systemSettings, userSettings, ... }:
+{ pkgs, pkgs-stable, nixvim, systemSettings, userSettings, ... }:
 
 with pkgs;
 let

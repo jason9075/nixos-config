@@ -44,16 +44,6 @@
         if systemSettings.useUnstable then nixpkgs.lib else nixpkgs-stable.lib;
       home-manager = home-manager-unstable;
     in {
-      homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ];
-        extraSpecialArgs = {
-          inherit pkgs-stable;
-          inherit (inputs) nixvim;
-          inherit systemSettings;
-          inherit userSettings;
-        };
-      };
       nixosConfigurations = {
         system = lib.nixosSystem {
           system = systemSettings.system;
@@ -67,6 +57,17 @@
             inherit systemSettings;
             inherit userSettings;
           };
+        };
+      };
+      homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home.nix ];
+        extraSpecialArgs = {
+          inherit pkgs;
+          inherit pkgs-stable;
+          inherit (inputs) nixvim;
+          inherit systemSettings;
+          inherit userSettings;
         };
       };
     };

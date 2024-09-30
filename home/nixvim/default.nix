@@ -38,6 +38,7 @@
         buffers = { followCurrentFile.enabled = true; };
       };
       indent-blankline.enable = true;
+      web-devicons.enable = true;
 
       fzf-lua.enable = true;
       refactoring.enable = true;
@@ -64,15 +65,13 @@
 
       which-key = {
         enable = true;
-        # settings = { preset = "helix"; };
+        settings = { preset = "helix"; };
       };
     };
 
     extraPlugins = with pkgs.vimPlugins; [
-      nvim-web-devicons
       nightfox-nvim
       nvim-lspconfig
-
       nui-nvim
       plenary-nvim
       nvim-bufdel

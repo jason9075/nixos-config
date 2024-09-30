@@ -41,16 +41,8 @@ sudo nixos-rebuild switch --flake .#system --impure
 home-manager switch --flake .#user --impure
 ```
 
-6. Update
-
-[Doc](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading)
-
-```bash
-sudo nix-channel --update
-sudo nix flake update
-```
-
 Alias
+
 ```bash
 update
 updatesys
@@ -77,4 +69,13 @@ IdentityFile ~/.ssh/id_ed25519
 
 ```bash
 git remote set-url origin <ssh path>
+```
+
+## Update NixOS Version
+
+[Doc](https://nixos.org/manual/nixos/stable/index.html#sec-upgrading)
+
+```bash
+sudo nix-channel --update
+sudo nix flake update
 ```
