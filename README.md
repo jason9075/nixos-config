@@ -4,18 +4,17 @@
 
 1. Disable System Suspend
 
-2. Install git and vim temporarily
+2. Install vim temporarily
 
 ```bash
-nix-shell -p git
 nix-shell -p vim
 ```
 
 3. Clone this project and dotfiles
 
 ```bash
-git clone https://github.com/jason9075/nixos-config.git
-git clone https://github.com/jason9075/dotfiles.git
+nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
+nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/dotfiles"
 ```
 
 4. Home Manager
