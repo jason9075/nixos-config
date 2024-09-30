@@ -21,7 +21,6 @@ in {
 
     # CLI
     ./home/cli/zsh.nix
-    # ./home/cli/nvim.nix
     ./home/cli/git.nix
     ./home/cli/lazygit.nix
     ./home/cli/mu.nix
@@ -97,7 +96,14 @@ in {
     thunderbird
 
     # Web Browser
-    google-chrome
+    # google-chrome
+    (chromium.override {
+      commandLineArgs = [
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime"
+      ];
+    })
     firefox
     (brave.override { vulkanSupport = true; })
 
@@ -106,10 +112,12 @@ in {
 
     # Multimedia
     gimp
+    krita # Drawing
     obs-studio
     vlc
-    shotcut
+    shotcut # Video Editor
     blender
+    davinci-resolve # Video Editor
 
     # Misc
     wl-clipboard
