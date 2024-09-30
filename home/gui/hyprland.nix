@@ -28,9 +28,11 @@ in {
         "col.shadow" = "rgba(00000099)";
       };
       # check settings here https://wiki.hyprland.org/Configuring/Master-Layout/
-      master = { new_is_master = false; };
-      # HOTFIX: if you got ghost monitor, you can force disable it
-      # monitor = [ "HDMI-A-1,1920x1080@60,0x0,1" "Unknown-1,disable" ];
+      master = {
+        new_status = "slave";
+        new_on_top = false;
+        mfact = 0.7;
+      };
       monitor = [ "HDMI-A-1,1920x1080@60,0x0,1" ];
       bindm = [
         "$mod, mouse:272, movewindow                                    # Move window"
