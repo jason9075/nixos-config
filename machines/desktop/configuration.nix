@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../system/hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     ../../system/networking/wireguard.nix
     ../../system/gui/nvidia.nix
     ../../system/gui/hyprland.nix
