@@ -107,9 +107,6 @@ in {
     firefox
     (brave.override { vulkanSupport = true; })
 
-    # Game
-    steam
-
     # Multimedia
     gimp
     krita # Drawing
@@ -124,4 +121,5 @@ in {
     wtype
     tree-sitter
   ];
+
 }
