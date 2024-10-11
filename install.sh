@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NIX_PATH=~/nixos-config
+NIX_CFG_PATH=~/nixos-config
 
 # Prompt for machine selection
 echo "Please select your machine:"
@@ -21,29 +21,28 @@ nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config 
 nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
 
 # Generate hardware config for new system
-sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_PATH/system/hardware-configuration.nix > /dev/null
+sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/system/hardware-configuration.nix > /dev/null
 
 # Check if uefi or bios
 if [ -d /sys/firmware/efi/efivars ]; then
-    sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"uefi\";/" $NIX_PATH/flake.nix
+    sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"uefi\";/" $NIX_CFG_PATH/flake.nix
 else
-    sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"bios\";/" $NIX_PATH/flake.nix
+    sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"bios\";/" $NIX_CFG_PATH/flake.nix
     grubDevice=$(findmnt / | awk -F' ' '{ print $2 }' | sed 's/\[.*\]//g' | tail -n 1 | lsblk -no pkname | tail -n 1 )
-    sed -i "0,/grubDevice.*=.*\".*\";/s//grubDevice = \"\/dev\/$grubDevice\";/" $NIX_PATH/flake.nix
+    sed -i "0,/grubDevice.*=.*\".*\";/s//grubDevice = \"\/dev\/$grubDevice\";/" $NIX_CFG_PATH/flake.nix
 fi
 
-# Patch flake.nix with different username/name and remove email by default
-sed -i "0,/jason9075/s//$(whoami)/" ~/nixos-config/flake.nix
-sed -i "0,/jason9075/s//$(getent passwd "$(whoami)" | cut -d ':' -f 5 | cut -d ',' -f 1)/" $NIX_PATH/flake.nix
+# Patch flake.nix with different username/name
+sed -i "0,/jason9075/s//$(whoami)/" $NIX_CFG_PATH/flake.nix
 
 # Set the selected machine in flake.nix
-sed -i "s+/machines/taipei+/machines/$MACHINE+g" $NIX_PATH/flake.nix
+sed -i "s+/machines/taipei+/machines/$MACHINE+g" $NIX_CFG_PATH/flake.nix
 
 # Confirm flake.nix before install
-vim $NIX_PATH/flake.nix
+vim $NIX_CFG_PATH/flake.nix
 
 # Install System
-sudo nixos-rebuild switch --flake $NIX_PATH#system --impure
+sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system --impure
 
 # Install User
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes --flake $NIX_PATH#user --impure
+nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes --flake $NIX_CFG_PATH#user --impure
