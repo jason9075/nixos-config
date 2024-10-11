@@ -88,7 +88,7 @@
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          default = self.packages.${system}.install;
+          default = packages.${system}.install;
 
           install = pkgs.writeShellApplication {
             name = "install";
