@@ -64,7 +64,9 @@
       };
       homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./. + "/machines" + ("/" + systemSettings.machine) + "/home.nix" ];
+        modules = [
+          (./. + "/machines" + ("/" + systemSettings.machine) + "/home.nix")
+        ];
         extraSpecialArgs = {
           inherit pkgs;
           inherit pkgs-stable;
