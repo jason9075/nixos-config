@@ -45,4 +45,4 @@ vim $NIX_CFG_PATH/flake.nix
 sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system --impure
 
 # Install User
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes --flake $NIX_CFG_PATH#user --impure
+nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $NIX_CFG_PATH#user --impure
