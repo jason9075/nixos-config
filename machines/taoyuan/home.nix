@@ -22,24 +22,24 @@ in {
     nixvim.homeManagerModules.nixvim
 
     # CLI
-    ./home/cli/zsh.nix
-    ./home/cli/git.nix
-    ./home/cli/lazygit.nix
-    ./home/nixvim
+    ../../home/cli/zsh.nix
+    ../../home/cli/git.nix
+    ../../home/cli/lazygit.nix
+    ../../home/nixvim
 
     # GUI
-    ./home/gui/hyprland.nix
-    ./home/gui/gtk.nix
-    ./home/gui/kitty.nix
-    ./home/gui/waybar.nix
-    ./home/gui/swaylock.nix
-    ./home/gui/wlogout.nix
-    ./home/gui/rofi.nix
-    ./home/gui/mako.nix
-    ./home/gui/zathura.nix # PDF Viewer
+    ../../home/gui/hyprland.nix
+    ../../home/gui/gtk.nix
+    ../../home/gui/kitty.nix
+    ../../home/gui/waybar.nix
+    ../../home/gui/swaylock.nix
+    ../../home/gui/wlogout.nix
+    ../../home/gui/rofi.nix
+    ../../home/gui/mako.nix
+    ../../home/gui/zathura.nix # PDF Viewer
 
     # Keyboards
-    ./home/keyboards/fcitx.nix
+    ../../home/keyboards/fcitx.nix
 
   ];
 

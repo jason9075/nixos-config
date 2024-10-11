@@ -1,9 +1,7 @@
 {
-  description = "My personal flake";
+  description = "Jason Kuan flake file";
 
-  outputs = inputs@{ nixpkgs, nixpkgs-stable, home-manager-unstable
-    , home-manager-stable, ... }:
-
+  outputs = inputs@{ self, ... }:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
@@ -33,19 +31,21 @@
         editor = "nvim"; # Default editor;
       };
       pkgs = (if systemSettings.useUnstable then
-        (import nixpkgs {
+        (import inputs.nixpkgs {
           system = systemSettings.system;
           config = { allowUnfree = true; };
         })
       else
-        nixpkgs);
-      pkgs-stable = import nixpkgs-stable {
+        inputs.nixpkgs);
+      pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
         config = { allowUnfree = true; };
       };
-      lib =
-        if systemSettings.useUnstable then nixpkgs.lib else nixpkgs-stable.lib;
-      home-manager = home-manager-unstable;
+      lib = if systemSettings.useUnstable then
+        inputs.nixpkgs.lib
+      else
+        inputs.nixpkgs-stable.lib;
+      home-manager = inputs.home-manager-unstable;
 
       # Systems that can run tests:
       supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
@@ -88,7 +88,7 @@
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          default = packages.${system}.install;
+          default = self.packages.${system}.install;
 
           install = pkgs.writeShellApplication {
             name = "install";
