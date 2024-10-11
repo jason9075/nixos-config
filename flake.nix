@@ -9,10 +9,12 @@
       systemSettings = {
         system = "x86_64-linux";
         hostname = "nixos";
-        machine = "desktop";
+        machine = "taipei";
         timezone = "Asia/Taipei";
         locale = "zh_TW.UTF-8";
         useUnstable = true; # Use unstable nixpkgs
+        bootMode = "uefi"; # uefi or bios
+        grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {

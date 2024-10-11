@@ -14,7 +14,7 @@ nix-shell -p vim
 
 ```bash
 nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
-nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/dotfiles"
+nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
 ```
 
 4. Home Manager

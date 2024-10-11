@@ -6,5 +6,5 @@ if [[ ! $yn =~ ^[Yy]$ ]]; then
   exit 0
 fi
 
-ansible-playbook ~/dotfiles/dot_bootstrap/ssh_key.yml --ask-vault-pass
+ansible-playbook ~/.dotfiles/dot_bootstrap/ssh_key.yml --ask-vault-pass
 

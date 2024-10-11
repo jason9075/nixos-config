@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
   programs.neovim = {
@@ -7,7 +7,7 @@
     viAlias = true;
     vimAlias = true;
     extraConfig = ''
-      source ~/dotfiles/dot_config/nvim/init.lua
+      source ~/.dotfiles/dot_config/nvim/init.lua
     '';
   };
 
