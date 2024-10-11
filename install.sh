@@ -36,7 +36,7 @@ fi
 sed -i "0,/jason9075/s//$(whoami)/" $NIX_CFG_PATH/flake.nix
 
 # Set the selected machine in flake.nix
-sed -i "s+/machines/taipei+/machines/$MACHINE+g" $NIX_CFG_PATH/flake.nix
+sed -i "0,/taipei/s//$MACHINE/" $NIX_CFG_PATH/flake.nix
 
 # Confirm flake.nix before install
 vim $NIX_CFG_PATH/flake.nix
