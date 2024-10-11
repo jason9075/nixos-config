@@ -14,7 +14,8 @@
         locale = "zh_TW.UTF-8";
         useUnstable = true; # Use unstable nixpkgs
         bootMode = "uefi"; # uefi or bios
-        grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
+        grubDevice =
+          ""; # device identifier for grub; only used for legacy (bios) boot mode
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {
@@ -72,6 +73,17 @@
           inherit userSettings;
         };
       };
+      packages = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system};
+        in {
+          default = self.packages.${system}.install;
+
+          install = pkgs.writeShellApplication {
+            name = "install";
+            runtimeInputs = with pkgs; [ git ];
+            text = ''${./install.sh} "$@"'';
+          };
+        });
     };
 
   inputs = {
