@@ -11,6 +11,8 @@ in {
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
 
+  home.sessionVariables = { EDITOR = userSettings.editor; };
+
   # home.stateVersion = "24.05"; # Stable
   home.stateVersion = "24.11"; # Unstable
 
@@ -23,7 +25,6 @@ in {
     ./home/cli/zsh.nix
     ./home/cli/git.nix
     ./home/cli/lazygit.nix
-    ./home/cli/mu.nix
     ./home/nixvim
 
     # GUI
@@ -36,9 +37,6 @@ in {
     ./home/gui/rofi.nix
     ./home/gui/mako.nix
     ./home/gui/zathura.nix # PDF Viewer
-
-    # Audio
-    ./home/audio/mpd.nix
 
     # Keyboards
     ./home/keyboards/fcitx.nix
@@ -96,8 +94,7 @@ in {
     thunderbird
 
     # Web Browser
-    # google-chrome
-    (chromium.override {
+    (google-chrome.override {
       commandLineArgs = [
         "--enable-features=UseOzonePlatform"
         "--ozone-platform=wayland"
@@ -109,12 +106,9 @@ in {
 
     # Multimedia
     gimp
-    krita # Drawing
     obs-studio
     vlc
-    shotcut # Video Editor
     blender
-    davinci-resolve # Video Editor
 
     # Misc
     wl-clipboard

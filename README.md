@@ -40,6 +40,12 @@ sudo nixos-rebuild switch --flake .#system --impure
 home-manager switch --flake .#user --impure
 ```
 
+###Alter
+
+```bash
+nix-shell -p git --command "nix run github:jason9075/nixos-config.git --extra-experimental-features nix-command --extra-experimental-features flakes"
+``````
+
 Alias
 
 ```bash

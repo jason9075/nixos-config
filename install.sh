@@ -39,6 +39,9 @@ sed -i "0,/jason9075/s//$(getent passwd "$(whoami)" | cut -d ':' -f 5 | cut -d '
 # Set the selected machine in flake.nix
 sed -i "s+/machines/taipei+/machines/$MACHINE+g" $NIX_PATH/flake.nix
 
+# Confirm flake.nix before install
+vim $NIX_PATH/flake.nix
+
 # Install System
 sudo nixos-rebuild switch --flake $NIX_PATH#system --impure
 

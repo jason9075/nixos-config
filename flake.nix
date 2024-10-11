@@ -64,7 +64,7 @@
       };
       homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [ ./. + "/machines" + ("/" + systemSettings.machine) + "/home.nix" ];
         extraSpecialArgs = {
           inherit pkgs;
           inherit pkgs-stable;
@@ -80,7 +80,7 @@
 
           install = pkgs.writeShellApplication {
             name = "install";
-            runtimeInputs = with pkgs; [ git ];
+            runtimeInputs = with pkgs; [ git vim ];
             text = ''${./install.sh} "$@"'';
           };
         });
