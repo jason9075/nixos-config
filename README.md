@@ -2,49 +2,10 @@
 
 ## New Computer
 
-1. Disable System Suspend
-
-2. Install vim temporarily
 
 ```bash
-nix-shell -p vim
+nix-shell -p git --command "nix run github:jason9075/nixos-config --extra-experimental-features nix-command --extra-experimental-features flakes"
 ```
-
-3. Clone this project and dotfiles
-
-```bash
-nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
-nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
-```
-
-4. Home Manager
-
-```bash
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-```
-
-Then logout and login again
-
-```bash
-nix-shell '<home-manager>' -A install
-```
-
-5. Install
-
-```bash
-cd nixos-config
-sudo nixos-generate-config --show-hardware-config > system/hardware-configuration.nix
-sudo nixos-rebuild switch --flake .#system --impure
-
-home-manager switch --flake .#user --impure
-```
-
-###Alter
-
-```bash
-nix-shell -p git --command "nix run github:jason9075/nixos-config.git --extra-experimental-features nix-command --extra-experimental-features flakes"
-``````
 
 Alias
 
@@ -57,9 +18,11 @@ updatesys
 
 ### SSH Key-gen
 
+1. Gen new ssh key
 ```bash
 ssh-keygen
 ```
+2. Use scripts/setup_ssh.sh
 
 ### Config File
 
