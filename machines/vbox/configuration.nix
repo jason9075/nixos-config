@@ -20,7 +20,7 @@
     enable = true;
     theme = "chili";
   };
-  services.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   networking.hostName = systemSettings.hostname;
 
@@ -64,6 +64,13 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [ vim git pulseaudio ];
+
+  # exclude packages from the KDE Plasma 6 environment
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    oxygen
+  ];
 
   # List services that you want to enable:
   services.openssh.enable = true;
