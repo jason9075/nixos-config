@@ -12,6 +12,7 @@ while true; do
   case "$choice" in
     1) MACHINE="taipei"; break;;
     2) MACHINE="taoyuan"; break;;
+    3) MACHINE="simple"; break;;
     *) echo "Invalid option, please select again.";;
   esac
 done

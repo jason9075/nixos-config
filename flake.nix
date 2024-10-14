@@ -12,6 +12,7 @@
         locale = "zh_TW.UTF-8";
         useUnstable = true; # Use unstable nixpkgs
         bootMode = "uefi"; # uefi or bios
+        bootMountPath = "/boot"; # boot mount point
         grubDevice =
           ""; # device identifier for grub; only used for legacy (bios) boot mode
       };

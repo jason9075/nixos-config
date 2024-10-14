@@ -17,6 +17,7 @@
     if (systemSettings.bootMode == "uefi") then true else false;
   boot.loader.efi.canTouchEfiVariables =
     if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath;
   boot.loader.grub.enable =
     if (systemSettings.bootMode == "uefi") then false else true;
   boot.loader.grub.device =
@@ -50,8 +51,8 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Enable docker daemon
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -78,6 +79,7 @@
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # nh
   programs.nh = {

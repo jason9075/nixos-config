@@ -3,13 +3,10 @@
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ../../system/networking/wireguard.nix
     ../../system/gui/nvidia.nix
-    ../../system/gui/hyprland.nix
     ../../system/gui/thunar.nix
     ../../system/gui/font.nix
     ../../system/keyboards/keyd.nix
-
   ];
 
   # Bootloader.
@@ -23,12 +20,12 @@
   boot.loader.grub.device =
     systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
-  networking.hostName = systemSettings.hostname;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # GUI
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = systemSettings.hostname;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -51,10 +48,6 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Enable docker daemon
-  virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -68,33 +61,25 @@
     pulse.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # nh
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.extraArgs = "--keep-since 14d --keep 3";
+    clean.extraArgs = "--keep-since 3d --keep 3";
   };
 
-  # Swaylock
-  security.pam.services.swaylock = { };
-
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
+  environment.systemPackages = with pkgs; [ vim git pulseaudio ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -104,34 +89,13 @@
   #   enableSSHSupport = true;
   # };
 
-  # Game
-  programs.steam = {
-    enable = true;
-    # Open ports in the firewall for Steam Remote Play
-    remotePlay.openFirewall = true;
-    # Open ports in the firewall for Source Dedicated Server
-    dedicatedServer.openFirewall = true;
-    # Open ports in the firewall for Steam Local Network Game Transfers
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
   # List services that you want to enable:
-
   services.openssh.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];
