@@ -3,22 +3,19 @@
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ../../system/gui/nvidia.nix
     ../../system/gui/thunar.nix
     ../../system/gui/font.nix
     ../../system/keyboards/keyd.nix
   ];
 
+  # Ref: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/virtualbox-demo.nix
+
   # Bootloader.
-  boot.loader.systemd-boot.enable =
-    if (systemSettings.bootMode == "uefi") then true else false;
-  boot.loader.efi.canTouchEfiVariables =
-    if (systemSettings.bootMode == "uefi") then true else false;
-  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath;
-  boot.loader.grub.enable =
-    if (systemSettings.bootMode == "uefi") then false else true;
-  boot.loader.grub.device =
-    systemSettings.grubDevice; # does nothing if running uefi rather than bios
+  boot.loader.grub.fsIdentifier = "provided";
+
+  # Add some more video drivers to give X11 a shot at working in
+  # VMware and QEMU.
+  services.xserver.videoDrivers = mkOverride 40 [ "virtualbox" "vmware" "cirrus" "vesa" "modesetting" ];
 
   # GUI
   services.xserver.enable = true;
@@ -48,25 +45,12 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
@@ -80,14 +64,6 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [ vim git pulseaudio ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # List services that you want to enable:
   services.openssh.enable = true;

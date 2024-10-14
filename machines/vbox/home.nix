@@ -2,11 +2,6 @@
 
 with pkgs;
 let
-  # Patch trick: https://www.reddit.com/r/NixOS/comments/13bo4fw/how_to_set_flags_for_application/
-  patchDesktop = pkg: appName: from: to:
-    (pkgs.lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" { } ''
-      ${coreutils}/bin/mkdir -p $out/share/applications
-      ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop ''));
 in {
   home.username = userSettings.username;
   home.homeDirectory = builtins.getEnv "HOME";
@@ -29,8 +24,7 @@ in {
     # GUI
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
-    ../../home/gui/rofi.nix
-    ../../home/gui/mako.nix
+    ../../home/gui/rofi_x.nix
     ../../home/gui/zathura.nix # PDF Viewer
 
     # Keyboards
@@ -41,7 +35,6 @@ in {
   home.packages = with pkgs; [
     # Development
     ansible
-    vpnc
 
     # CLI
     htop
@@ -64,17 +57,10 @@ in {
     # GUI
     grim # Screenshot
     slurp # Screenshot
-    swappy # Window switcher
     imv # Image Viewer
 
     # Web Browser
-    (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-      ];
-    })
+    google-chrome
     firefox
 
     # Multimedia
@@ -82,8 +68,8 @@ in {
     vlc
 
     # Misc
-    wl-clipboard
-    wtype
+    xclip
+    xdotool
     tree-sitter
   ];
 }
