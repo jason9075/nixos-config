@@ -12,6 +12,8 @@
   # Ref: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/virtualbox-demo.nix
 
   # Bootloader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.fsIdentifier = "provided";
 
   # Add some more video drivers to give X11 a shot at working in
