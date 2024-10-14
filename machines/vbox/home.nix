@@ -24,12 +24,9 @@ in {
     # GUI
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
-    ../../home/gui/rofi_x.nix
-    ../../home/gui/zathura.nix # PDF Viewer
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
-
   ];
 
   home.packages = with pkgs; [
@@ -53,11 +50,6 @@ in {
     kitty
     neofetch
     tree
-
-    # GUI
-    grim # Screenshot
-    slurp # Screenshot
-    imv # Image Viewer
 
     # Web Browser
     google-chrome

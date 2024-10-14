@@ -116,6 +116,8 @@
     treesitter-context.enable = true;
     treesitter-textobjects.enable = true;
     treesitter-refactor.enable = true;
+    # syntax highlight for nix confeg
+    hmts.enable = true;
   };
 
 }

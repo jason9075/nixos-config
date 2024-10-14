@@ -3,7 +3,6 @@
 {
   imports = [
     ../../system/hardware-configuration.nix
-    ../../system/gui/thunar.nix
     ../../system/gui/font.nix
     ../../system/keyboards/keyd.nix
   ];
@@ -17,11 +16,11 @@
 
   # GUI
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     theme = "chili";
   };
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma5.enable = true;
 
   networking.hostName = systemSettings.hostname;
 
@@ -50,7 +49,7 @@
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = userSettings.name;
+    description = "Hello VirtualBox";
     extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
