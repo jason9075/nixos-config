@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, systemSettings, userSettings, ... }:
+{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
 
 with pkgs;
 let
@@ -8,7 +8,7 @@ in {
 
   home.sessionVariables = { EDITOR = userSettings.editor; };
 
-  home.stateVersion = "24.11"; # Unstable
+  home.stateVersion = userSettings.version;
 
   programs.home-manager.enable = true;
 
@@ -22,7 +22,6 @@ in {
     ../../home/nixvim
 
     # GUI
-    ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
 
     # Keyboards
@@ -30,8 +29,6 @@ in {
   ];
 
   home.packages = with pkgs; [
-    # Development
-    ansible
 
     # CLI
     htop
@@ -54,13 +51,9 @@ in {
     google-chrome
     firefox
 
-    # Multimedia
-    gimp
-    vlc
-
     # Misc
-    xclip
-    xdotool
+    wl-clipboard
+    wtype
     tree-sitter
   ];
 }

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # Enable graphics driver in NixOS unstable/NixOS 24.11
+  # Enable graphics driver in NixOS unstable/NixOS
   hardware.graphics.enable = true;
 
   # Load nvidia driver for Xorg and Wayland

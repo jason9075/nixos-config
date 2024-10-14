@@ -16,10 +16,7 @@
 
   # GUI
   services.xserver.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    theme = "chili";
-  };
+  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   networking.hostName = systemSettings.hostname;
@@ -45,7 +42,6 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
@@ -68,8 +64,9 @@
   # exclude packages from the KDE Plasma 6 environment
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
-    konsole
     oxygen
+    kate
+    elisa
   ];
 
   # List services that you want to enable:
@@ -78,7 +75,7 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = systemSettings.version;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];

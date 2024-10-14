@@ -53,6 +53,7 @@ in {
         FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
+        sudo nixos-generate-config --show-hardware-config | sudo tee ~nixos-config/system/hardware-configuration.nix > /dev/null &&
         FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
       delolder = "sudo nix-collect-garbage --delete-older-than 14d";
       icat = "kitty +kitten icat";

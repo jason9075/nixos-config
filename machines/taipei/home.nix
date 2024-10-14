@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, systemSettings, userSettings, ... }:
+{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
 
 with pkgs;
 let
@@ -13,8 +13,7 @@ in {
 
   home.sessionVariables = { EDITOR = userSettings.editor; };
 
-  # home.stateVersion = "24.05"; # Stable
-  home.stateVersion = "24.11"; # Unstable
+  home.stateVersion = userSettings.version;
 
   programs.home-manager.enable = true;
 

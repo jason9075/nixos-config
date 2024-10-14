@@ -15,21 +15,21 @@
         bootMountPath = "/boot"; # boot mount point
         grubDevice =
           ""; # device identifier for grub; only used for legacy (bios) boot mode
+        # version = "24.05"; # Stable version
+        version = "24.11"; # Unstable version
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {
         username = "jason9075"; # username
         name = "Jason Kuan"; # name/identifier
         dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
-        wm =
-          "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
-        wmType = if (wm == "hyprland") then "wayland" else "x11";
         browser =
           "firefox"; # Default browser; must select one from ./user/app/browser/
         defaultRoamDir =
           "Personal.p"; # Default org roam directory relative to ~/Org
         term = "kitty"; # Default terminal command;
         editor = "nvim"; # Default editor;
+        version = "24.11";
       };
       pkgs = (if systemSettings.useUnstable then
         (import inputs.nixpkgs {
@@ -82,7 +82,6 @@
           inherit pkgs;
           inherit pkgs-stable;
           inherit (inputs) nixvim;
-          inherit systemSettings;
           inherit userSettings;
         };
       };
