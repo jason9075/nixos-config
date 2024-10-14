@@ -6,6 +6,7 @@ NIX_CFG_PATH=~/nixos-config
 echo "Please select your machine:"
 echo "1) taipei"
 echo "2) taoyuan"
+echo "3) simple"
 while true; do
   echo "Enter the number of your choice: "
   read -r choice
