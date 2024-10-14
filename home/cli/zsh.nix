@@ -49,9 +49,11 @@ in {
       gs = "git -c delta.side-by-side=true diff";
       ssh = "kitty +kitten ssh";
       # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
-      update = ''FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
+      update = ''
+        FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
-      updatesys = ''FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
+      updatesys = ''
+        FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
       delolder = "sudo nix-collect-garbage --delete-older-than 14d";
       icat = "kitty +kitten icat";
       act = "nix develop -c zsh";
@@ -78,6 +80,6 @@ in {
     initExtraBeforeCompInit = beforeRc;
     initExtra = extraRc;
   };
-  home.file.".p10k.zsh".source = ~/.dotfiles/dot_p10k.zsh;
+  home.file.".p10k.zsh".source = p10k_config.zsh;
 
 }
