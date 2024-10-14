@@ -1,2 +1,3 @@
 # Hardware Configuration
-system/hardware-configuration.nix
+# can not ignore hardware-configuration.nix because it is used by nixos. Or you have to use --impure option
+# system/hardware-configuration.nix
