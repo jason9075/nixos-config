@@ -10,6 +10,9 @@
         dockerls = { enable = true; };
         gopls = { enable = true; };
         clangd = { enable = true; };
+        html = { enable = true; };
+        ts-ls = { enable = true; };
+        yamlls = { enable = true; };
       };
     };
 
@@ -86,27 +89,31 @@
           severity_sort = true;
         };
         on_attach = # lua
-        ''
-          function(client, bufnr)
-            local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-            if client.supports_method("textDocument/formatting") then
-              vim.api.nvim_clear_autocmds({
-                group = augroup,
-                buffer = bufnr
-              })
-              vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                  vim.lsp.buf.format({ async = false })
-                end
-              })
+          ''
+            function(client, bufnr)
+              local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+              if client.supports_method("textDocument/formatting") then
+                vim.api.nvim_clear_autocmds({
+                  group = augroup,
+                  buffer = bufnr
+                })
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  group = augroup,
+                  buffer = bufnr,
+                  callback = function()
+                    vim.lsp.buf.format({ async = false })
+                  end
+                })
+              end
             end
-          end
-        '';
+          '';
       };
     };
-    treesitter.enable = true;
+    treesitter = {
+      enable = true;
+      settings = { auto_install = true; };
+    };
+    treesitter-context.enable = true;
     treesitter-textobjects.enable = true;
     treesitter-refactor.enable = true;
   };

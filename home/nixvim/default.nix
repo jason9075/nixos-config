@@ -43,6 +43,8 @@
       fzf-lua.enable = true;
       refactoring.enable = true;
       comment.enable = true;
+      # typescrip commentstring
+      ts-context-commentstring.enable = true;
       copilot-lua = {
         enable = true;
         suggestion = {
