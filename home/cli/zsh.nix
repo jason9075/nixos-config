@@ -80,6 +80,6 @@ in {
     initExtraBeforeCompInit = beforeRc;
     initExtra = extraRc;
   };
-  home.file.".p10k.zsh".source = p10k_config.zsh;
+  home.file.".p10k.zsh".source = ./p10k_config.zsh;
 
 }
