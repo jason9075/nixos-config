@@ -2,7 +2,8 @@
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    # /etc/nixos/hardware-configuration.nix
+    /tmp/hardware-configuration.nix
     ../../system/gui/thunar.nix
     ../../system/gui/font.nix
     ../../system/keyboards/keyd.nix

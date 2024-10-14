@@ -24,6 +24,7 @@ nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.d
 
 # Generate hardware config for new system
 sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/system/hardware-configuration.nix > /dev/null
+sudo nixos-generate-config --show-hardware-config | sudo tee /tmp/hardware-configuration.nix > /dev/null
 
 # Check if uefi or bios
 if [ -d /sys/firmware/efi/efivars ]; then
