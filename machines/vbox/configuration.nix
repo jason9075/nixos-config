@@ -2,7 +2,7 @@
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ../../system/hardware-configuration.nix
     ../../system/gui/thunar.nix
     ../../system/gui/font.nix
     ../../system/keyboards/keyd.nix
@@ -15,13 +15,12 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.fsIdentifier = "provided";
 
-  # Add some more video drivers to give X11 a shot at working in
-  # VMware and QEMU.
-  #services.xserver.videoDrivers = mkOverride 40 [ "virtualbox" "vmware" "cirrus" "vesa" "modesetting" ];
-
   # GUI
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    theme = "chili";
+  };
   services.xserver.desktopManager.plasma5.enable = true;
 
   networking.hostName = systemSettings.hostname;
