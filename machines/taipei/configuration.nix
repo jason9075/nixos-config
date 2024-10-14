@@ -9,7 +9,6 @@
     ../../system/gui/thunar.nix
     ../../system/gui/font.nix
     ../../system/keyboards/keyd.nix
-
   ];
 
   # Bootloader.

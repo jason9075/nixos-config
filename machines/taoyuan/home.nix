@@ -8,8 +8,8 @@ let
       ${coreutils}/bin/mkdir -p $out/share/applications
       ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop ''));
 in {
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
+  home.username = userSettings.username;
+  home.homeDirectory = "/home/${userSettings.username}";
 
   home.sessionVariables = { EDITOR = userSettings.editor; };
 

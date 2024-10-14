@@ -24,7 +24,9 @@ nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.d
 
 # Generate hardware config for new system
 sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/system/hardware-configuration.nix > /dev/null
-sudo nixos-generate-config --show-hardware-config | sudo tee /tmp/hardware-configuration.nix > /dev/null
+if [ ! -f /etc/nixos/hardware-configuration.nix ]; then
+    sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
+fi
 
 # Check if uefi or bios
 if [ -d /sys/firmware/efi/efivars ]; then
@@ -44,8 +46,9 @@ sed -i "0,/taipei/s//$MACHINE/" $NIX_CFG_PATH/flake.nix
 # Confirm flake.nix before install
 vim $NIX_CFG_PATH/flake.nix
 
-# Install System
-sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system --impure
+# Install System and User
+echo "Installing system..."
+sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system
 
-# Install User
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $NIX_CFG_PATH#user --impure
+echo "Installing user..."
+nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $NIX_CFG_PATH#user

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ userSettings, ... }:
 
 let
   beforeRc = # bash
@@ -48,12 +48,10 @@ in {
       gd = "git diff";
       gs = "git -c delta.side-by-side=true diff";
       ssh = "kitty +kitten ssh";
-      # old: cd ~/nixos-config/ && home-manager switch --flake .#user --impure && cd -
-      update =
-        ''FLAKE="$HOME/nixos-config" nh home switch -c user -- --impure'';
-      # old: cd ~/nixos-config/ && sudo nixos-generate-config --show-hardware-config > ~/nixos-config/system/hardware-configuration.nix && sudo nixos-rebuild switch --flake .#system --impure && cd -
-      updatesys =
-        ''FLAKE="$HOME/nixos-config" nh os switch -H system -- --impure'';
+      # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
+      update = ''FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
+      # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
+      updatesys = ''FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
       delolder = "sudo nix-collect-garbage --delete-older-than 14d";
       icat = "kitty +kitten icat";
       act = "nix develop -c zsh";

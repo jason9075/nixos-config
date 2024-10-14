@@ -4,7 +4,7 @@ with pkgs;
 let
 in {
   home.username = userSettings.username;
-  home.homeDirectory = builtins.getEnv "HOME";
+  home.homeDirectory = "/home/${userSettings.username}";
 
   home.sessionVariables = { EDITOR = userSettings.editor; };
 

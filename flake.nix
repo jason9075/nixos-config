@@ -19,7 +19,7 @@
       # ----- USER SETTINGS ----- #
       userSettings = rec {
         username = "jason9075"; # username
-        name = "jason9075"; # name/identifier
+        name = "Jason Kuan"; # name/identifier
         dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
         wm =
           "hyprland"; # Selected window manager or desktop environment; must select one in both ./user/wm/ and ./system/wm/
