@@ -6,14 +6,16 @@ NIX_CFG_PATH=~/nixos-config
 echo "Please select your machine:"
 echo "1) taipei"
 echo "2) taoyuan"
-echo "3) vbox"
+echo "3) taoyuan-dad"
+echo "4) vbox"
 while true; do
   echo "Enter the number of your choice: "
   read -r choice
   case "$choice" in
     1) MACHINE="taipei"; break;;
     2) MACHINE="taoyuan"; break;;
-    3) MACHINE="vbox"; break;;
+    3) MACHINE="taoyuan-dad"; break;;
+    4) MACHINE="vbox"; break;;
     *) echo "Invalid option, please select again.";;
   esac
 done
