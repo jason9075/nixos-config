@@ -21,23 +21,50 @@ while true; do
 done
 
 # dotfiles
-nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
-nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
+if [ -d ~/nixos-config ]; then
+    echo "Updating nixos-config..."
+    nix-shell -p git --command "git -C ~/nixos-config pull"
+else
+    echo "Cloning nixos-config..."
+    nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
+fi
+if [ -d ~/.dotfiles ]; then
+    echo "Updating dotfiles..."
+    nix-shell -p git --command "git -C ~/.dotfiles pull"
+else
+    echo "Cloning dotfiles..."
+    nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
+fi
+# Function to update or clone a repository
+update_or_clone() {
+  local dir=$1
+  local repo=$2
+  if [ -d "$dir" ]; then
+    echo "Updating $dir..."
+    nix-shell -p git --command "git -C $dir pull"
+  else
+    echo "Cloning $repo..."
+    nix-shell -p git --command "git clone $repo $dir"
+  fi
+}
+
+# Update or clone repositories
+update_or_clone "$NIX_CFG_PATH" "https://github.com/jason9075/nixos-config"
+update_or_clone "$HOME/.dotfiles" "https://github.com/jason9075/dotfiles"
 
 # Generate hardware config for new system
 sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/system/hardware-configuration.nix > /dev/null
-if [ ! -f /etc/nixos/hardware-configuration.nix ]; then
-    sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
-fi
+[ ! -f /etc/nixos/hardware-configuration.nix ] && sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
 
 # Check if uefi or bios
 if [ -d /sys/firmware/efi/efivars ]; then
-    sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"uefi\";/" $NIX_CFG_PATH/flake.nix
+    boot_mode="uefi"
 else
-    sed -i "0,/bootMode.*=.*\".*\";/s//bootMode = \"bios\";/" $NIX_CFG_PATH/flake.nix
-    grubDevice=$(findmnt / | awk -F' ' '{ print $2 }' | sed 's/\[.*\]//g' | tail -n 1 | lsblk -no pkname | tail -n 1 )
-    sed -i "0,/grubDevice.*=.*\".*\";/s//grubDevice = \"\/dev\/$grubDevice\";/" $NIX_CFG_PATH/flake.nix
+    boot_mode="bios"
+    grub_device=$(lsblk -no pkname "$(findmnt / -o SOURCE -n)" | tail -n 1)
+    sed -i "s/grubDevice = \".*\";/grubDevice = \"\/dev\/$grub_device\";/" $NIX_CFG_PATH/flake.nix
 fi
+sed -i "s/bootMode = \".*\";/bootMode = \"$boot_mode\";/" $NIX_CFG_PATH/flake.nix
 
 # Patch flake.nix with different username/name
 sed -i "0,/jason9075/s//$(whoami)/" $NIX_CFG_PATH/flake.nix
