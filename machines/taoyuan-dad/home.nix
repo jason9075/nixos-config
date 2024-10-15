@@ -6,7 +6,11 @@ in {
   home.username = userSettings.username;
   home.homeDirectory = "/home/${userSettings.username}";
 
-  home.sessionVariables = { EDITOR = userSettings.editor; };
+  home.sessionVariables = {
+    TERMINAL = userSettings.term;
+    EDITOR = userSettings.editor;
+    BROWSER = "google-chrome";
+  };
 
   home.stateVersion = userSettings.version;
 

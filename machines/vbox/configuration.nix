@@ -19,7 +19,7 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  networking.hostName = systemSettings.hostname;
+  networking.hostName = "vbox";
 
   # Enable networking
   networking.networkmanager.enable = true;

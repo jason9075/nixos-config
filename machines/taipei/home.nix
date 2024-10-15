@@ -11,7 +11,11 @@ in {
   home.username = userSettings.username;
   home.homeDirectory = "/home/${userSettings.username}";
 
-  home.sessionVariables = { EDITOR = userSettings.editor; };
+  home.sessionVariables = {
+    TERMINAL = userSettings.term;
+    EDITOR = userSettings.editor;
+    BROWSER = userSettings.browser;
+  };
 
   home.stateVersion = userSettings.version;
 

@@ -1,34 +1,31 @@
 {
-  description = "Jason Kuan flake file";
+  description = "Jason Kuan's flake file";
 
   outputs = inputs@{ self, ... }:
     let
       # ---- SYSTEM SETTINGS ---- #
       systemSettings = {
         system = "x86_64-linux";
-        hostname = "nixos";
+        hostname = "nixos"; # for ssh ex: ssh <user>@<hostname>
         machine = "taipei";
         timezone = "Asia/Taipei";
         locale = "zh_TW.UTF-8";
-        useUnstable = true; # Use unstable nixpkgs
+        useUnstable = true;
         bootMode = "uefi"; # uefi or bios
         bootMountPath = "/boot"; # boot mount point
-        grubDevice =
-          ""; # device identifier for grub; only used for legacy (bios) boot mode
+        grubDevice = ""; # only used for legacy bios mode
         # version = "24.05"; # Stable version
         version = "24.11"; # Unstable version
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {
         username = "jason9075"; # username
-        name = "Jason Kuan"; # name/identifier
-        dotfilesDir = "~/.dotfiles"; # absolute path of the local repo
+        name = "Jason Kuan"; # display on login screen
+        dotfilesDir = "~/.dotfiles";
         browser =
-          "firefox"; # Default browser; must select one from ./user/app/browser/
-        defaultRoamDir =
-          "Personal.p"; # Default org roam directory relative to ~/Org
-        term = "kitty"; # Default terminal command;
-        editor = "nvim"; # Default editor;
+          "firefox"; # Default browser
+        term = "kitty"; # Default terminal
+        editor = "nvim"; # Default editor
         version = "24.11";
       };
       pkgs = (if systemSettings.useUnstable then

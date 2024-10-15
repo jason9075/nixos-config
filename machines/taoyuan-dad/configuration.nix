@@ -19,7 +19,7 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
-  networking.hostName = systemSettings.hostname;
+  networking.hostName = "nixos-kuan33400";
 
   # Enable networking
   networking.networkmanager.enable = true;
