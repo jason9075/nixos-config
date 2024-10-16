@@ -28,6 +28,7 @@
 
     # Plugins
     plugins = {
+      mini.enable = true; # multiple mini functions
       bufferline.enable = true;
       lualine.enable = true;
       project-nvim.enable = true;
@@ -69,14 +70,17 @@
         enable = true;
         settings = { preset = "helix"; };
       };
+
+      markdown-preview.enable = true;
     };
 
     extraPlugins = with pkgs.vimPlugins; [
-      nightfox-nvim
+      nightfox-nvim # colorscheme
       nvim-lspconfig
-      nui-nvim
-      plenary-nvim
-      nvim-bufdel
+      nui-nvim # ui
+      plenary-nvim # testing
+      nvim-bufdel # buffer management
+      bullets-vim # markdown bullets
     ];
 
   };
