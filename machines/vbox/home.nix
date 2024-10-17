@@ -9,7 +9,7 @@ in {
   home.sessionVariables = {
     TERMINAL = userSettings.term;
     EDITOR = userSettings.editor;
-    BROWSER = userSettings.browser;
+    BROWSER = qutebrowser;
   };
 
   home.stateVersion = userSettings.version;
@@ -52,6 +52,7 @@ in {
     tree
 
     # Web Browser
+    qutebrowser
     google-chrome
     firefox
 

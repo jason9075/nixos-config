@@ -9,7 +9,8 @@ let
     "margin-right" = 10;
 
     "modules-left" = [ "hyprland/workspaces" "custom/mpd" ];
-    "modules-center" = [ "clock" "custom/wallpaper" "custom/keybindings" ];
+    "modules-center" =
+      [ "clock" "custom/wallpaper" "custom/colorpicker" "custom/keybindings" ];
     "modules-right" = [
       "cpu"
       "temperature"
@@ -70,7 +71,7 @@ let
     };
     "clock" = {
       "interval" = 60;
-      "format" = " {:%b %d %a  %p %I:%M}";
+      "format" = "  {:%b %d %a  %p %I:%M}";
       "tooltip-format" = ''
         <big>{:%Y %B}</big>
         <tt><small>{calendar}</small></tt>'';
@@ -84,7 +85,6 @@ let
     "cpu" = {
       "interval" = 2;
       "format" = "  {usage}%";
-      "tooltip" = false;
       "states" = {
         "mid" = 90;
         "high" = 95;
@@ -130,7 +130,7 @@ let
     };
     "pulseaudio" = {
       # "scroll-step"= 1; 
-      "format" = "{icon} {volume}%";
+      "format" = "{icon}  {volume}%";
       "format-bluetooth" = "{icon} {volume}% 󰂯";
       "format-bluetooth-muted" = "{icon} 󰖁 󰂯";
       "format-muted" = "󰖁 {format_source}";
@@ -151,13 +151,19 @@ let
       "format" = " {icon} ";
       "format-icons" = "󰸉";
       "on-click" = "~/nixos-config/scripts/swww_randomize.sh";
-      "tooltip" = false;
+      "tooltip-format" = "Change Wallpaper";
+    };
+    "custom/colorpicker" = {
+      "format" = " {icon} ";
+      "format-icons" = "󰴱";
+      "on-click" = "~/nixos-config/scripts/colorpicker.sh";
+      "tooltip-format" = "Color Picker";
     };
     "custom/keybindings" = {
       "format" = " {icon} ";
       "format-icons" = "󰍉";
       "on-click" = "~/nixos-config/scripts/rofi_keybindings.sh";
-      "tooltip" = false;
+      "tooltip-format" = "Hotkeys";
     };
     "custom/power" = {
       "format" = "{icon} ";
@@ -325,6 +331,10 @@ let
     }
 
     #custom-wallpaper {
+      color: @nordblue;
+    }
+
+    #custom-colorpicker {
       color: @nordblue;
     }
 

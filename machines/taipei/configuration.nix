@@ -51,7 +51,6 @@
   };
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -78,7 +77,6 @@
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # nh
   programs.nh = {

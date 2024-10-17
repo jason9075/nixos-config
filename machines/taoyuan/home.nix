@@ -2,7 +2,6 @@
 
 with pkgs;
 let
-  # Patch trick: https://www.reddit.com/r/NixOS/comments/13bo4fw/how_to_set_flags_for_application/
   patchDesktop = pkg: appName: from: to:
     (pkgs.lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" { } ''
       ${coreutils}/bin/mkdir -p $out/share/applications
@@ -39,7 +38,7 @@ in {
     ../../home/gui/wlogout.nix
     ../../home/gui/rofi.nix
     ../../home/gui/mako.nix
-    ../../home/gui/zathura.nix # PDF Viewer
+    ../../home/gui/zathura.nix
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
@@ -108,6 +107,7 @@ in {
     (brave.override { vulkanSupport = true; })
 
     # Multimedia
+    pavucontrol
     gimp
     obs-studio
     vlc

@@ -7,12 +7,16 @@
     ../../system/keyboards/keyd.nix
   ];
 
-  # Ref: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/installer/virtualbox-demo.nix
-
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.fsIdentifier = "provided";
+  boot.loader.systemd-boot.enable =
+    if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.canTouchEfiVariables =
+    if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath;
+  boot.loader.grub.enable =
+    if (systemSettings.bootMode == "uefi") then false else true;
+  boot.loader.grub.device =
+    systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
   # GUI
   services.xserver.enable = true;

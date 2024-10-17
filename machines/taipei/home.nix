@@ -83,6 +83,7 @@ in {
     # GUI
     hyprland
     pyprland
+    hyprcursor
     swww
     swayidle
     grim # Screenshot
@@ -91,7 +92,6 @@ in {
     imv # Image Viewer
 
     # Communication
-    discord
     slack
     (patchDesktop slack "slack" "^Exec=${slack}/bin/slack -s %U"
       "Exec=${slack}/bin/slack --enable-wayland-ime -s %U")
@@ -116,7 +116,7 @@ in {
 
     # Multimedia
     gimp
-    krita # Drawing
+    pavucontrol
     obs-studio
     vlc
     shotcut # Video Editor

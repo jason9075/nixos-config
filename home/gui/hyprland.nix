@@ -4,13 +4,15 @@ let
   startupScript = pkgs.writeShellScriptBin "start" ''
     waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
-    swww init &
+    echo "swww init"
+    swww-daemon --format xrgb &
     pypr &
     $HOME/nixos-config/scripts/swww_randomize.sh
 
     sleep 1
   '';
 in {
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -33,7 +35,10 @@ in {
         new_on_top = false;
         mfact = 0.7;
       };
-      monitor = [ "HDMI-A-1,1920x1080@60,0x0,1" ];
+      monitor = [ "HDMI-A-1,1920x1080@144,0x0,1" ];
+      # git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors /tmp/cursor
+      # cp -r /tmp/cursor/hyprcursors/themes/Nordzy-hyprcursors ~/.icons/
+      env = [ "HYPRCURSOR_THEME, Nordzy-hyprcursors" "HYPRCURSOR_SIZE, 24" ];
       bindm = [
         "$mod, mouse:272, movewindow                                    # Move window"
         "$mod, mouse:273, resizewindow                                  # Resize window"
@@ -142,4 +147,8 @@ in {
     size = "80% 85%"
     margin = 50
   '';
+
+  home.packages = with pkgs; [
+    hyprpicker
+  ];
 }
