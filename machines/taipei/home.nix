@@ -42,6 +42,7 @@ in {
     ../../home/gui/rofi.nix
     ../../home/gui/mako.nix
     ../../home/gui/zathura.nix # PDF Viewer
+    ../../home/gui/qutebrowser.nix
 
     # Audio
     ../../home/audio/mpd.nix

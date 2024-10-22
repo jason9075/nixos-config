@@ -42,7 +42,7 @@ let
       # https://www.nerdfonts.com/cheat-sheet
       "format-icons" = {
         "10" = "";
-        "9" = "";
+        "9" = "󰖟";
         "8" = "󰒱";
         "7" = "󰙯";
       };

@@ -48,6 +48,7 @@ in {
       gd = "git diff";
       gs = "git -c delta.side-by-side=true diff";
       ssh = "kitty +kitten ssh";
+      open = "thunar";
       # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
       update = ''
         FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';

@@ -22,8 +22,7 @@
         username = "jason9075"; # username
         name = "Jason Kuan"; # display on login screen
         dotfilesDir = "~/.dotfiles";
-        browser =
-          "firefox"; # Default browser
+        browser = "qutebrowser"; # Default browser
         term = "kitty"; # Default terminal
         editor = "nvim"; # Default editor
         version = "24.11";
