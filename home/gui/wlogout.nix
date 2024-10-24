@@ -41,59 +41,70 @@ let
   ];
   wlogoutStyle = # css
     ''
-          @define-color nordblue #81a1c1;
+      @define-color bg rgba(46, 52, 64, 0.8);
+      @define-color bg-focus rgba(76, 86, 106, 0.8);
+      @define-color blue #5e81ac;
+      @define-color green #8fbcbb;
       * {
-      	background-image: none;
-      }
-      window {
-      	background-color: rgba(46, 52, 64, 0.9);
-      }
-      button {
-      	background-color: #2e3440;
-      	border-style: solid;
-      	border-width: 0px;
-      	border-radius: 0;
-      	background-repeat: no-repeat;
-      	background-position: center;
-      	background-size: 25%;
-      	color: #5e81ac;
+        background-image: none;
       }
 
-      button:focus, button:active, button:hover {
-      	background-color: #4c566a;
-      	color: #81a1c1;
-      	outline-style: none;
+      window {
+        background-color: @bg;
+      }
+
+      button {
+        background-color: @bg;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 25%;
+        border-style: solid;
+        border-width: 0px;
+        border-radius: 0;
+        font-size: 24px;
+        font-family: "Hack Nerd Font";
+        color: @blue;
+        padding: 20px;
+      }
+
+      button:focus,
+      button:active,
+      button:hover {
+        background-color: @bg-focus;
+        background-size: 30%;
+        color: @green;
+        outline-style: none;
       }
 
       #lock {
-          background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+        background-image: url("../../nixos-config/assets/lock.png");
       }
 
       #logout {
-          background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+        background-image: url("../../nixos-config/assets/logout.png");
       }
 
       #suspend {
-          background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+        background-image: url("../../nixos-config/assets/suspend.png");
       }
 
       #hibernate {
-          background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+        background-image: url("../../nixos-config/assets/hibernate.png");
       }
 
       #shutdown {
-          background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+        background-image: url("../../nixos-config/assets/shutdown.png");
       }
 
       #reboot {
-          background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
-      }    
+        background-image: url("../../nixos-config/assets/reboot.png");
+      }
     '';
 in {
 
   programs.wlogout = {
     enable = true;
     layout = wlogoutLayout;
-    # style = wlogoutStyle;
+    style = wlogoutStyle;
   };
 }

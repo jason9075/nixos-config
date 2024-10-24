@@ -6,7 +6,6 @@ let
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
     eww daemon &
-    eww open widgets
     swww-daemon --format xrgb &
     pypr &
     $HOME/nixos-config/scripts/swww_randomize.sh
@@ -14,6 +13,7 @@ let
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
 
     sleep 1
+    eww open widgets
   '';
 in {
 
@@ -144,7 +144,6 @@ in {
     class = "chatgpt_app"
     size = "80% 85%"
     margin = 50
-    lazy = true
 
     [scratchpads.calendar]
     animation = "fromLeft"
