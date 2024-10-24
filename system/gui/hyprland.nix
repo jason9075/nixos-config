@@ -7,13 +7,14 @@
     restart = false;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command =
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --theme time=cyan;greet=border=text=action=blue;prompt=input=green;button=yellow;container=black --time --cmd Hyprland";
         user = userSettings.username;
       };
-      initial_session = {
-        command = "Hyprland";
-        user = userSettings.username;
-      };
+      # initial_session = {
+      #   command = "Hyprland";
+      #   user = userSettings.username;
+      # };
     };
   };
 

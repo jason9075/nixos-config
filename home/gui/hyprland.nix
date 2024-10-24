@@ -10,6 +10,8 @@ let
     swww-daemon --format xrgb &
     pypr &
     $HOME/nixos-config/scripts/swww_randomize.sh
+    $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
+    $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
 
     sleep 1
   '';
@@ -38,7 +40,7 @@ in {
         mfact = 0.7;
       };
       monitor = [ "HDMI-A-1,1920x1080@144,0x0,1" ];
-      # git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors /tmp/cursor
+      # git clone https://github.com/guillaumeboehm/Nordzy-cursors.git /tmp/cursor
       # cp -r /tmp/cursor/hyprcursors/themes/Nordzy-hyprcursors ~/.icons/
       env = [ "HYPRCURSOR_THEME, Nordzy-hyprcursors" "HYPRCURSOR_SIZE, 24" ];
       bindm = [
@@ -50,7 +52,6 @@ in {
         "$mod, A, exec, ~/nixos-config/scripts/rofi_keybindings.sh      # Show all keybinding"
         "$mod, F, exec, rofi -show drun -show-icons                     # Application launcher"
         "$mod, T, exec, kitty                                           # Terminal"
-        "$mod, B, exec, brave                                           # Brave web browser"
         "$mod, E, exec, thunar                                          # File Manager"
         "$mod, X, exec, wlogout                                         # Power menu"
         "$mod, Q, killactive                                            # Close window"
@@ -79,6 +80,7 @@ in {
         "$mod SHIFT, J, resizeactive, 0 80                              # Resize window down"
         # Scratchpads
         "$mod, C, exec, pypr toggle chatgpt                             # ChatGPT scratchpad"
+        "$mod, P, exec, pypr toggle calendar                            # Calendar scratchpad"
         "$mod, I, exec, pypr toggle term                                # Terminal scratchpad"
 
         "$mod, 1, workspace, 1                                          # Switch to workspace 1"
@@ -131,7 +133,7 @@ in {
     };
   };
 
-  # https://github.com/hyprland-community/pyprland/wiki/scratchpads
+  # # https://github.com/hyprland-community/pyprland/wiki/scratchpads
   home.file.".config/hypr/pyprland.toml".text = ''
     [pyprland]
     plugins = ["scratchpads"]
@@ -144,12 +146,21 @@ in {
     margin = 50
     lazy = true
 
+    [scratchpads.calendar]
+    animation = "fromLeft"
+    command = "firefox --name=calendar_app --no-remote -P calendar https://calendar.google.com/calendar"
+    class = "calendar_app"
+    size = "80% 85%"
+    margin = 50
+    lazy = true
+
     [scratchpads.term]
     animation = "fromRight"
     command = "kitty --class term --hold htop"
     class = "term"
     size = "80% 85%"
     margin = 50
+    lazy = true
   '';
 
   # eww
@@ -162,8 +173,9 @@ in {
     (defpoll time :interval "5s" "date '+%H:%M'")
 
     ;; ENV VARS
-    (defpoll uptime :interval "1m" "$HOME/nixos-config/scripts/uptime.sh &")
+    (defpoll UPTIME :interval "1m" "$HOME/nixos-config/scripts/uptime.sh &")
     (defpoll IP_ADDR :interval "24h" "ip -br address | grep UP | awk '{ print $3 }'")
+    (defpoll NET_INTERFACE :interval "24h" "ip -br address | grep UP | awk '{ print $1}'")
 
     ;; Widgets
 
@@ -194,7 +206,7 @@ in {
               (label :class "info-icon" :text " :")
             )
             (box :class "info-box-right" :orientation "v" :space-evenly false
-              (label :class "info-text" :halign "start" :text "''${uptime}")
+              (label :class "info-text" :halign "start" :text "''${UPTIME}")
             )
           )
         )
@@ -215,7 +227,7 @@ in {
         (box :orientation "h" :width 100
           (graph :class "network-graph-up"
                  :thickness 2
-                 :value {round(EWW_NET.enp6s0.NET_UP / 1024, 1)}
+                 :value {round(EWW_NET[NET_INTERFACE].NET_UP / 1000, 1)}
                  :time-range "2m"
                  :min 0
                  :max 101
@@ -233,7 +245,7 @@ in {
         (box :orientation "h" :width 100
           (graph :class "network-graph-down"
                  :thickness 2
-                 :value {round(EWW_NET.enp6s0.NET_DOWN, 1)}
+                 :value {round(EWW_NET[NET_INTERFACE].NET_DOWN, 1)}
                  :time-range "2m"
                  :min 0
                  :max 101
@@ -258,7 +270,7 @@ in {
       :monitor 0
       :geometry (geometry :x "16px"
                           :y "40px"
-                          :width "9%"
+                          :width "180px"
                           :height "0%"
                           :anchor "top right")
       :stacking "bg"

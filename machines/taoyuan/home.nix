@@ -13,7 +13,7 @@ in {
   home.sessionVariables = {
     TERMINAL = userSettings.term;
     EDITOR = userSettings.editor;
-    BROWSER = userSettings.browser;
+    BROWSER = "firefox";
   };
 
   home.stateVersion = userSettings.version;
