@@ -27,6 +27,7 @@ in {
 
     # GUI
     ../../home/gui/kitty.nix
+    ../../home/gui/eww.nix
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
@@ -55,9 +56,25 @@ in {
     google-chrome
     firefox
 
+    # Multimedia
+    vlc
+
     # Misc
     xclip
     xdotool
     tree-sitter
+    wmctrl
   ];
+
+  # Cinnamon auto start
+  home.file.".config/autostart/run_once.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Exec=/home/jason9075/nixos-config/scripts/cinnamon_login.sh
+    Hidden=false
+    NoDisplay=false
+    X-GNOME-Autostart-enabled=true
+    Name=Run eww
+    Comment=Run once on login
+  '';
 }
