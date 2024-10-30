@@ -76,7 +76,6 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       nightfox-nvim # colorscheme
-      nvim-lspconfig
       nui-nvim # ui
       plenary-nvim # testing
       nvim-bufdel # buffer management

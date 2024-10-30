@@ -26,7 +26,6 @@ in {
 
     # CLI
     ../../home/cli/zsh.nix
-    ../../home/cli/zsh.nix
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
     ../../home/cli/mu.nix

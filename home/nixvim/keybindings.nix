@@ -37,6 +37,17 @@
         options.silent = true;
         action = "5<C-y>";
       }
+      # Disable default completion, use cmp instead
+      {
+        mode = "i";
+        key = "<C-n>";
+        action = "<Nop>";
+      }
+      {
+        mode = "i";
+        key = "<C-p>";
+        action = "<Nop>";
+      }
     ];
     plugins = {
       which-key = {
@@ -172,12 +183,17 @@
           }
         ];
       };
-      copilot-lua = { suggestion.keymap = { accept = "<c-g>"; }; };
+      copilot-lua = {
+        suggestion.keymap = {
+          accept = "<c-g>";
+          next = "<c-y>"; # cycle through suggestions
+        };
+      };
       cmp.settings.mapping = {
         "<C-Space>" = "cmp.mapping.complete()";
         "<CR>" = "cmp.mapping.confirm({ select = true })";
-        "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-        "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+        "<C-n>" = "cmp.mapping.select_next_item()";
+        "<C-p>" = "cmp.mapping.select_prev_item()";
       };
     };
 

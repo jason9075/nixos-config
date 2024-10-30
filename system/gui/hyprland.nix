@@ -4,8 +4,10 @@ let
   tuigreetOptions = [
     "--remember"
     "--time"
+    "--time-format '%Y-%m-%d %H:%M'"
+    "--greeting 'Welcome to Hyprland'"
     # Make sure theme is wrapped in single quotes. See https://github.com/apognu/tuigreet/issues/147
-    "--theme 'greet=border=text=action=white;time=lightcyan;prompt=input=green;button=yellow;container=gray'"
+    "--theme 'border=text=white;time=blue;action=prompt=input=green;button=yellow;container=black'"
     "--cmd Hyprland"
   ];
   flags = lib.concatStringsSep " " tuigreetOptions;
@@ -18,6 +20,11 @@ in {
     settings = {
       default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet ${flags}";
+        user = userSettings.username;
+      };
+      # Automatically log in the user when the system boots
+      initial_session = {
+        command = "Hyprland";
         user = userSettings.username;
       };
     };

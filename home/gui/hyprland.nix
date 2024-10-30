@@ -2,6 +2,7 @@
 
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
+    sleep 1
     waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
@@ -11,15 +12,11 @@ let
     $HOME/nixos-config/scripts/swww_randomize.sh
     $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
-
-    sleep 1
     eww open widgets
   '';
 in {
 
-  imports = [
-    ./eww.nix
-  ];
+  imports = [ ./eww.nix ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -165,7 +162,6 @@ in {
     margin = 50
     lazy = true
   '';
-
 
   home.packages = with pkgs; [ hyprpicker ];
 }

@@ -88,6 +88,34 @@
   # Swaylock
   security.pam.services.swaylock = { };
 
+  # Color scheme
+  stylix.enable = true;
+  stylix.image = ./wallpaper.png; # dummy image
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+  console = {
+    earlySetup = true;
+    packages = with pkgs; [ terminus_font powerline-fonts ];
+    font = "ter-powerline-v24b";
+    colors = [
+      "2e3440"
+      "3b4252"
+      "434c5e"
+      "4c566a"
+      "d8dee9"
+      "e5e9f0"
+      "eceff4"
+      "8fbcbb"
+      "88c0d0"
+      "81a1c1"
+      "5e81ac"
+      "bf616a"
+      "d08770"
+      "ebcb8b"
+      "a3be8c"
+      "b48ead"
+    ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];

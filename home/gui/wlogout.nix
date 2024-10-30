@@ -28,7 +28,7 @@ let
     }
     {
       label = "suspend";
-      action = "systemctl syspend";
+      action = "systemctl suspend";
       text = "Suspend (u)";
       keybind = "u";
     }

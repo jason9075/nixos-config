@@ -13,6 +13,20 @@
         html = { enable = true; };
         ts-ls = { enable = true; };
         yamlls = { enable = true; };
+        nixd = {
+          enable = true;
+          settings = {
+            nixpkgs = { expr = "import <nixpkgs> {}"; };
+            options = {
+              nixos.expr = ''
+                (builtins.getFlake "github:jason9075/nixos-config").nixosConfigurations.system.options
+              '';
+              home_manager.expr = ''
+                (builtins.getFlake "github:jason9075/nixos-config").homeConfigurations.user.options
+              '';
+            };
+          };
+        };
       };
     };
 
@@ -82,7 +96,7 @@
 
       settings = {
         diagnostic_config = {
-          virtual_text = false;
+          virtual_text = true;
           signs = true;
           update_in_insert = false;
           underline = true;
@@ -116,8 +130,10 @@
     treesitter-context.enable = true;
     treesitter-textobjects.enable = true;
     treesitter-refactor.enable = true;
-    # syntax highlight for nix confeg
+    # syntax highlight for nix config
     hmts.enable = true;
   };
+
+  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
 }
