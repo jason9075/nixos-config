@@ -3,7 +3,7 @@
 {
   imports = [
     ../../system/hardware-configuration.nix
-    ../../system/gui/font.nix
+    ../../system/gui/fonts
     ../../system/keyboards/keyd.nix
   ];
 

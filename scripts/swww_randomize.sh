@@ -12,7 +12,7 @@ if [ ! -d "$DIR" ]; then
     exit 1
 fi
 
-PICS=($(find "$DIR" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.gif' -o -iname '*.mp4' \)))
+PICS=($(find "$DIR" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.gif' \)))
 if [ ${#PICS[@]} -eq 0 ]; then
     echo "No wallpapers found in the directory. Exiting."
     exit 1

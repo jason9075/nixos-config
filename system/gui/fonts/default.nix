@@ -1,6 +1,7 @@
-{ pkgs, userSettings, ... }:
+{ pkgs, ... }:
 
-{
+let elffont = import ./elffont.nix { inherit pkgs; };
+in {
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -9,13 +10,14 @@
       powerline-symbols
       (nerdfonts.override { fonts = [ "Hack" ]; })
       source-han-sans-traditional-chinese
+      elffont.v1
     ];
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Source Han Sans TC"];
-        sansSerif = ["Source Han Sans TC"];
-        monospace = ["Hack Nerd Font Mono"];
+        serif = [ "Source Han Sans TC" ];
+        sansSerif = [ "Source Han Sans TC" ];
+        monospace = [ "Hack Nerd Font Mono" ];
       };
     };
   };

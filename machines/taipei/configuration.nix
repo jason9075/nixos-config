@@ -7,7 +7,7 @@
     ../../system/gui/nvidia.nix
     ../../system/gui/hyprland.nix
     ../../system/gui/thunar.nix
-    ../../system/gui/font.nix
+    ../../system/gui/fonts
     ../../system/keyboards/keyd.nix
   ];
 
