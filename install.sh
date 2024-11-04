@@ -7,7 +7,8 @@ echo "Please select your machine:"
 echo "1) taipei"
 echo "2) taoyuan"
 echo "3) taoyuan-dad"
-echo "4) vbox"
+echo "4) office-msi"
+echo "5) vbox"
 while true; do
   echo "Enter the number of your choice: "
   read -r choice
@@ -15,7 +16,8 @@ while true; do
     1) MACHINE="taipei"; break;;
     2) MACHINE="taoyuan"; break;;
     3) MACHINE="taoyuan-dad"; break;;
-    4) MACHINE="vbox"; break;;
+    4) MACHINE="office-msi"; break;;
+    5) MACHINE="vbox"; break;;
     *) echo "Invalid option, please select again.";;
   esac
 done
