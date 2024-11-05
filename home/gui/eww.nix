@@ -9,6 +9,7 @@ let
       (defpoll calendar_date :interval "12h" "date '+%A, %d %B'")
       (defpoll today :interval "12h" "date '+%a, %d %B'")
       (defpoll time :interval "5s" "date '+%H:%M'")
+      (defpoll QUOTE :interval "12h" "$HOME/nixos-config/scripts/gen_quote.sh")
 
       ;; ENV VARS
       (defpoll UPTIME :interval "1m" "$HOME/nixos-config/scripts/uptime.sh &")
@@ -118,6 +119,37 @@ let
           (right)
         )
       )
+      ;; Clock
+      (defwindow clock
+        :monitor 0
+        :geometry (geometry :x "120px"
+                            :y "80px"
+                            :width "180px"
+                            :height "0%"
+                            :anchor "top left")
+        :stacking "bg"
+        :windowtype "dock"
+        :exclusive false
+        (box :class "main-container"
+          (label :class "clock" :text time)
+        )
+      )
+      ;;Quote
+      (defwindow quote
+        :monitor 0
+          :geometry (geometry :x "400px"
+                              :y "280px"
+                              :width "600px"
+                              :height "0%"
+                              :anchor "top left")
+          :stacking "bg"
+          :windowtype "dock"
+          :exclusive false
+          (box :class "main-container" 
+            (label :class "quote" :text "''${QUOTE}")
+          )
+      )
+
       ;; CENTER WIDGET CONFIGURATION
       (defwidget music []
         (button :class "center-button" :onclick "$HOME/nixos-config/scripts/browser_toggle_url.sh"
@@ -292,6 +324,14 @@ let
         border-radius: 10px;
         padding-top: 6px;
       }
+      .quote {
+        background-color: $color25;
+        font-family: "elffont";
+        font-size: 40px;
+        color: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        padding-top: 6px;
+      }
 
       calendar {
         &:selected {
@@ -350,7 +390,6 @@ let
 
 in {
 
-  # eww
   home.file.".config/eww/eww.yuck".text = yuckConfig;
   home.file.".config/eww/eww.scss".text = scssConfig;
 

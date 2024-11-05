@@ -9,10 +9,13 @@ let
     eww daemon
     swww-daemon --format xrgb &
     pypr &
+    sleep 1
+    eww open widgets
     $HOME/nixos-config/scripts/swww_randomize.sh
     $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
-    eww open widgets
+    sleep 10
+    eww open quote
   '';
 in {
 
@@ -82,7 +85,8 @@ in {
         # Scratchpads
         "$mod, C, exec, pypr toggle chatgpt                             # ChatGPT scratchpad"
         "$mod, P, exec, pypr toggle calendar                            # Calendar scratchpad"
-        "$mod, I, exec, pypr toggle term                                # Terminal scratchpad"
+        "$mod, I, exec, pypr toggle htop                                # htop scratchpad"
+        "$mod, N, exec, pypr toggle nvtop                               # nvtop scratchpad"
 
         "$mod, 1, workspace, 1                                          # Switch to workspace 1"
         "$mod, 2, workspace, 2                                          # Switch to workspace 2"
@@ -126,6 +130,8 @@ in {
         "opacity 1.0 0.9, class:^(kitty)$"
         "opacity 1.0 0.93, class:^.*zathura$"
         "opacity 0.95 0.88, class:^(thunar)$"
+        "opacity 0.9 0.7, class:^(htop)$"
+        "opacity 0.9 0.7, class:^(nvtop)$"
       ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
       animation =
@@ -154,10 +160,18 @@ in {
     margin = 50
     lazy = true
 
-    [scratchpads.term]
+    [scratchpads.htop]
     animation = "fromRight"
-    command = "kitty --class term --hold htop"
-    class = "term"
+    command = "kitty --class htop --hold htop"
+    class = "htop"
+    size = "80% 85%"
+    margin = 50
+    lazy = true
+
+    [scratchpads.nvtop]
+    animation = "fromBottom"
+    command = "kitty --class nvtop --hold nvtop"
+    class = "nvtop"
     size = "80% 85%"
     margin = 50
     lazy = true

@@ -48,7 +48,6 @@ in {
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
-
   ];
 
   home.packages = with pkgs; [
@@ -61,6 +60,7 @@ in {
     postman
     ansible
     vpnc
+    entr
 
     # CLI
     htop
@@ -90,6 +90,7 @@ in {
     slurp # Screenshot
     swappy # Window switcher
     imv # Image Viewer
+    font-manager
 
     # Communication
     slack
