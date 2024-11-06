@@ -81,8 +81,8 @@
       enable = true;
       settings = {
         sources = [
-          { name = "nvim_lsp"; }
           { name = "luasnip"; }
+          { name = "nvim_lsp"; }
           { name = "treesitter"; }
         ];
         snippet = {

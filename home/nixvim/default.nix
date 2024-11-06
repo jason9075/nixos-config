@@ -54,7 +54,13 @@
         };
       };
 
-      luasnip.enable = true;
+      luasnip = {
+        enable = true;
+        fromLua = [
+          {paths = "~/nixos-config/home/nixvim/snippets"}
+
+        ];
+      };
       gitsigns.enable = true;
 
       noice.enable = true;
