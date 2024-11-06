@@ -31,6 +31,18 @@
       };
     };
     lsp-format.enable = true;
+    lspkind = {
+      enable = true;
+      cmp = {
+        enable = true;
+        menu = {
+          nvim_lsp = "[LSP]";
+          path = "[Path]";
+          luasnip = "[Snip]";
+          buffer = "[Buf]";
+        };
+      };
+    };
     none-ls = {
       enable = true;
       sources = {
@@ -81,9 +93,13 @@
       enable = true;
       settings = {
         sources = [
-          { name = "luasnip"; }
           { name = "nvim_lsp"; }
-          { name = "treesitter"; }
+          { name = "path"; }
+          { name = "luasnip"; }
+          {
+            name = "buffer";
+            keyword_length = 5; # show buffer completion after 5 characters
+          }
         ];
         snippet = {
           expand = # lua

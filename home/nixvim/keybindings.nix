@@ -48,6 +48,18 @@
         key = "<C-p>";
         action = "<Nop>";
       }
+      {
+        mode = [ "i" "s" ];
+        key = "<C-k>";
+        action = "<CMD>lua require('luasnip').expand_or_jump() <CR>";
+        options.silent = true;
+      }
+      {
+        mode = [ "i" "s" ];
+        key = "<C-j>";
+        action = "<CMD>lua require('luasnip').jump(-1) <CR>";
+        options.silent = true;
+      }
     ];
     plugins = {
       which-key = {
@@ -190,10 +202,15 @@
         };
       };
       cmp.settings.mapping = {
-        "<C-Space>" = "cmp.mapping.complete()";
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
-        "<C-n>" = "cmp.mapping.select_next_item()";
-        "<C-p>" = "cmp.mapping.select_prev_item()";
+        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+        "<C-f>" = "cmp.mapping.scroll_docs(4)";
+        "<C-e>" = "cmp.mapping.close()";
+        "<C-y>" =
+          "cmp.mapping.confirm({ select = true , behavior = cmp.ConfirmBehavior.Insert }, {'i', 'c'})";
+        "<C-n>" =
+          "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })";
+        "<C-p>" =
+          "cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })";
       };
     };
 

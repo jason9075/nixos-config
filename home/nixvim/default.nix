@@ -56,13 +56,11 @@
 
       luasnip = {
         enable = true;
-        fromLua = [
-          {paths = "~/nixos-config/home/nixvim/lua_snippets";}
-        ];
-        fromVscode = [
-          {paths = "~/nixos-config/home/nixvim/vscode_snippets";}
-        ];
+        fromLua = [{ paths = "~/nixos-config/home/nixvim/lua_snippets"; }];
+        fromVscode =
+          [{ paths = "~/nixos-config/home/nixvim/vscode_snippets"; }];
       };
+      friendly-snippets.enable = true;
       gitsigns.enable = true;
 
       noice.enable = true;
