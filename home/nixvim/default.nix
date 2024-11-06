@@ -56,6 +56,9 @@
 
       luasnip = {
         enable = true;
+        fromLua = [
+          {paths = "~/nixos-config/home/nixvim/lua_snippets";}
+        ];
         fromVscode = [
           {paths = "~/nixos-config/home/nixvim/vscode_snippets";}
         ];
