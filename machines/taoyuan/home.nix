@@ -27,7 +27,7 @@ in {
     ../../home/cli/zsh.nix
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
-    ../../home/nixvim
+    ../../home/nixvim_config
 
     # GUI
     ../../home/gui/hyprland.nix

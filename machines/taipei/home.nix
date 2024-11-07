@@ -29,7 +29,7 @@ in {
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
     ../../home/cli/mu.nix
-    (../../home/nixvim { copilot = true; })
+    ../../home/nixvim_config
 
     # GUI
     ../../home/gui/hyprland.nix
@@ -49,6 +49,7 @@ in {
     # Keyboards
     ../../home/keyboards/fcitx.nix
   ];
+  nixvim_config.copilot.enable = true;
 
   home.packages = with pkgs; [
     # Development
