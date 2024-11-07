@@ -13,6 +13,12 @@
 
       colorscheme = "nordfox";
 
+      autoCmd = [{
+        command = "set filetype=bash";
+        event = [ "BufNewFile" "BufRead" ];
+        pattern = "*.sh";
+      }];
+
       opts = {
         termguicolors = true;
         number = true;
@@ -62,9 +68,12 @@
 
         luasnip = {
           enable = true;
-          fromLua = [{ paths = "~/nixos-config/home/nixvim/lua_snippets"; }];
+          # TextChangedI will update the other nodes when the first node is updated.
+          settings = { updateevents = "TextChangedI"; };
+          fromLua =
+            [{ paths = "~/nixos-config/home/nixvim_config/lua_snippets"; }];
           fromVscode =
-            [{ paths = "~/nixos-config/home/nixvim/vscode_snippets"; }];
+            [{ paths = "~/nixos-config/home/nixvim_config/vscode_snippets"; }];
         };
         friendly-snippets.enable = true;
         gitsigns.enable = true;

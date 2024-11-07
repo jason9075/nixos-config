@@ -8,7 +8,7 @@
     };
     keymaps = [
       {
-        mode = "i";
+        mode = [ "i" "s" ];
         key = "kj";
         options.silent = true;
         action = "<Esc>";

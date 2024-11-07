@@ -1,4 +1,3 @@
--- Ref: https://github.com/mireq/luasnip-snippets/tree/main
 local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
@@ -27,13 +26,27 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
-ls.add_snippets("all", {
+ls.add_snippets("bash", {
 	s(
-		{ trig = "jason", descr = "Jason Kuan's test snippet." },
-		fmt("Line 1 {}\nLine 2 {}\nLine 3 {}\n", { i(1, "value1"), i(2, "value2"), i(3, "value3") })
-	),
-	s(
-		{ trig = "jasonrep", descr = "Jason Kuan's test repetition snippet." },
-		fmt("origin: {},  repeat: {}, repeat again: {}", { i(1, "value"), rep(1), rep(1) })
+		{ trig = "curl", dscr = "curl function" },
+		fmt(
+			[[
+function make_request() {{
+    local url="{}"
+    local method="{}"
+    local headers="{}"
+    local data="{}"
+
+    curl -X "$method" -H "$headers" -d "$data" "$url"
+}}
+make_request
+]],
+			{
+				i(1, "https://api.example.com"),
+				i(2, "GET"),
+				i(3, "Content-Type: application/json"),
+				i(4, '{"key": "value"}'),
+			}
+		)
 	),
 })
