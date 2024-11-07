@@ -23,7 +23,7 @@ in {
     ../../home/cli/zsh.nix
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
-    ../../home/nixvim
+    (../../home/nixvim { copilot = false; })
 
     # GUI
     ../../home/gui/kitty.nix

@@ -29,7 +29,7 @@ in {
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
     ../../home/cli/mu.nix
-    ../../home/nixvim
+    (../../home/nixvim { copilot = true; })
 
     # GUI
     ../../home/gui/hyprland.nix

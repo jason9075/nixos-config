@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ copilot ? false, pkgs, ... }:
 
 {
   imports = [ ./keybindings.nix ./lsp.nix ];
@@ -47,7 +47,7 @@
       # typescrip commentstring
       ts-context-commentstring.enable = true;
       copilot-lua = {
-        enable = true;
+        enable = copilot;
         suggestion = {
           enabled = true;
           autoTrigger = true;
