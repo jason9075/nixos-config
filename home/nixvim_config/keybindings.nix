@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.nixvim = {
@@ -37,6 +37,31 @@
         options.silent = true;
         action = "5<C-y>";
       }
+      # resize windows with arrow
+      {
+        mode = "n";
+        key = "<Up>";
+        action = ":resize +4<CR>";
+        options.silent = true;
+      }
+      {
+        mode = "n";
+        key = "<Down>";
+        action = ":resize -4<CR>";
+        options.silent = true;
+      }
+      {
+        mode = "n";
+        key = "<Left>";
+        action = ":vertical resize +4<CR>";
+        options.silent = true;
+      }
+      {
+        mode = "n";
+        key = "<Right>";
+        action = ":vertical resize -4<CR>";
+        options.silent = true;
+      }
       # Disable default completion, use cmp instead
       {
         mode = "i";
@@ -51,13 +76,19 @@
       {
         mode = [ "i" "s" ];
         key = "<C-k>";
-        action = "<CMD>lua require('luasnip').expand_or_jump() <CR>";
+        action = "<CMD>lua require('luasnip').expand_or_jump()<CR>";
         options.silent = true;
       }
       {
         mode = [ "i" "s" ];
         key = "<C-j>";
-        action = "<CMD>lua require('luasnip').jump(-1) <CR>";
+        action = "<CMD>lua require('luasnip').jump(-1)<CR>";
+        options.silent = true;
+      }
+      {
+        mode = [ "i" "s" ];
+        key = "<C-l>";
+        action = "<CMD>lua require('luasnip').change_choice(1)<CR>";
         options.silent = true;
       }
     ];
@@ -69,6 +100,12 @@
             __unkeyed-2 = ":Neotree reveal toggle<CR>";
             desc = "Toggle file explorer";
             icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>t";
+            __unkeyed-2 = ":InspectTree<CR>";
+            desc = "Inspect tree";
+            icon = "";
           }
           {
             __unkeyed-1 = "<leader>q";

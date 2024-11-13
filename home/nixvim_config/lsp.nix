@@ -130,6 +130,7 @@
     treesitter-refactor.enable = true;
     # syntax highlight for nix config
     hmts.enable = true;
+    plantuml-syntax.enable = true;
   };
 
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];

@@ -34,8 +34,9 @@
         smartcase = true;
         ignorecase = true;
         smartindent = true;
-        scrolloff = 8;
-        sidescrolloff = 8;
+        scrolloff = 4;
+        sidescrolloff = 4;
+        laststatus = 3; # global status line at the bottom
       };
 
       # Plugins
