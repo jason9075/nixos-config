@@ -86,8 +86,8 @@ let
       "interval" = 2;
       "format" = "  {usage}%";
       "states" = {
-        "mid" = 90;
-        "high" = 95;
+        "mid" = 80;
+        "high" = 90;
       };
     };
     "memory" = {
@@ -351,7 +351,7 @@ let
     }
 
     #cpu.mid {
-      color: @nordtyellow;
+      color: @nordyellow;
     }
 
     #cpu.high {

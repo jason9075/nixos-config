@@ -140,13 +140,13 @@ in {
     };
   };
 
-  # # https://github.com/hyprland-community/pyprland/wiki/scratchpads
+  # # https://hyprland-community.github.io/pyprland/scratchpads.html
   home.file.".config/hypr/pyprland.toml".text = ''
     [pyprland]
     plugins = ["scratchpads"]
 
     [scratchpads.chatgpt]
-    animation = "fromTop"
+    animation = ""
     command = "firefox --name=chatgpt_app --no-remote -P chatgpt https://chat.openai.com"
     class = "chatgpt_app"
     size = "80% 85%"
