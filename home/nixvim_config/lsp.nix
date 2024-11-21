@@ -50,26 +50,29 @@
           gofmt.enable = true;
           nixfmt.enable = true;
           hclfmt.enable = true;
-          stylua.enable = true;
           prettierd.enable = true;
           yamlfmt.enable = true;
-          black.settings = {
+          stylua = {
             enable = true;
-            withArgs = ''
-              {
-                extra_args = { "--fast" },
-              }
-            '';
+            settings = {
+              extra_args = [ "--indent-type" "Spaces" "--indent-width" "2" ];
+            };
           };
-          clang_format.settings = {
+          black = {
             enable = true;
-            withArgs = # lua
-              ''
-                {
-                  extra_args = { "--style={BasedOnStyle: Google, ColumnLimit: 120}" },
-                  extra_filetypes = { "glsl" },
-                }
-              '';
+            settings = { extra_args = [ "--fast" ]; };
+          };
+          clang_format = {
+            enable = true;
+            settings = {
+              withArgs = # lua
+                ''
+                  {
+                    extra_args = { "--style={BasedOnStyle: Google, ColumnLimit: 120}" },
+                    extra_filetypes = { "glsl" },
+                  }
+                '';
+            };
           };
         };
         diagnostics = {

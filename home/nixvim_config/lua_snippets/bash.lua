@@ -27,10 +27,10 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
 ls.add_snippets("bash", {
-	s(
-		{ trig = "curl", dscr = "curl function" },
-		fmt(
-			[[
+  s(
+    { trig = "curl", dscr = "curl function" },
+    fmt(
+      [[
 function make_request() {{
     local url="{}"
     local method="{}"
@@ -41,12 +41,12 @@ function make_request() {{
 }}
 make_request
 ]],
-			{
-				i(1, "https://api.example.com"),
-				i(2, "GET"),
-				i(3, "Content-Type: application/json"),
-				i(4, '{"key": "value"}'),
-			}
-		)
-	),
+      {
+        i(1, "https://api.example.com"),
+        i(2, "GET"),
+        i(3, "Content-Type: application/json"),
+        i(4, '{"key": "value"}'),
+      }
+    )
+  ),
 })
