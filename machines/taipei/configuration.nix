@@ -143,6 +143,8 @@
 
   services.openssh.enable = true;
 
+  services.fstrim.enable = true;
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -159,5 +161,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];
+  nix.settings.substituters = [ "https://cuda-maintainers.cachix.org" ];
+  nix.settings.trusted-public-keys = [
+    "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+  ];
 
 }

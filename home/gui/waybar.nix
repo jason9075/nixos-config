@@ -93,6 +93,10 @@ let
     "memory" = {
       "interval" = 2;
       "format" = " {}%";
+      "states" = {
+        "mid" = 50;
+        "high" = 80;
+      };
     };
     "disk" = {
       "interval" = 15;
@@ -368,6 +372,14 @@ let
 
     #memory {
       color: @nordblue;
+    }
+
+    #memory.mid {
+      color: @nordyellow;
+    }
+
+    #memory.high {
+      color: @alert;
     }
 
     #disk {

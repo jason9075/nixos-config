@@ -78,6 +78,7 @@ in {
     yq
     fzf
     kitty
+    tmux
     neofetch
     tree
 
@@ -92,6 +93,7 @@ in {
     swappy # Window switcher
     imv # Image Viewer
     font-manager
+    plantuml
 
     # Communication
     slack
@@ -129,6 +131,7 @@ in {
     wl-clipboard
     wtype
     tree-sitter
+    cachix
   ];
 
 }
