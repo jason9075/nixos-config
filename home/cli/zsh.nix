@@ -49,6 +49,7 @@ in {
       gs = "git -c delta.side-by-side=true diff";
       ssh = "kitty +kitten ssh";
       open = "thunar";
+      icat = "kitty +kitten icat";
       # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
       update = ''
         FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
@@ -56,14 +57,17 @@ in {
       updatesys = ''
         sudo nixos-generate-config --show-hardware-config | sudo tee /home/${userSettings.username}/nixos-config/system/hardware-configuration.nix > /dev/null &&
         FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
-      delolder = "sudo nix-collect-garbage --delete-older-than 14d";
-      icat = "kitty +kitten icat";
-      act = "nix develop -c zsh";
-      nixclean = "nix-collect-garbage --delete-old";
-      nixlist =
-        "nix-env --list-generations --profile /nix/var/nix/profiles/system";
-      nixdel =
+      nixdev = "nix develop --command zsh";
+      # delete old generations
+      nixdel = "nix-env --delete-generations 7d";
+      nixdelsys =
         "nix-env --delete-generations --profile /nix/var/nix/profiles/system 7d";
+      # list generations
+      nixls = "nix-env --list-generations";
+      nixlssys =
+        "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+      # delete old nix store (unreferenced and older than 7 days)
+      nixgc = "nix-collect-garbage --delete-older-than 7d";
     };
     zplug = {
       enable = true;

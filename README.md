@@ -2,7 +2,6 @@
 
 ## New Computer
 
-
 ```bash
 nix-shell -p git --command "nix run github:jason9075/nixos-config --extra-experimental-features nix-command --extra-experimental-features flakes"
 ```
@@ -19,9 +18,11 @@ updatesys
 ### SSH Key-gen
 
 1. Gen new ssh key
+
 ```bash
 ssh-keygen
 ```
+
 2. Use scripts/setup_ssh.sh
 
 ### Config File
@@ -46,4 +47,24 @@ git remote set-url origin <ssh path>
 ```bash
 sudo nix-channel --update
 sudo nix flake update
+```
+
+## Switch Generation
+
+List Generation
+
+```bash
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+```
+
+Change Generation
+
+```bash
+sudo nix-env --profile /nix/var/nix/profiles/system/ --switch-generation <number>
+```
+
+Delete Gereration
+
+```bash
+sudo nix-env --profile /nix/var/nix/profiles/system/ --delete-generations <number>
 ```
