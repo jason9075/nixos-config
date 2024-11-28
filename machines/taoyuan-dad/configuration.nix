@@ -20,7 +20,11 @@
 
   # GUI
   services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager = {
+    lightdm.enable = true;
+    autoLogin.enable = true;
+    autoLogin.user = userSettings.username;
+  };
   services.xserver.desktopManager.cinnamon.enable = true;
 
   networking.hostName = "nixos-kuan33400";
