@@ -73,6 +73,23 @@
 
   system.stateVersion = systemSettings.version;
 
+  # Schedule shutdown at 10 PM
+  systemd.timers.shutdown-timer = {
+    description = "Schedule shutdown at 10 PM";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      onCalendar = "22:00";
+      persistent = true;
+    };
+  };
+  systemd.services.shutdown-service = {
+    description = "Shutdown the computer";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/run/current-system/sw/bin/systemctl poweroff";
+    };
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];
 
