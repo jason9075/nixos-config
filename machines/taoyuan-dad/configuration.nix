@@ -82,8 +82,9 @@
     description = "Schedule shutdown at 10 PM";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      onCalendar = "22:00";
-      persistent = true;
+      Unit = "shutdown-service.service";
+      OnCalendar = "22:00";
+      Persistent = true;
     };
   };
   systemd.services.shutdown-service = {
