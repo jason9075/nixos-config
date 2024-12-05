@@ -132,6 +132,7 @@ in {
         "opacity 0.95 0.88, class:^(thunar)$"
         "opacity 0.9 0.7, class:^(htop)$"
         "opacity 0.9 0.7, class:^(nvtop)$"
+        "idleinhibit fullscreen, fullscreen:1"
       ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
       animation =
