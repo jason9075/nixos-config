@@ -114,6 +114,13 @@ in {
         "--enable-wayland-ime"
       ];
     })
+    (google-chrome.override {
+      commandLineArgs = [
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime"
+      ];
+    })
     firefox
     (brave.override { vulkanSupport = true; })
     pcmanx-gtk2

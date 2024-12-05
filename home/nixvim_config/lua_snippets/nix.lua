@@ -41,27 +41,39 @@ ls.add_snippets("nix", {
 
   outputs = inputs@{ ... }:
     let
-      system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
+      system-linux = "x86_64-linux";
+      system-darwin = "x86_64-darwin";
+      pkgs-linux = import inputs.nixpkgs {
+        system = system-linux;
+        config = { allowUnfree = true; };
       };
+      pkgs-darwin = import inputs.nixpkgs {
+        system = system-darwin;
+        config = { allowUnfree = true; };
+      };
+      # unstable
       pkgs-unstable = import inputs."nixpkgs-unstable" {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
+        system = system-linux;
+        config = { allowUnfree = true; };
       };
     in {
-      devShells.x86_64-linux.default = pkgs.mkShell {
-        name = "<proj_name>";
-        nativeBuildInputs = with pkgs; [ entr ];
+      devShells = {
+        x86_64-linux.default = pkgs-linux.mkShell {
+          name = "<proj_name>";
+          nativeBuildInputs = with pkgs-linux; [ entr ];
 
-        shellHook = ''
-          echo "<hook_msg>";
-        '';
+          shellHook = ''
+            echo "<hook_msg>";
+          '';
+        };
+        x86_64-darwin.default = pkgs-darwin.mkShell {
+          name = "<>";
+          nativeBuildInputs = with pkgs-darwin; [ entr ];
+
+          shellHook = ''
+            echo "<>";
+          '';
+        };
       };
     };
 }
@@ -70,6 +82,8 @@ ls.add_snippets("nix", {
         desc = i(1, "Development environment for projects"),
         proj_name = i(2, "project-name"),
         hook_msg = i(3, "project environment activated."),
+        rep(2),
+        rep(3),
       }
     )
   ),

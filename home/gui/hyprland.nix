@@ -2,7 +2,7 @@
 
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
-    sleep 1
+    sleep 5
     waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
@@ -14,8 +14,8 @@ let
     $HOME/nixos-config/scripts/swww_randomize.sh
     $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
-    sleep 10
-    eww open quote
+    # sleep 10
+    # eww open quote
   '';
 in {
 
