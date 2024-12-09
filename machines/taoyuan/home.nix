@@ -27,6 +27,7 @@ in {
     ../../home/cli/zsh.nix
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
+    ../../home/cli/dict
     ../../home/nixvim_config
 
     # GUI

@@ -29,6 +29,7 @@ in {
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
     ../../home/cli/mu.nix
+    ../../home/cli/dict # Dictionary
     ../../home/nixvim_config
 
     # GUI
@@ -74,6 +75,7 @@ in {
     killall
     zip
     unzip
+    unar # unzip rar files
     jq
     yq
     fzf

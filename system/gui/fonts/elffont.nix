@@ -23,7 +23,7 @@ let
         runHook postInstall
       '';
 
-      meta = with pkgs.lib; {
+      meta = {
         description = "Font Elffont - OTF Font";
         longDescription = ''
           重新定義ㄅㄆㄇ！台灣人才懂的史詩注音字型
