@@ -74,6 +74,7 @@ in {
     kitty
     neofetch
     tree
+    nmap
 
     # GUI
     hyprland
@@ -113,6 +114,7 @@ in {
     obs-studio
     vlc
     blender
+    shotcut
 
     # Misc
     wl-clipboard
