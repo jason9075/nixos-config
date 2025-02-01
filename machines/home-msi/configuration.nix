@@ -46,11 +46,13 @@
     LC_TIME = systemSettings.locale;
   };
 
+  virtualisation.docker.enable = true;
+
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = "Hello Kuan";
-    extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
