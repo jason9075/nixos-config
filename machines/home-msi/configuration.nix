@@ -25,10 +25,14 @@
 
   # Power management
   services.logind = {
-    enable = true;
-    handleSuspendKey = "ignore";
-    handleHibernateKey = "ignore";
-    handleLidSwitch = "ignore";
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+    extraConfig = ''
+      IdleAction=ignore
+      HandlePowerKey=ignore
+      HandleSuspendKey=ignore
+    '';
   };
   powerManagement.enable = false;
 
