@@ -23,7 +23,7 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  networking.hostName = "astra";
+  networking.hostName = "kuan";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -49,7 +49,7 @@
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = "Hello Astra";
+    description = "Hello Kuan";
     extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];

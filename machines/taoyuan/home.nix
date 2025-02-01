@@ -45,6 +45,7 @@ in {
     ../../home/keyboards/fcitx.nix
 
   ];
+  nixvim_config.copilot.enable = true;
 
   home.packages = with pkgs; [
     # Development
