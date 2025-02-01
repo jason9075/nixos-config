@@ -49,6 +49,7 @@ in {
     fzf
     kitty
     neofetch
+    tmux
     tree
 
     # Web Browser

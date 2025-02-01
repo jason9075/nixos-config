@@ -23,6 +23,15 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Power management
+  services.logind = {
+    enable = true;
+    handleSuspendKey = "ignore";
+    handleHibernateKey = "ignore";
+    handleLidSwitch = "ignore";
+  };
+  powerManagement.enable = false;
+
   networking.hostName = "kuan";
 
   # Enable networking
