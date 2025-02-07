@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
+{ pkgs, pkgs-stable, nixvim, userSettings, nix-vscode-extensions, ... }:
 
 with pkgs;
 let
@@ -43,6 +43,7 @@ in {
     ../../home/gui/mako.nix
     ../../home/gui/zathura.nix # PDF Viewer
     ../../home/gui/qutebrowser.nix
+    ../../home/gui/vscode.nix
 
     # Audio
     ../../home/audio/mpd.nix
@@ -107,7 +108,7 @@ in {
       "Exec=webcord --enable-wayland-ime")
     thunderbird
 
-    # Web Browser
+    # Network
     # google-chrome
     (chromium.override {
       commandLineArgs = [
@@ -135,6 +136,7 @@ in {
     shotcut # Video Editor
     blender
     davinci-resolve # Video Editor
+    audacity
 
     # Misc
     wl-clipboard

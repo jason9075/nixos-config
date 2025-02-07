@@ -120,6 +120,7 @@ in {
       # https://wiki.hyprland.org/Configuring/Window-Rules/
       windowrulev2 = [
         "workspace 10, class:^(kitty)$"
+        "workspace 10, class:^(code-url-handler)$" # vscode url handler
         "workspace 9, class:^(.*qutebrowser)$"
         "workspace 9, class:^(firefox)$"
         "workspace 9, class:^(brave-browser)$"
@@ -128,6 +129,7 @@ in {
         "workspace 7, class:^(WebCord)$"
         "workspace 6, class:^(thunderbird)$"
         "opacity 1.0 0.9, class:^(kitty)$"
+        "opacity 1.0 0.9, class:^(code-url-handler)$"
         "opacity 1.0 0.93, class:^.*zathura$"
         "opacity 0.95 0.88, class:^(thunar)$"
         "opacity 0.9 0.7, class:^(htop)$"
