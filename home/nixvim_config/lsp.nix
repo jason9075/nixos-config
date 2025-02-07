@@ -9,7 +9,10 @@
         bashls = { enable = true; };
         dockerls = { enable = true; };
         gopls = { enable = true; };
-        clangd = { enable = true; };
+        clangd = {
+          enable = true;
+          filetypes = [ "c" "cpp" "objc" "objcpp" "cuda" ];
+        };
         eslint = { enable = true; };
         html = { enable = true; };
         ts-ls = { enable = true; };

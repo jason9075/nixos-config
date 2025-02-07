@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../system/hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../system/networking/wireguard.nix
     ../../system/gui/nvidia.nix
     ../../system/gui/hyprland.nix
@@ -34,6 +34,7 @@
 
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
+  time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = systemSettings.locale;

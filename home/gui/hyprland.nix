@@ -2,7 +2,7 @@
 
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
-    sleep 5
+    sleep 15
     waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"

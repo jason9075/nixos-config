@@ -26,13 +26,13 @@
         action = ":bprevious<CR>";
       }
       {
-        mode = "n";
+        mode = [ "n" "v" ];
         key = "<S-j>";
         options.silent = true;
         action = "5<C-e>";
       }
       {
-        mode = "n";
+        mode = [ "n" "v" ];
         key = "<S-k>";
         options.silent = true;
         action = "5<C-y>";
