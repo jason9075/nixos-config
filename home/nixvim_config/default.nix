@@ -54,7 +54,12 @@
         indent-blankline.enable = true;
         web-devicons.enable = true;
 
-        fzf-lua.enable = true;
+        fzf-lua = {
+          enable = true;
+          settings = {
+            files = { file_ignore_patterns = [ "vendor" "build" ]; };
+          };
+        };
         refactoring.enable = true;
         comment.enable = true;
         # typescrip commentstring
