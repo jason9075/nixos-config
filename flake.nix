@@ -79,6 +79,7 @@
           inherit pkgs;
           inherit pkgs-stable;
           inherit (inputs) nixvim;
+          inherit systemSettings;
           inherit userSettings;
         };
       };
