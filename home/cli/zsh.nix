@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ systemSettings, userSettings, ... }:
 
 let
   beforeRc = # bash
@@ -55,7 +55,7 @@ in {
         FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
-        sudo nixos-generate-config --show-hardware-config | sudo tee /home/${userSettings.username}/nixos-config/system/hardware-configuration.nix > /dev/null &&
+        sudo nixos-generate-config --show-hardware-config | sudo tee /home/${userSettings.username}/nixos-config/${systemSettings.machine}/hardware-configuration.nix > /dev/null &&
         FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
       nixdev = "nix develop --command zsh";
       # delete old generations

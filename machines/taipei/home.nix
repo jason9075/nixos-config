@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, userSettings, nix-vscode-extensions, ... }:
+{ pkgs, pkgs-stable, nixvim, systemSettings, userSettings, ... }:
 
 with pkgs;
 let
