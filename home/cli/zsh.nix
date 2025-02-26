@@ -67,7 +67,9 @@ in {
       nixlssys =
         "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
       # delete old nix store (unreferenced and older than 7 days)
-      nixgc = "nix-collect-garbage --delete-older-than 7d";
+      nixgc = "sudo nix-collect-garbage --delete-older-than 7d";
+      # tts
+      speak = "~/nixos-config/scripts/speak.sh";
     };
     zplug = {
       enable = true;

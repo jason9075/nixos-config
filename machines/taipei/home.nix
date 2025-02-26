@@ -55,11 +55,7 @@ in {
 
   home.packages = with pkgs; [
     # Development
-    gcc10
-    gdb
     gnumake
-    cmake
-    nodejs
     postman
     ansible
     vpnc

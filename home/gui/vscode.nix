@@ -8,6 +8,7 @@ in {
       jnoortheen.nix-ide
       ms-python.python
       ms-vscode.cpptools
+      ms-vscode.makefile-tools
       golang.go
       alefragnani.project-manager
       arcticicestudio.nord-visual-studio-code
