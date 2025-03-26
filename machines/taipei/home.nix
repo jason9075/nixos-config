@@ -123,6 +123,7 @@ in {
     firefox
     (brave.override { vulkanSupport = true; })
     pcmanx-gtk2
+    wireguard-tools
 
     # Multimedia
     gimp

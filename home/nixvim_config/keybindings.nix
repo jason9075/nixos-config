@@ -218,6 +218,11 @@
             desc = "Find grep";
           }
           {
+            __unkeyed-1 = "<leader>fi";
+            __unkeyed-2 = ":FzfLua lsp_implementations<CR>";
+            desc = "Find implementations";
+          }
+          {
             __unkeyed-1 = "<leader>fs";
             __unkeyed-2 = ":ClangdSwitchSourceHeader<CR>";
             desc = "Switch source header";

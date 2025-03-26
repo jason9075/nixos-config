@@ -70,6 +70,9 @@ in {
       nixgc = "sudo nix-collect-garbage --delete-older-than 7d";
       # tts
       speak = "~/nixos-config/scripts/speak.sh";
+      # docker
+      dps =
+        "docker ps --format 'table {{.Names}}	{{.RunningFor}}	{{.Status}}	{{.Image}}	{{.ID}}	{{.Size}}' -a";
     };
     zplug = {
       enable = true;
