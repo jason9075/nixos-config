@@ -80,6 +80,7 @@ in {
     tmux
     neofetch
     tree
+    russ
 
     # GUI
     hyprland

@@ -121,7 +121,7 @@ in {
       windowrulev2 = [
         "workspace 10, class:^(kitty)$"
         "workspace 10, class:^(code-url-handler)$" # vscode url handler
-        "workspace 9, class:^(.*qutebrowser)$"
+        # "workspace 9, class:^(.*qutebrowser)$"
         "workspace 9, class:^(firefox)$"
         "workspace 9, class:^(brave-browser)$"
         "workspace 8, class:^(Slack)$"
