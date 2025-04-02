@@ -146,6 +146,78 @@
             desc = "LspInfo";
             icon = "";
           }
+          # Harpoon
+          {
+            __unkeyed-1 = "<leader>h";
+            group = "Harpoon";
+            icon = "󰛢";
+          }
+          {
+            __unkeyed-1 = "<leader>hl";
+            __unkeyed-2 = ":lua require('harpoon.ui').toggle_quick_menu()<CR>";
+            desc = "List";
+            icon = "󰛢";
+          }
+          {
+            __unkeyed-1 = "<leader>ha";
+            group = "Add";
+            icon = "";
+          }
+          # Add current file to Harpoon slot 1~4
+          {
+            __unkeyed-1 = "<leader>ha1";
+            __unkeyed-2 =
+              "<Cmd>lua require('harpoon.mark').set_current_at(1)<CR>";
+            desc = "Slot 1";
+            icon = "1";
+          }
+          {
+            __unkeyed-1 = "<leader>ha2";
+            __unkeyed-2 =
+              "<Cmd>lua require('harpoon.mark').set_current_at(2)<CR>";
+            desc = "Slot 2";
+            icon = "2";
+          }
+          {
+            __unkeyed-1 = "<leader>ha3";
+            __unkeyed-2 =
+              "<Cmd>lua require('harpoon.mark').set_current_at(3)<CR>";
+            desc = "Slot 3";
+            icon = "3";
+          }
+          {
+            __unkeyed-1 = "<leader>ha4";
+            __unkeyed-2 =
+              "<Cmd>lua require('harpoon.mark').set_current_at(4)<CR>";
+            desc = "Slot 4";
+            icon = "4";
+          }
+
+          # Jump to Harpoon slot 1~4
+          {
+            __unkeyed-1 = "<leader>h1";
+            __unkeyed-2 = "<Cmd>lua require('harpoon.ui').nav_file(1)<CR>";
+            desc = "Goto 1";
+            icon = "1";
+          }
+          {
+            __unkeyed-1 = "<leader>h2";
+            __unkeyed-2 = "<Cmd>lua require('harpoon.ui').nav_file(2)<CR>";
+            desc = "Goto 2";
+            icon = "2";
+          }
+          {
+            __unkeyed-1 = "<leader>h3";
+            __unkeyed-2 = "<Cmd>lua require('harpoon.ui').nav_file(3)<CR>";
+            desc = "Goto 3";
+            icon = "3";
+          }
+          {
+            __unkeyed-1 = "<leader>h4";
+            __unkeyed-2 = "<Cmd>lua require('harpoon.ui').nav_file(4)<CR>";
+            desc = "Goto 4";
+            icon = "4";
+          }
           {
             __unkeyed-1 = "<leader>s";
             group = "Show";

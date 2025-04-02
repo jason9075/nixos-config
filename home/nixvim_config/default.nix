@@ -97,6 +97,7 @@
           enable = true;
           settings = { preset = "helix"; };
         };
+        harpoon.enable = true;
 
         markdown-preview.enable = true;
       };
