@@ -80,7 +80,13 @@
         };
         diagnostics = {
           dotenv_linter.enable = true;
-          pylint.enable = true;
+          pylint = {
+            enable = true;
+            settings = {
+              extra_args =
+                [ "--disable=C0114,C0115,C0116" ]; # disable docstring warnings
+            };
+          };
           zsh.enable = true;
         };
       };
