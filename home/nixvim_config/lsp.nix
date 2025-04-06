@@ -86,6 +86,7 @@
               extra_args = [
                 "--disable=C0114,C0115,C0116" # disable docstring warnings
                 "--max-locals=35" # R0914 too many local variables warning
+                "--disable=R0913" # too many arguments warning
               ];
             };
           };
