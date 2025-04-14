@@ -82,7 +82,11 @@
             [{ paths = "~/nixos-config/home/nixvim_config/vscode_snippets"; }];
         };
         friendly-snippets.enable = true;
+
+        # git
         gitsigns.enable = true;
+        # fugitive.enable = true;
+        diffview.enable = true;
 
         noice.enable = true;
         notify = {

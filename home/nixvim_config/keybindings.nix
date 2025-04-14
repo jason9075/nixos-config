@@ -218,6 +218,58 @@
             desc = "Goto 4";
             icon = "4";
           }
+          # Git
+          {
+            __unkeyed-1 = "<leader>g";
+            group = "Git";
+            icon = "";
+          }
+          {
+            __unkeyed-1 = "<leader>gc";
+            __unkeyed-2 = ":FzfLua git_commits<CR>";
+            desc = "Commits";
+          }
+          {
+            __unkeyed-1 = "<leader>gb";
+            __unkeyed-2 = ":FzfLua git_bcommits<CR>";
+            desc = "Buffer commits";
+          }
+          {
+            __unkeyed-1 = "<leader>gs";
+            __unkeyed-2 = ":FzfLua git_status<CR>";
+            desc = "Status";
+          }
+          {
+            __unkeyed-1 = "<leader>gS";
+            __unkeyed-2 = ":FzfLua git_stash<CR>";
+            desc = "Stash";
+          }
+          {
+            __unkeyed-1 = "<leader>gf";
+            __unkeyed-2 = ":FzfLua git_files<CR>";
+            desc = "Files";
+          }
+          {
+            __unkeyed-1 = "<leader>gF";
+            __unkeyed-2 = ":FzfLua git_branches<CR>";
+            desc = "Branches";
+          }
+          {
+            __unkeyed-1 = "<leader>gR";
+            __unkeyed-2 = ":FzfLua git_reflog<CR>";
+            desc = "Reflog";
+          }
+          {
+            __unkeyed-1 = "<leader>gd";
+            __unkeyed-2 = ":DiffviewOpen<CR>";
+            desc = "Diffview";
+          }
+          {
+            __unkeyed-1 = "<leader>gh";
+            __unkeyed-2 = ":DiffviewFileHistory<CR>";
+            desc = "Diffview file history";
+          }
+          # Show
           {
             __unkeyed-1 = "<leader>s";
             group = "Show";
@@ -226,12 +278,22 @@
           {
             __unkeyed-1 = "<leader>sl";
             __unkeyed-2 = ":lua vim.diagnostic.open_float()<CR>";
-            desc = "Show diagnostics";
+            desc = "Diagnostics";
           }
           {
             __unkeyed-1 = "<leader>sh";
             __unkeyed-2 = ":lua vim.lsp.buf.hover()<CR>";
-            desc = "Show hover";
+            desc = "Hover";
+          }
+          {
+            __unkeyed-1 = "<leader>sb";
+            __unkeyed-2 = ":Gitsigns blame_line<CR>";
+            desc = "Blame Line";
+          }
+          {
+            __unkeyed-1 = "<leader>sp";
+            __unkeyed-2 = ":Gitsigns preview_hunk<CR>";
+            desc = "Preview Hunk";
           }
           {
             __unkeyed-1 = "<leader>r";
@@ -314,6 +376,23 @@
           accept = "<c-g>";
           next = "<c-y>"; # cycle through suggestions
         };
+      };
+      diffview.keymaps = {
+        # not working, don't know why
+        # filePanel = [
+        #   {
+        #     action = "actions.toggle_files";
+        #     description = "Toggle the file panel";
+        #     key = "<leader>e";
+        #     mode = "n";
+        #   }
+        #   {
+        #     action = "actions.focus_files";
+        #     description = "Focus the file panel";
+        #     key = "<leader>b";
+        #     mode = "n";
+        #   }
+        # ];
       };
       cmp.settings.mapping = {
         "<C-d>" = "cmp.mapping.scroll_docs(-4)";
