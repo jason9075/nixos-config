@@ -1,6 +1,7 @@
 #!/bin/sh
+set -e
 
-NIX_CFG_PATH=~/nixos-config
+NIX_CFG_PATH="${NIX_CFG_PATH:-$HOME/nixos-config}"
 
 # Prompt for machine selection
 echo "Please select your machine:"
@@ -10,8 +11,7 @@ echo "3) taoyuan-dad"
 echo "4) home-msi"
 echo "5) vbox"
 while true; do
-  echo "Enter the number of your choice: "
-  read -r choice
+  read -rp "Enter the number of your choice: " choice
   case "$choice" in
     1) MACHINE="taipei"; break;;
     2) MACHINE="taoyuan"; break;;
@@ -22,22 +22,7 @@ while true; do
   esac
 done
 
-# dotfiles
-if [ -d ~/nixos-config ]; then
-    echo "Updating nixos-config..."
-    nix-shell -p git --command "git -C ~/nixos-config pull"
-else
-    echo "Cloning nixos-config..."
-    nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
-fi
-if [ -d ~/.dotfiles ]; then
-    echo "Updating dotfiles..."
-    nix-shell -p git --command "git -C ~/.dotfiles pull"
-else
-    echo "Cloning dotfiles..."
-    nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
-fi
-# Function to update or clone a repository
+# Clone or update repositories on demand
 update_or_clone() {
   local dir=$1
   local repo=$2
@@ -55,8 +40,9 @@ update_or_clone "$NIX_CFG_PATH" "https://github.com/jason9075/nixos-config"
 update_or_clone "$HOME/.dotfiles" "https://github.com/jason9075/dotfiles"
 
 # Generate hardware config for new system
-sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/system/hardware-configuration.nix > /dev/null
-[ ! -f /etc/nixos/hardware-configuration.nix ] && sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
+sudo nixos-generate-config --show-hardware-config | sudo tee "$NIX_CFG_PATH/system/hardware-configuration.nix" > /dev/null
+[ ! -f /etc/nixos/hardware-configuration.nix ] && \
+  sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
 
 # Check if uefi or bios
 if [ -d /sys/firmware/efi/efivars ]; then
@@ -64,22 +50,22 @@ if [ -d /sys/firmware/efi/efivars ]; then
 else
     boot_mode="bios"
     grub_device=$(lsblk -no pkname "$(findmnt / -o SOURCE -n)" | tail -n 1)
-    sed -i "s/grubDevice = \".*\";/grubDevice = \"\/dev\/$grub_device\";/" $NIX_CFG_PATH/flake.nix
+    sed -i "s|grubDevice = \".*\";|grubDevice = \"/dev/$grub_device\";|" "$NIX_CFG_PATH/flake.nix"
 fi
-sed -i "s/bootMode = \".*\";/bootMode = \"$boot_mode\";/" $NIX_CFG_PATH/flake.nix
+sed -i "s|bootMode = \".*\";|bootMode = \"$boot_mode\";|" "$NIX_CFG_PATH/flake.nix"
 
 # Patch flake.nix with different username/name
-sed -i "0,/jason9075/s//$(whoami)/" $NIX_CFG_PATH/flake.nix
+sed -i "0,/jason9075/s//$(whoami)/" "$NIX_CFG_PATH/flake.nix"
 
 # Set the selected machine in flake.nix
-sed -i "0,/taipei/s//$MACHINE/" $NIX_CFG_PATH/flake.nix
+sed -i "0,/taipei/s//$MACHINE/" "$NIX_CFG_PATH/flake.nix"
 
 # Confirm flake.nix before install
-vim $NIX_CFG_PATH/flake.nix
+vim "$NIX_CFG_PATH/flake.nix"
 
 # Install System and User
 echo "Installing system..."
-sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system
+sudo nixos-rebuild switch --flake "$NIX_CFG_PATH"#system
 
 echo "Installing user..."
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $NIX_CFG_PATH#user
+nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake "$NIX_CFG_PATH"#user
