@@ -35,8 +35,8 @@ in {
       };
       decoration = {
         rounding = 4;
-        shadow_offset = "4 4";
-        "col.shadow" = "rgba(00000099)";
+        shadow.offset = "4 4";
+        shadow.color = "rgba(00000099)";
       };
       # check settings here https://wiki.hyprland.org/Configuring/Master-Layout/
       master = {
