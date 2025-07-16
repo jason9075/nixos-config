@@ -1,8 +1,8 @@
-{ pkgs, lib, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 {
   services = {
-    mpdris2.enable = true;
+    mpdris2.enable = false; # nix 25.11 breaks it
     mpd = {
       enable = true;
       musicDirectory = "/home" + ("/" + userSettings.username) + "/Music";

@@ -31,6 +31,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # Use NetworkManager to manage the network interfaces.
+  networking.useDHCP = false;
 
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
@@ -57,7 +59,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

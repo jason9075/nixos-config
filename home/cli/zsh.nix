@@ -1,7 +1,7 @@
-{ systemSettings, userSettings, ... }:
+{ lib, systemSettings, userSettings, ... }:
 
 let
-  beforeRc = # bash
+  beforeRc = lib.mkOrder 550 # bash
     ''
       # p10k instant prompt
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
@@ -44,7 +44,6 @@ in {
       ll = "ls -alh";
       v = "nvim";
       lg = "lazygit";
-      cat = "bat";
       gd = "git diff";
       gs = "git -c delta.side-by-side=true diff";
       ssh = "kitty +kitten ssh";
@@ -52,11 +51,11 @@ in {
       icat = "kitty +kitten icat";
       # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
       update = ''
-        FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
+        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
         sudo nixos-generate-config --show-hardware-config | sudo tee /home/${userSettings.username}/nixos-config/machines/${systemSettings.machine}/hardware-configuration.nix > /dev/null &&
-        FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
+        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
       nixdev = "nix develop --command zsh";
       # delete old generations
       nixdel = "nix-env --delete-generations 7d";
@@ -88,8 +87,7 @@ in {
         }
       ];
     };
-    initExtraBeforeCompInit = beforeRc;
-    initExtra = extraRc;
+    initContent = lib.mkMerge [ beforeRc extraRc ];
   };
   home.file.".p10k.zsh".source = ./p10k_config.zsh;
 

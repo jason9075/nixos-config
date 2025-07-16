@@ -66,7 +66,7 @@
         ts-context-commentstring.enable = true;
         copilot-lua = {
           enable = config.nixvim_config.copilot.enable;
-          suggestion = {
+          settings.suggestion = {
             enabled = true;
             autoTrigger = true;
           };
@@ -89,7 +89,7 @@
         diffview.enable = true;
 
         noice.enable = true;
-        notify = {
+        notify.settings = {
           enable = true;
           topDown = false;
         };

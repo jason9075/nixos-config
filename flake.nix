@@ -14,8 +14,8 @@
         bootMode = "uefi"; # uefi or bios
         bootMountPath = "/boot"; # boot mount point
         grubDevice = ""; # only used for legacy bios mode
-        # version = "24.05"; # Stable version
-        version = "24.11"; # Unstable version
+        # version = "25.05"; # Stable version
+        version = "25.11"; # Unstable version
       };
       # ----- USER SETTINGS ----- #
       userSettings = rec {
@@ -25,7 +25,7 @@
         browser = "qutebrowser"; # Default browser
         term = "kitty"; # Default terminal
         editor = "nvim"; # Default editor
-        version = "24.11";
+        version = "25.11";
       };
       pkgs = (if systemSettings.useUnstable then
         (import inputs.nixpkgs {
@@ -98,7 +98,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "nixpkgs/nixos-25.05";
 
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master";
@@ -106,7 +106,7 @@
     };
 
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 

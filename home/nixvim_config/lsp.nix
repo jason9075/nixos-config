@@ -15,7 +15,7 @@
         };
         eslint = { enable = true; };
         html = { enable = true; };
-        ts-ls = { enable = true; };
+        ts_ls = { enable = true; };
         yamlls = { enable = true; };
         nixd = {
           enable = true;
@@ -55,6 +55,7 @@
           hclfmt.enable = true;
           prettierd.enable = true;
           yamlfmt.enable = true;
+          prettierd.disableTsServerFormatter = true;
           stylua = {
             enable = true;
             settings = {

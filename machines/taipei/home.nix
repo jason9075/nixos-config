@@ -81,6 +81,7 @@ in {
     neofetch
     tree
     russ
+    taskwarrior3
 
     # GUI
     hyprland
@@ -123,18 +124,20 @@ in {
     })
     firefox
     (brave.override { vulkanSupport = true; })
-    pcmanx-gtk2
+    # pcmanx-gtk2
     wireguard-tools
+    traceroute
 
     # Multimedia
-    gimp
+    pkgs-stable.gimp # 25.11 unstable breaks gimp
     pavucontrol
     obs-studio
     vlc
     shotcut # Video Editor
-    blender
-    davinci-resolve # Video Editor
+    # blender
+    # davinci-resolve # Video Editor
     audacity
+    piper-tts # text-to-speech
 
     # Misc
     wl-clipboard

@@ -371,7 +371,7 @@
           }
         ];
       };
-      copilot-lua = {
+      copilot-lua.settings = {
         suggestion.keymap = {
           accept = "<c-g>";
           next = "<c-y>"; # cycle through suggestions

@@ -8,7 +8,7 @@ in {
       font-awesome
       powerline-fonts
       powerline-symbols
-      (nerdfonts.override { fonts = [ "Hack" ]; })
+      nerd-fonts.hack
       source-han-sans-traditional-chinese
       elffont.v1
     ];

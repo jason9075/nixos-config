@@ -47,6 +47,9 @@ git remote set-url origin <ssh path>
 ```bash
 sudo nix-channel --update
 sudo nix flake update
+
+sudo nixos-rebuild switch --flake .#system
+home-manager switch --flake .#user
 ```
 
 ## Switch Generation

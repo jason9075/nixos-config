@@ -3,6 +3,7 @@
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
     sleep 15
+    nm-applet &
     waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
@@ -62,6 +63,7 @@ in {
         "$mod, M, fullscreen                                            # Toggle fullscreen"
         "$mod, V, togglefloating                                        # Toggle floating"
         "$mod, W, exec, ~/nixos-config/scripts/swww_randomize.sh        # Randomize wallpaper"
+        "$mod, B, exec, pkill -USR1 waybar                              # Toggle waybar"
         "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%            # Volume up"
         "$mod, minus, exec, pactl -- set-sink-volume 0 -10%             # Volume down"
         ''
@@ -180,5 +182,5 @@ in {
     lazy = true
   '';
 
-  home.packages = with pkgs; [ hyprpicker ];
+  home.packages = with pkgs; [ hyprpicker networkmanagerapplet ];
 }
