@@ -10,15 +10,13 @@
         machine = "taipei";
         timezone = "Asia/Taipei";
         locale = "zh_TW.UTF-8";
-        useUnstable = true;
         bootMode = "uefi"; # uefi or bios
         bootMountPath = "/boot"; # boot mount point
         grubDevice = ""; # only used for legacy bios mode
-        # version = "25.05"; # Stable version
-        version = "25.11"; # Unstable version
+        version = "25.11";
       };
       # ----- USER SETTINGS ----- #
-      userSettings = rec {
+      userSettings = {
         username = "jason9075"; # username
         name = "Jason Kuan"; # display on login screen
         dotfilesDir = "~/.dotfiles";
@@ -27,21 +25,14 @@
         editor = "nvim"; # Default editor
         version = "25.11";
       };
-      pkgs = (if systemSettings.useUnstable then
-        (import inputs.nixpkgs {
-          system = systemSettings.system;
-          config = { allowUnfree = true; };
-        })
-      else
-        inputs.nixpkgs);
+      pkgs = import inputs.nixpkgs {
+        system = systemSettings.system;
+        config = { allowUnfree = true; };
+      };
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
         config = { allowUnfree = true; };
       };
-      lib = if systemSettings.useUnstable then
-        inputs.nixpkgs.lib
-      else
-        inputs.nixpkgs-stable.lib;
       home-manager = inputs.home-manager-unstable;
 
       # Systems that can run tests:
@@ -55,7 +46,7 @@
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
     in {
       nixosConfigurations = {
-        system = lib.nixosSystem {
+        system = inputs.nixpkgs.lib.nixosSystem {
           system = systemSettings.system;
           modules = [
             (./. + "/machines" + ("/" + systemSettings.machine)
