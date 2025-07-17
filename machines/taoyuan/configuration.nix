@@ -8,8 +8,8 @@
     ../../system/gui/hyprland.nix
     ../../system/gui/thunar.nix
     ../../system/gui/fonts
+    ../../system/gui/steam.nix
     ../../system/keyboards/keyd.nix
-
   ];
 
   # Bootloader.
@@ -20,19 +20,15 @@
   boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath;
   boot.loader.grub.enable =
     if (systemSettings.bootMode == "uefi") then false else true;
-  boot.loader.grub.device =
-    systemSettings.grubDevice; # does nothing if running uefi rather than bios
+  boot.loader.grub.device = systemSettings.grubDevice;
 
   networking.hostName = "taoyuan";
 
-  # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = systemSettings.timezone;
   time.hardwareClockInLocalTime = true;
 
-  # Select internationalisation properties.
   i18n.defaultLocale = systemSettings.locale;
 
   i18n.extraLocaleSettings = {
@@ -47,14 +43,11 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Enable docker daemon
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -64,10 +57,6 @@
     pulse.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   users.users.${userSettings.username} = {
     isNormalUser = true;
@@ -78,40 +67,21 @@
   };
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
-  # nh
   programs.nh = {
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 14d --keep 3";
   };
 
-  # Swaylock
   security.pam.services.swaylock = { };
 
   environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
 
-  # Game
-  programs.steam = {
-    enable = true;
-    # Open ports in the firewall for Steam Remote Play
-    remotePlay.openFirewall = true;
-    # Open ports in the firewall for Source Dedicated Server
-    dedicatedServer.openFirewall = true;
-    # Open ports in the firewall for Steam Local Network Game Transfers
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
-  # List services that you want to enable:
-
   services.openssh.enable = true;
 
-  # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
-  system.stateVersion = systemSettings.version;
+  system.stateVersion = "24.05";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];

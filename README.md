@@ -52,6 +52,11 @@ sudo nixos-rebuild switch --flake .#system
 home-manager switch --flake .#user
 ```
 
+Hardware changed.
+```bash
+sudo nixos-generate-config --show-hardware-config | sudo tee /home/${username}/nixos-config/machines/${machine}/hardware-configuration.nix > /dev/null
+```
+
 ## Switch Generation
 
 List Generation

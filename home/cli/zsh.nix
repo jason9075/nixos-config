@@ -1,4 +1,4 @@
-{ lib, systemSettings, userSettings, ... }:
+{ lib, userSettings, ... }:
 
 let
   beforeRc = lib.mkOrder 550 # bash
@@ -54,7 +54,6 @@ in {
         NH_FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
-        sudo nixos-generate-config --show-hardware-config | sudo tee /home/${userSettings.username}/nixos-config/machines/${systemSettings.machine}/hardware-configuration.nix > /dev/null &&
         NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
       nixdev = "nix develop --command zsh";
       # delete old generations

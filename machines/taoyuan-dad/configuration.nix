@@ -76,7 +76,7 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  system.stateVersion = systemSettings.version;
+  system.stateVersion = "24.05";
 
   # Schedule shutdown at 10 PM
   systemd.timers.shutdown-timer = {

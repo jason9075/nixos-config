@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, systemSettings, userSettings, ... }:
+{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
 
 with pkgs;
 let
@@ -12,7 +12,7 @@ in {
     BROWSER = qutebrowser;
   };
 
-  home.stateVersion = userSettings.version;
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 

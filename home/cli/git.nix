@@ -1,4 +1,4 @@
-{ userSettings, ...}:
+{ userSettings, ... }:
 
 {
   programs.git = {
@@ -9,8 +9,6 @@
       core.editor = "nvim";
       init.defaultBranch = "main";
     };
-    delta = {
-      enable = true;
-    };
+    delta = { enable = true; };
   };
 }

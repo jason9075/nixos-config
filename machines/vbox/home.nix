@@ -12,7 +12,7 @@ in {
     BROWSER = qutebrowser;
   };
 
-  home.stateVersion = userSettings.version;
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 

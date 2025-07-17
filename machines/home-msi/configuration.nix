@@ -94,7 +94,7 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  system.stateVersion = systemSettings.version;
+  system.stateVersion = "24.05";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];

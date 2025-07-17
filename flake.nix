@@ -13,7 +13,6 @@
         bootMode = "uefi"; # uefi or bios
         bootMountPath = "/boot"; # boot mount point
         grubDevice = ""; # only used for legacy bios mode
-        version = "25.11";
       };
       # ----- USER SETTINGS ----- #
       userSettings = {
@@ -23,7 +22,6 @@
         browser = "qutebrowser"; # Default browser
         term = "kitty"; # Default terminal
         editor = "nvim"; # Default editor
-        version = "25.11";
       };
       pkgs = import inputs.nixpkgs {
         system = systemSettings.system;
@@ -47,6 +45,7 @@
     in {
       nixosConfigurations = {
         system = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
           system = systemSettings.system;
           modules = [
             (./. + "/machines" + ("/" + systemSettings.machine)
@@ -54,7 +53,6 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs;
             inherit pkgs-stable;
             inherit systemSettings;
             inherit userSettings;
@@ -67,10 +65,8 @@
           (./. + "/machines" + ("/" + systemSettings.machine) + "/home.nix")
         ];
         extraSpecialArgs = {
-          inherit pkgs;
           inherit pkgs-stable;
           inherit (inputs) nixvim;
-          inherit systemSettings;
           inherit userSettings;
         };
       };
@@ -117,7 +113,5 @@
     };
 
     stylix.url = "github:danth/stylix";
-
   };
-
 }

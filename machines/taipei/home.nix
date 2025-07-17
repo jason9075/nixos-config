@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, systemSettings, userSettings, ... }:
+{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
 
 with pkgs;
 let
@@ -17,7 +17,7 @@ in {
     BROWSER = userSettings.browser;
   };
 
-  home.stateVersion = userSettings.version;
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 
@@ -60,6 +60,7 @@ in {
     ansible
     vpnc
     entr
+    nodejs # for github copilot
 
     # CLI
     htop
@@ -82,6 +83,9 @@ in {
     tree
     russ
     taskwarrior3
+    libwebp
+    gh
+    gh-copilot
 
     # GUI
     hyprland
@@ -138,6 +142,7 @@ in {
     # davinci-resolve # Video Editor
     audacity
     piper-tts # text-to-speech
+    meshlab
 
     # Misc
     wl-clipboard

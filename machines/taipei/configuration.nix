@@ -8,6 +8,7 @@
     ../../system/gui/hyprland.nix
     ../../system/gui/thunar.nix
     ../../system/gui/fonts
+    ../../system/gui/steam.nix
     ../../system/keyboards/keyd.nix
   ];
 
@@ -132,19 +133,13 @@
   # };
 
   # Game
-  programs.steam = {
-    enable = true;
-    # Open ports in the firewall for Steam Remote Play
-    remotePlay.openFirewall = true;
-    # Open ports in the firewall for Source Dedicated Server
-    dedicatedServer.openFirewall = true;
-    # Open ports in the firewall for Steam Local Network Game Transfers
-    localNetworkGameTransfers.openFirewall = true;
-  };
 
   # List services that you want to enable:
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+  };
 
   services.fstrim.enable = true;
 
@@ -154,13 +149,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = systemSettings.version; # Did you read the comment?
+  system.stateVersion = "24.05";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];
