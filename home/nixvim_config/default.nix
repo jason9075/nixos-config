@@ -8,6 +8,7 @@
   };
   imports = [ ./keybindings.nix ./lsp.nix ];
   config = {
+
     programs.nixvim = {
       enable = true;
 
@@ -53,6 +54,24 @@
         };
         indent-blankline.enable = true;
         web-devicons.enable = true;
+        image = {
+          enable = true;
+          settings = {
+            integrations = {
+              markdown = {
+                enabled = true;
+                clear_in_insert_mode = false;
+                download_remote_images = true;
+                only_render_image_at_cursor = true;
+                only_render_image_at_cursor_mode = "popup";
+                floating_windows =
+                  false; # will be rendered in floating markdown windows
+              };
+              html = { enabled = false; };
+              css = { enabled = false; };
+            };
+          };
+        };
 
         fzf-lua = {
           enable = true;
@@ -71,6 +90,7 @@
             autoTrigger = true;
           };
         };
+        # copilot-vim.enable = config.nixvim_config.copilot.enable;
 
         luasnip = {
           enable = true;
