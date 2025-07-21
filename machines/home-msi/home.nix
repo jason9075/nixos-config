@@ -35,6 +35,7 @@ in {
   home.packages = with pkgs; [
 
     # CLI
+    gcc
     gnumake
     htop
     ripgrep
