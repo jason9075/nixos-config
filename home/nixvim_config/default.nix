@@ -124,6 +124,7 @@
         harpoon.enable = true;
 
         markdown-preview.enable = true;
+        markview.enable = true;
       };
 
       extraPlugins = with pkgs.vimPlugins; [
