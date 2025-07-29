@@ -61,6 +61,7 @@ in {
     vpnc
     entr
     nodejs # for github copilot
+    gcc # for neovim tree-sitter
 
     # CLI
     htop
