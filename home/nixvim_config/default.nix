@@ -81,6 +81,7 @@
         };
         refactoring.enable = true;
         comment.enable = true;
+        colorizer.enable = true;
         # typescrip commentstring
         ts-context-commentstring.enable = true;
         copilot-lua = {
