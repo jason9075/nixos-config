@@ -66,7 +66,7 @@
         ];
         extraSpecialArgs = {
           inherit pkgs-stable;
-          inherit (inputs) nixvim;
+          inherit inputs;
           inherit userSettings;
         };
       };
@@ -109,6 +109,11 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
+{ pkgs, pkgs-stable, inputs, userSettings, ... }:
 
 with pkgs;
 let
@@ -21,7 +21,7 @@ in {
   programs.home-manager.enable = true;
 
   imports = [
-    nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeManagerModules.nixvim
 
     # CLI
     ../../home/cli/zsh.nix

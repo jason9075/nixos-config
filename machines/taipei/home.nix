@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, nixvim, userSettings, ... }:
+{ pkgs, pkgs-stable, inputs, userSettings, ... }:
 
 with pkgs;
 let
@@ -22,7 +22,7 @@ in {
   programs.home-manager.enable = true;
 
   imports = [
-    nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeManagerModules.nixvim
 
     # CLI
     ../../home/cli/zsh.nix
@@ -87,6 +87,7 @@ in {
     libwebp
     gh
     gh-copilot
+    codex
 
     # GUI
     hyprland
@@ -131,6 +132,8 @@ in {
     (brave.override { vulkanSupport = true; })
     # pcmanx-gtk2
     wireguard-tools
+    networkmanager
+    networkmanager-vpnc
     traceroute
 
     # Multimedia
@@ -150,6 +153,8 @@ in {
     wtype
     tree-sitter
     cachix
+
+    inputs.antigravity-nix.packages.x86_64-linux.default
   ];
 
 }

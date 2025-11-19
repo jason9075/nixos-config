@@ -32,6 +32,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = with pkgs; [ networkmanager-vpnc ];
   # Use NetworkManager to manage the network interfaces.
   networking.useDHCP = false;
 
@@ -157,5 +158,9 @@
   nix.settings.trusted-public-keys = [
     "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
   ];
+
+  # use for nvidia physx
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [ libxcrypt-legacy ];
 
 }
