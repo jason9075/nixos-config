@@ -3,6 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../system/gui/hyprland.nix
+    ../../system/gui/thunar.nix
     ../../system/gui/fonts
     ../../system/keyboards/keyd.nix
   ];
@@ -18,19 +20,12 @@
   boot.loader.grub.device =
     systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
-  # GUI
-  services.xserver.enable = true;
-  services.displayManager = {
-    lightdm.enable = true;
-    autoLogin.enable = true;
-    autoLogin.user = "sahisi";
-  };
-  services.xserver.desktopManager.cinnamon.enable = true;
 
   networking.hostName = "sahisi";
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = with pkgs; [ networkmanager-vpnc ];
 
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
@@ -51,11 +46,23 @@
     LC_TIME = systemSettings.locale;
   };
 
+  virtualisation.docker.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   programs.zsh.enable = true;
   users.users.sahisi = {
     isNormalUser = true;
     description = "上海興";
-    extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
@@ -65,6 +72,37 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 3d --keep 3";
+  };
+
+  # Swaylock
+  security.pam.services.swaylock = { };
+
+  # Color scheme
+  stylix.enable = true;
+  stylix.image = ./wallpaper.png; # dummy image
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+  console = {
+    earlySetup = true;
+    packages = with pkgs; [ terminus_font powerline-fonts ];
+    font = "ter-powerline-v24b";
+    colors = [
+      "2e3440"
+      "3b4252"
+      "434c5e"
+      "4c566a"
+      "d8dee9"
+      "e5e9f0"
+      "eceff4"
+      "8fbcbb"
+      "88c0d0"
+      "81a1c1"
+      "5e81ac"
+      "bf616a"
+      "d08770"
+      "ebcb8b"
+      "a3be8c"
+      "b48ead"
+    ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -77,24 +115,6 @@
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   system.stateVersion = "24.05";
-
-  # Schedule shutdown at 10 PM
-  systemd.timers.shutdown-timer = {
-    description = "Schedule shutdown at 10 PM";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      Unit = "shutdown-service.service";
-      OnCalendar = "22:00";
-      Persistent = true;
-    };
-  };
-  systemd.services.shutdown-service = {
-    description = "Shutdown the computer";
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "/run/current-system/sw/bin/systemctl poweroff";
-    };
-  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" "sahisi" ];

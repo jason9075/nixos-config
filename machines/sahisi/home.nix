@@ -16,6 +16,7 @@ in {
 
   programs.home-manager.enable = true;
 
+
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
 
@@ -23,17 +24,30 @@ in {
     ../../home/cli/zsh.nix
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
+    ../../home/cli/mu.nix
     ../../home/nixvim_config
 
     # GUI
+    ../../home/gui/hyprland.nix
+    ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
-    ../../home/gui/eww.nix
+    ../../home/gui/waybar.nix
+    ../../home/gui/wlogout.nix
+    ../../home/gui/rofi.nix
+    ../../home/gui/mako.nix
+    ../../home/gui/zathura.nix # PDF Viewer
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
   ];
 
   home.packages = with pkgs; [
+
+    # Development
+    gnumake
+    ansible
+    entr
+    gcc # for neovim tree-sitter
 
     # CLI
     htop
@@ -45,36 +59,51 @@ in {
     killall
     zip
     unzip
+    unar # unzip rar files
     jq
     yq
     fzf
     kitty
+    tmux
     neofetch
     tree
+    russ
+    taskwarrior3
+    libwebp
 
-    # Web Browser
-    google-chrome
+    # GUI
+    hyprland
+    pyprland
+    hyprcursor
+    swww
+    swayidle
+    grim # Screenshot
+    slurp # Screenshot
+    swappy # Window switcher
+    imv # Image Viewer
+    font-manager
+
+    # Network
+    (google-chrome.override {
+      commandLineArgs = [
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+        "--enable-wayland-ime"
+      ];
+    })
     firefox
+    networkmanager
+    traceroute
 
     # Multimedia
+    pkgs-stable.gimp # 25.11 unstable breaks gimp
+    pavucontrol
     vlc
 
     # Misc
-    xclip
-    xdotool
+    wl-clipboard
+    wtype
     tree-sitter
-    wmctrl
   ];
 
-  # Cinnamon auto start
-  home.file.".config/autostart/run_once.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Exec=/home/jason9075/nixos-config/scripts/cinnamon_login.sh
-    Hidden=false
-    NoDisplay=false
-    X-GNOME-Autostart-enabled=true
-    Name=Run eww
-    Comment=Run once on login
-  '';
 }
