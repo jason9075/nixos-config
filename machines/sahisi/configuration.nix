@@ -124,4 +124,21 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" "sahisi" ];
 
+  systemd.services.sa-hi-si-erp = {
+    description = "Sa-Hi-Si ERP docker stack";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" "docker.service" ];
+    wants = [ "network-online.target" "docker.service" ];
+
+    serviceConfig = {
+      Type = "simple";
+      User = "sahisi";
+      Group = "users";
+      WorkingDirectory = "/home/sahisi/sa-hi-si-erp";
+      ExecStart = "/run/current-system/sw/bin/make run";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+  };
+
 }
