@@ -20,7 +20,7 @@
 
   # GUI
   services.xserver.enable = true;
-  services.xserver.displayManager = {
+  services.displayManager = {
     lightdm.enable = true;
     autoLogin.enable = true;
     autoLogin.user = "sahisi";
