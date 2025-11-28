@@ -23,7 +23,7 @@
   services.xserver.displayManager = {
     lightdm.enable = true;
     autoLogin.enable = true;
-    autoLogin.user = userSettings.username;
+    autoLogin.user = "sahisi";
   };
   services.xserver.desktopManager.cinnamon.enable = true;
 
@@ -52,7 +52,7 @@
   };
 
   programs.zsh.enable = true;
-  users.users.${userSettings.username} = {
+  users.users.sahisi = {
     isNormalUser = true;
     description = "上海興";
     extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
@@ -97,6 +97,6 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.allowed-users = [ "root" userSettings.username ];
+  nix.settings.allowed-users = [ "root" "sahisi" ];
 
 }

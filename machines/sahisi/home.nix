@@ -3,8 +3,8 @@
 with pkgs;
 let
 in {
-  home.username = userSettings.username;
-  home.homeDirectory = "/home/${userSettings.username}";
+  home.username = "sahisi";
+  home.homeDirectory = "/home/sahisi";
 
   home.sessionVariables = {
     TERMINAL = userSettings.term;
