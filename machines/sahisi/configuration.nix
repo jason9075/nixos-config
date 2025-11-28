@@ -111,6 +111,11 @@
   # List services that you want to enable:
   services.openssh.enable = true;
 
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
 
