@@ -106,7 +106,7 @@
   };
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [ vim git pulseaudio ];
+  environment.systemPackages = with pkgs; [ vim git gnumake pulseaudio ];
 
   # List services that you want to enable:
   services.openssh.enable = true;
@@ -135,7 +135,7 @@
       User = "sahisi";
       Group = "users";
       WorkingDirectory = "/home/sahisi/sa-hi-si-erp";
-      ExecStart = "/run/current-system/sw/bin/make run";
+      ExecStart = "${pkgs.gnumake}/bin/make run";
       Restart = "on-failure";
       RestartSec = 5;
     };
