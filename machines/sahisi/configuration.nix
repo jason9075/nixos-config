@@ -130,6 +130,14 @@
     after = [ "network-online.target" "docker.service" ];
     wants = [ "network-online.target" "docker.service" ];
 
+    path = [
+      pkgs.docker            # /nix/store/.../bin/docker
+      pkgs.docker-compose    # /nix/store/.../bin/docker-compose（如果你改用這個）
+      pkgs.gnumake
+      pkgs.coreutils
+      pkgs.bash
+    ];
+
     serviceConfig = {
       Type = "simple";
       User = "sahisi";
