@@ -2,14 +2,10 @@
 
 ## New Computer
 
+It may missing hardware config. Need time to figure out
+
 ```bash
 nix-shell -p git --command "nix run github:jason9075/nixos-config --extra-experimental-features nix-command --extra-experimental-features flakes"
-```
-
-If missing harware config
-
-```bash
-nix-shell -p git --command 'git clone https://github.com/jason9075/nixos-config ~/nixos-config || git -C ~/nixos-config pull; sudo nixos-generate-config --show-hardware-config | sudo tee ~/nixos-config/system/hardware-configuration.nix > /dev/null; [ -f /etc/nixos/hardware-configuration.nix ] || sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null; nix run github:jason9075/nixos-config --extra-experimental-features nix-command --extra-experimental-features flakes'
 ```
 
 Alias
