@@ -69,7 +69,7 @@ in {
         ''
           , Print, exec, grim -g "$(slurp)"                             # Screenshot''
         ''
-          $mod, Print, exec, grim -g - "$(slurp)" | swappy -f -         # Screenshot with edit''
+          $mod, Print, exec, grim - | wl-copy                           # Screenshot with edit''
         "$mod, left,  movewindow, l                                     # Move window left"
         "$mod, right, movewindow, r                                     # Move window right"
         "$mod, up,    movewindow, u                                     # Move window up"
