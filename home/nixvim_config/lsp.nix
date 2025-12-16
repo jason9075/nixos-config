@@ -33,7 +33,6 @@
         };
       };
     };
-    lsp-format.enable = true;
     lspkind = {
       enable = true;
       cmp = {
@@ -54,6 +53,7 @@
           nixfmt.enable = true;
           hclfmt.enable = true;
           prettierd.enable = true;
+          djlint.enable = true;
           yamlfmt.enable = true;
           prettierd.disableTsServerFormatter = true;
           stylua = {
@@ -137,8 +137,11 @@
       nixGrammars = true;
       settings = {
         auto_install = true;
-        highlight.enable = true;
         indent.enable = true;
+        highlight = {
+          enable = true;
+          disable = [ "htmldjango" "jinja" "jinja2"];
+        };
       };
     };
     treesitter-context.enable = true;

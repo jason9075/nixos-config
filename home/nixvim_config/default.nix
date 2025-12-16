@@ -134,6 +134,7 @@
         plenary-nvim # testing
         nvim-bufdel # buffer management
         bullets-vim # markdown bullets
+        vim-jinja-languages
       ];
 
     };

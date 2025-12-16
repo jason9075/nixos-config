@@ -301,8 +301,13 @@
             icon = "󰷉";
           }
           {
+            __unkeyed-1 = "<leader>ra";
+            __unkeyed-2 = ":lua vim.lsp.buf.code_action()<CR>";
+            desc = "Code Action";
+          }
+          {
             __unkeyed-1 = "<leader>rf";
-            __unkeyed-2 = ":Format<CR>";
+            __unkeyed-2 = ":lua vim.lsp.buf.format()<CR>";
             desc = "Format";
           }
           {
