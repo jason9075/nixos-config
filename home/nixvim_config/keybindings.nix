@@ -352,9 +352,19 @@
             desc = "Find files";
           }
           {
+            __unkeyed-1 = "<leader>fF";
+            __unkeyed-2 = "<cmd>lua require('fzf-lua').files({ fd_opts = \"--hidden --no-ignore --exclude .git\" })<CR>";
+            desc = "Find files (include ignored)";
+          }
+          {
             __unkeyed-1 = "<leader>fg";
             __unkeyed-2 = ":FzfLua live_grep<CR>";
             desc = "Find grep";
+          }
+          {
+            __unkeyed-1 = "<leader>fG";
+            __unkeyed-2 = "<cmd>lua require('fzf-lua').live_grep({ rg_opts = \"--hidden --no-ignore --glob '!.git/*'\" })<CR>";
+            desc = "Find grep (include ignored)";
           }
           {
             __unkeyed-1 = "<leader>fi";
