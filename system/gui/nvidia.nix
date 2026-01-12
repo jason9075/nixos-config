@@ -34,4 +34,9 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  # VA-API implementation using NVIDIA's NVDEC
+  hardware.graphics.extraPackages = with pkgs; [
+    nvidia-vaapi-driver
+  ];
 }
