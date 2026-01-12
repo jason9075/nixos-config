@@ -43,8 +43,8 @@ in {
     ../../home/gui/rofi.nix
     ../../home/gui/mako.nix
     ../../home/gui/zathura.nix # PDF Viewer
-    ../../home/gui/qutebrowser.nix
-    ../../home/gui/vscode.nix
+    # ../../home/gui/qutebrowser.nix
+    # ../../home/gui/vscode.nix
 
     # Audio
     ../../home/audio/mpd.nix
@@ -87,7 +87,7 @@ in {
     taskwarrior3
     libwebp
     gh
-    gh-copilot
+    # gh-copilot
     gemini-cli
 
     # GUI
@@ -107,26 +107,20 @@ in {
 
     # Communication
     slack
-    (patchDesktop slack "slack" "^Exec=${slack}/bin/slack -s %U"
-      "Exec=${slack}/bin/slack --enable-wayland-ime -s %U")
     zoom-us
-    webcord
-    (patchDesktop webcord "webcord" "^Exec=webcord"
-      "Exec=webcord --enable-wayland-ime")
-    thunderbird
+    discord
+    # webcord
 
     # Network
-    chromium
     google-chrome
     firefox
-    brave
     wireguard-tools
     networkmanager
     networkmanager-vpnc
-    traceroute
 
     # Multimedia
-    pkgs-stable.gimp # 25.11 unstable breaks gimp
+    # pkgs-stable.gimp # 25.11 unstable breaks gimp
+    gimp
     pavucontrol
     obs-studio
     vlc
@@ -134,8 +128,8 @@ in {
     # blender
     # davinci-resolve # Video Editor
     audacity
-    piper-tts # text-to-speech
-    meshlab
+    # piper-tts # text-to-speech
+    # meshlab
 
     # Misc
     wl-clipboard

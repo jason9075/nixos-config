@@ -86,22 +86,12 @@ in {
     # Communication
     discord
     slack
-    (patchDesktop slack "slack" "^Exec=${slack}/bin/slack -s %U"
-      "Exec=${slack}/bin/slack --enable-wayland-ime -s %U")
     zoom-us
-    webcord
-    (patchDesktop webcord "webcord" "^Exec=webcord"
-      "Exec=webcord --enable-wayland-ime")
+    discord
     thunderbird
 
     # Web Browser
-    (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-      ];
-    })
+    google-chrome
     firefox
     (brave.override { vulkanSupport = true; })
 
