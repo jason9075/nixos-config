@@ -125,23 +125,23 @@ in {
       ];
       # use "hyprctl clients" to show class
       # https://wiki.hyprland.org/Configuring/Window-Rules/
-      windowrulev2 = [
-        "workspace 10, class:^(kitty)$"
-        "workspace 10, class:^(code-url-handler)$" # vscode url handler
-        # "workspace 9, class:^(.*qutebrowser)$"
-        "workspace 9, class:^(firefox)$"
-        "workspace 9, class:^(brave-browser)$"
-        "workspace 8, class:^(Slack)$"
-        "workspace 7, class:^(discord)$"
-        "workspace 7, class:^(WebCord)$"
-        "workspace 6, class:^(thunderbird)$"
-        "opacity 1.0 0.9, class:^(kitty)$"
-        "opacity 1.0 0.9, class:^(code-url-handler)$"
-        "opacity 1.0 0.93, class:^.*zathura$"
-        "opacity 0.95 0.88, class:^(thunar)$"
-        "opacity 0.9 0.7, class:^(htop)$"
-        "opacity 0.9 0.7, class:^(nvtop)$"
-        "idleinhibit fullscreen, fullscreen:1"
+      windowrule = [
+        "workspace 10, match:class ^(kitty)$"
+        "workspace 10, match:class ^(code-url-handler)$" # vscode url handler
+        # "workspace 9, match:class ^(.*qutebrowser)$"
+        "workspace 9, match:class ^(firefox)$"
+        "workspace 9, match:class ^(brave-browser)$"
+        "workspace 8, match:class ^(Slack)$"
+        "workspace 7, match:class ^(discord)$"
+        "workspace 7, match:class ^(WebCord)$"
+        "workspace 6, match:class ^(thunderbird)$"
+        "opacity 1.0 0.9, match:class ^(kitty)$"
+        "opacity 1.0 0.9, match:class ^(code-url-handler)$"
+        "opacity 1.0 0.93, match:class ^.*zathura$"
+        "opacity 0.95 0.88, match:class ^(thunar)$"
+        "opacity 0.9 0.7, match:class ^(htop)$"
+        "opacity 0.9 0.7, match:class ^(nvtop)$"
+        "idle_inhibit fullscreen, fullscreen 1"
       ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
       animation =
