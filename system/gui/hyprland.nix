@@ -24,7 +24,7 @@ in {
       };
       # Automatically log in the user when the system boots
       initial_session = {
-        command = "Hyprland";
+        command = "start-hyprland";
         user = userSettings.username;
       };
     };
