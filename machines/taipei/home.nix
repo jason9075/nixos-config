@@ -23,7 +23,7 @@ in {
   programs.zoxide.enable = true;
 
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
 
     # CLI
     ../../home/cli/zsh.nix
@@ -63,7 +63,7 @@ in {
     entr
     nodejs # for github copilot
     gcc # for neovim tree-sitter
-    chrony
+    opencode
 
     # CLI
     htop

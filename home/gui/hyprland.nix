@@ -62,7 +62,8 @@ in {
         "$mod, Q, killactive                                            # Close window"
         "$mod, M, fullscreen                                            # Toggle fullscreen"
         "$mod, V, togglefloating                                        # Toggle floating"
-        "$mod, W, exec, ~/nixos-config/scripts/swww_randomize.sh        # Randomize wallpaper"
+        "$mod, W, exec, /home/jason9075/projects/wkey/wkey              # wkey"
+        "$mod SHIFT, W, exec, ~/nixos-config/scripts/swww_randomize.sh  # Randomize wallpaper"
         "$mod, B, exec, pkill -USR1 waybar                              # Toggle waybar"
         "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%            # Volume up"
         "$mod, minus, exec, pactl -- set-sink-volume 0 -10%             # Volume down"
@@ -156,7 +157,7 @@ in {
 
     [scratchpads.chatgpt]
     animation = ""
-    command = "firefox --name=chatgpt_app --no-remote -P chatgpt https://chat.openai.com"
+    command = "firefox --name=chatgpt_app --no-remote -P chatgpt https://gemini.google.com"
     class = "chatgpt_app"
     size = "80% 85%"
     margin = 50
@@ -184,6 +185,7 @@ in {
     size = "80% 85%"
     margin = 50
     lazy = true
+
   '';
 
   home.packages = with pkgs; [ hyprpicker networkmanagerapplet ];

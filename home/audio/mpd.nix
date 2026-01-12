@@ -16,7 +16,7 @@
     };
   };
 
-  home.packages = with pkgs; [ mpd cava ffmpeg mpc-cli ];
+  home.packages = with pkgs; [ mpd cava ffmpeg mpc ];
 
   programs = {
     ncmpcpp = {

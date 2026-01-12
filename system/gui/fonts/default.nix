@@ -9,7 +9,7 @@ in {
       powerline-fonts
       powerline-symbols
       nerd-fonts.hack
-      source-han-sans-traditional-chinese
+      source-han-sans
       elffont.v1
     ];
     fontconfig = {

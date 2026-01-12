@@ -48,9 +48,11 @@
         project-nvim.enable = true;
         neo-tree = {
           enable = true;
-          closeIfLastWindow = true;
-          window.position = "right";
-          buffers = { followCurrentFile.enabled = true; };
+          settings = {
+            close_if_last_window = true;
+            window.position = "right";
+            buffers = { follow_current_file.enabled = true; };
+          };
         };
         indent-blankline.enable = true;
         web-devicons.enable = true;

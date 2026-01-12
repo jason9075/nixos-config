@@ -139,6 +139,6 @@ in {
   home.file.".config/rofi/nord.rasi".text = nordConfig;
   home.file.".config/rofi/config.rasi".text = rofiConfig;
 
-  home.packages = with pkgs; [ rofi-wayland ];
+  home.packages = with pkgs; [ rofi ];
 
 }

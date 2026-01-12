@@ -35,7 +35,7 @@
     };
     lspkind = {
       enable = true;
-      cmp = {
+      settings.cmp = {
         enable = true;
         menu = {
           nvim_lsp = "[LSP]";
@@ -145,8 +145,8 @@
       };
     };
     treesitter-context.enable = true;
-    treesitter-textobjects.enable = true;
-    treesitter-refactor.enable = true;
+    # treesitter-textobjects.enable = true;
+    # treesitter-refactor.enable = true;
     # syntax highlight for nix config
     hmts.enable = true;
     plantuml-syntax.enable = true;

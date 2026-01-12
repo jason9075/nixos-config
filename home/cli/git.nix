@@ -3,12 +3,17 @@
 {
   programs.git = {
     enable = true;
-    userName = userSettings.username;
-    userEmail = userSettings.email;
-    extraConfig = {
+    settings = {
+      user = {
+        name = userSettings.username;
+        email = userSettings.email;
+      };
       core.editor = "nvim";
       init.defaultBranch = "main";
     };
-    delta = { enable = true; };
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 }

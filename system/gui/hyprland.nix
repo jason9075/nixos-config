@@ -19,7 +19,7 @@ in {
     restart = false;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet ${flags}";
+        command = "${pkgs.tuigreet}/bin/tuigreet ${flags}";
         user = userSettings.username;
       };
       # Automatically log in the user when the system boots
