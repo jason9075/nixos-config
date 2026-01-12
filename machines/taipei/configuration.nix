@@ -60,6 +60,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.atd.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -153,6 +155,8 @@
   system.stateVersion = "24.05";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.auto-optimise-store = true;
+  nix.settings.warn-dirty = false;
   nix.settings.allowed-users = [ "root" userSettings.username ];
   nix.settings.substituters = [ "https://cuda-maintainers.cachix.org" ];
   nix.settings.trusted-public-keys = [

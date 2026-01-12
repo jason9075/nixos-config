@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
     userName = userSettings.username;
-    userEmail = userSettings.username + "@users.noreply.github.com";
+    userEmail = userSettings.email;
     extraConfig = {
       core.editor = "nvim";
       init.defaultBranch = "main";

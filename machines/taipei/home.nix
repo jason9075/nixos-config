@@ -20,6 +20,7 @@ in {
   home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
+  programs.zoxide.enable = true;
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
@@ -62,6 +63,7 @@ in {
     entr
     nodejs # for github copilot
     gcc # for neovim tree-sitter
+    chrony
 
     # CLI
     htop
@@ -69,7 +71,6 @@ in {
     ripgrep
     fd
     bat
-    zoxide
     wget
     killall
     zip
@@ -80,14 +81,14 @@ in {
     fzf
     kitty
     tmux
-    neofetch
+    fastfetch
     tree
     russ
     taskwarrior3
     libwebp
     gh
     gh-copilot
-    codex
+    gemini-cli
 
     # GUI
     hyprland
@@ -101,6 +102,8 @@ in {
     imv # Image Viewer
     font-manager
     plantuml
+    gparted
+    anydesk
 
     # Communication
     slack
@@ -113,24 +116,10 @@ in {
     thunderbird
 
     # Network
-    # google-chrome
-    (chromium.override {
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-      ];
-    })
-    (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-      ];
-    })
+    chromium
+    google-chrome
     firefox
-    (brave.override { vulkanSupport = true; })
-    # pcmanx-gtk2
+    brave
     wireguard-tools
     networkmanager
     networkmanager-vpnc

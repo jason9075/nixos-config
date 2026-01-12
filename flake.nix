@@ -18,8 +18,9 @@
       userSettings = {
         username = "jason9075"; # username
         name = "Jason Kuan"; # display on login screen
+        email = "jason9075@gmail.com"; # email
         dotfilesDir = "~/.dotfiles";
-        browser = "qutebrowser"; # Default browser
+        browser = "firefox"; # Default browser
         term = "kitty"; # Default terminal
         editor = "nvim"; # Default editor
       };

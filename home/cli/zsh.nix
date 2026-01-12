@@ -20,8 +20,6 @@ let
 
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-      eval "$(zoxide init zsh)"
-
       # FZF
       source "$(fzf-share)/key-bindings.zsh"
       source "$(fzf-share)/completion.zsh"
@@ -72,12 +70,12 @@ in {
       dps =
         "docker ps --format 'table {{.Names}}	{{.RunningFor}}	{{.Status}}	{{.Image}}	{{.ID}}	{{.Size}}' -a";
     };
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     zplug = {
       enable = true;
       plugins = [
         { name = "zsh-users/zsh-completions"; }
-        { name = "zsh-users/zsh-autosuggestions"; }
-        { name = "zsh-users/zsh-syntax-highlighting"; }
         { name = "zsh-users/zsh-history-substring-search"; }
         { name = "jeffreytse/zsh-vi-mode"; }
         {
