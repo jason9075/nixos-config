@@ -143,6 +143,12 @@ in {
         "opacity 0.9 0.7, match:class ^(nvtop)$"
         "idle_inhibit fullscreen, fullscreen 1"
       ];
+      workspace = [
+        "10, name:coding, gapsin:0, gapsout:0"
+        "9, name:browser"
+        "8, name:slack"
+        "7, name:discord"
+      ];
       bezier = "myBeizer, 0.05, 0.9, 0.1, 1.05";
       animation =
         [ "windows, 1, 8, myBeizer" "workspaces, 1, 8, myBeizer, fade" ];

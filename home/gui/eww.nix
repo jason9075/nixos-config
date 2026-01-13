@@ -13,8 +13,10 @@ let
 
       ;; ENV VARS
       (defpoll UPTIME :interval "1m" "$HOME/nixos-config/scripts/uptime.sh &")
-      (defpoll IP_ADDR :interval "24h" "ip -br address | grep UP | awk '{ print $3 }'")
-      (defpoll NET_INTERFACE :interval "24h" "ip -br address | grep UP | awk '{ print $1}'")
+      (defpoll IP_ADDR :interval "24h" "ip -4 -br address | grep UP | awk '{ print $3 }'")
+      (defpoll NET_INTERFACE :interval "24h" "ip -4 -br address | grep UP | awk '{ print $1}'")
+      (defpoll NIXOS_VERSION :interval "24h"
+        "nixos-version | sed -E 's/^([0-9]+\\.[0-9]+)\\.[0-9]+\\.[a-z0-9]+ (.*)/\\1 \\2/'")
 
       ;; Widgets
 
@@ -38,16 +40,16 @@ let
       )
 
       (defwidget info []
-        (box :class "info-box-outer" :orientation "h" :space-evenly false :halign "center"
-          (box :class "info-box-top" :orientation "v" :space-evenly false
-            (box :class "info-box-inner" :orientation "h" :space-evenly false
-              (box :class "info-box-left" :orientation "v" :space-evenly false
-                (label :class "info-icon" :text " :")
-              )
-              (box :class "info-box-right" :orientation "v" :space-evenly false
-                (label :class "info-text" :halign "start" :text "''${UPTIME}")
-              )
-            )
+        (box :class "info-box-outer" :orientation "v" :space-evenly false :halign "center" :spacing 5
+          ;; 第一行：Uptime
+          (box :class "info-row" :orientation "h" :space-evenly false
+            (label :class "info-icon" :text " : ")
+            (label :class "info-text" :text "''${UPTIME}")
+          )
+          ;; 第二行：NixOS Version (獨立一行，字體可稍微縮小)
+          (box :class "info-row" :orientation "h" :space-evenly false
+            (label :class "info-icon" :text " : ")
+            (label :class "info-text" :limit-width 18 :text "''${NIXOS_VERSION}")
           )
         )
       )
@@ -245,17 +247,30 @@ let
         margin: 4px 16px 2px 16px;
         padding: 2px;
       }
-      .info-box-left {
-        padding: 4px;
-      }
-      .info-box-right {
-        padding: 4px;
-      }
       .info-icon {
         color: $color14;
       }
       .info-text {
         color: $color19;
+        font-size: 12px;
+      }
+      .info-box-outer {
+        padding: 8px 0px;
+      }
+      .info-row {
+        margin: 2px 0px;
+        min-width: 150px; 
+      }
+      
+      .info-icon {
+        color: $color14;
+        font-size: 14px;
+        margin-right: 5px;
+      }
+      
+      .info-text {
+        color: $color19;
+        font-size: 12px; 
       }
 
       .network {
