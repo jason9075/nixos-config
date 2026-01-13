@@ -12,6 +12,7 @@ let
     pypr &
     sleep 1
     eww open widgets
+    eww open pomodoro
     $HOME/nixos-config/scripts/swww_randomize.sh
     $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar

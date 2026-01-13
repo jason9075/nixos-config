@@ -10,6 +10,7 @@ let
       (defpoll today :interval "12h" "date '+%a, %d %B'")
       (defpoll time :interval "5s" "date '+%H:%M'")
       (defpoll QUOTE :interval "12h" "$HOME/nixos-config/scripts/gen_quote.sh")
+      (deflisten POMO_DATA "$HOME/nixos-config/scripts/pomodoro.sh listen")
 
       ;; ENV VARS
       (defpoll UPTIME :interval "1m" "$HOME/nixos-config/scripts/uptime.sh &")
@@ -178,6 +179,19 @@ let
         )
       )
 
+      (defwidget pomodoro []
+        (box :class "pomo-container" :orientation "v" :space-evenly false :spacing 5
+          (label :class "pomo-status" :text {POMO_DATA.status})
+          (label :class "pomo-time" :text {POMO_DATA.time})
+          (box :class "pomo-controls" :orientation "h" :space-evenly true
+            (button :class "pomo-btn" :onclick "$HOME/nixos-config/scripts/pomodoro.sh toggle" 
+              {POMO_DATA.state == "running" ? "󰏤" : "󰐊"}
+            )
+            (button :class "pomo-btn" :onclick "$HOME/nixos-config/scripts/pomodoro.sh reset" "󰦛")
+          )
+        )
+      )
+
       (defwindow center
         :monitor 0
         :geometry (geometry :x 0
@@ -188,6 +202,20 @@ let
         :exclusive false
         (box :class "center-container"
           (center-panel)
+        )
+      )
+
+      (defwindow pomodoro
+        :monitor 0
+        :geometry (geometry :x "20px"
+                            :y "20px"
+                            :width "150px"
+                            :anchor "bottom right")
+        :stacking "bg"
+        :windowtype "dock"
+        :exclusive false
+        (box :class "main-container"
+          (pomodoro)
         )
       )
     '';
@@ -400,6 +428,37 @@ let
       .center-button:hover .button-text,
       .center-button:hover .button-icon {
         color: $color19;
+      }
+
+      // POMODORO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      .pomo-container {
+        padding: 15px;
+        background-color: $color24;
+        border-radius: 12px;
+      }
+      .pomo-status {
+        font-size: 16px;
+        font-weight: bold;
+        color: $color4;
+      }
+      .pomo-time {
+        font-size: 32px;
+        font-weight: bold;
+        color: $white;
+        margin: 5px 0px;
+      }
+      .pomo-controls {
+        margin-top: 10px;
+      }
+      .pomo-btn {
+        font-size: 24px;
+        color: $color17;
+        padding: 5px;
+        border-radius: 8px;
+        &:hover {
+          background-color: $color22;
+          color: $color19;
+        }
       }
     '';
 
