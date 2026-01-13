@@ -2,16 +2,16 @@
   services.mako = {
     enable = true;
     settings = {
-      defaultTimeout = 5000;
-      borderRadius = 8;
-      maxVisible = 5;
+      default-timeout = 5000;
+      border-radius = 8;
+      max-visible = 5;
       anchor = "top-right";
       width = 400;
       height = 200;
       font = "Hack 14";
       margin = "8";
-      backgroundColor = "#5e81ace0";
-      textColor = "#eceff4ff";
+      background-color = "#5e81ace0";
+      text-color = "#eceff4ff";
     };
   };
 
