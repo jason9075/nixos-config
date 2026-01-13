@@ -49,14 +49,15 @@ listen() {
                 (( time_left-- ))
                 echo "$time_left" > "$TIME_FILE"
             else
+                echo "paused" > "$STATE_FILE"
                 if [[ "$status" == "Work" ]]; then
                     status="Break"
                     time_left=$BREAK_TIME
-                    notify-send -u critical "Pomodoro" "Time for a break! ☕"
+                    notify-send -u critical "Pomodoro" "Work ended! Click to start break. ☕"
                 else
                     status="Work"
                     time_left=$WORK_TIME
-                    notify-send -u normal "Pomodoro" "Back to work! 🚀"
+                    notify-send -u normal "Pomodoro" "Break ended! Click to start work. 🚀"
                 fi
                 echo "$status" > "$STATUS_FILE"
                 echo "$time_left" > "$TIME_FILE"
@@ -71,7 +72,7 @@ listen() {
         # 根據狀態決定顯示文字
         local status_display="$status"
         [[ "$state" == "idle" ]] && status_display="Pomodoro"
-        [[ "$state" == "paused" ]] && status_display="Paused"
+        # 移除暫停時顯示 "Paused" 的邏輯，讓它顯示即將開始的 Work/Break 狀態
 
         # 4. 輸出 JSON 給 Eww (只有在內容變動時才輸出，進一步省效能)
         # 但番茄鐘每秒都在變，所以這裡直接 print

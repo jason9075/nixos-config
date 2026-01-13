@@ -53,6 +53,8 @@ in {
     ../../home/keyboards/fcitx.nix
   ];
   nixvim_config.copilot.enable = true;
+  eww_config.pomodoro.enable = true;
+  eww_config.widgets.enable = true;
 
   home.packages = with pkgs; [
     # Development
@@ -64,6 +66,7 @@ in {
     nodejs # for github copilot
     gcc # for neovim tree-sitter
     opencode
+    zed-editor
 
     # CLI
     htop

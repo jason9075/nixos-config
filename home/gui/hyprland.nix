@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
     sleep 15
     nm-applet &
+    mako &
     waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
@@ -11,8 +12,8 @@ let
     swww-daemon --format xrgb &
     pypr &
     sleep 1
-    eww open widgets
-    eww open pomodoro
+    ${lib.optionalString config.eww_config.widgets.enable "eww open widgets"}
+    ${lib.optionalString config.eww_config.pomodoro.enable "eww open pomodoro"}
     $HOME/nixos-config/scripts/swww_randomize.sh
     $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
