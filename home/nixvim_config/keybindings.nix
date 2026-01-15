@@ -137,8 +137,18 @@
           }
           {
             __unkeyed-1 = "<leader>n";
+            group = "Noice";
+            icon = "󰎟";
+          }
+          {
+            __unkeyed-1 = "<leader>nd";
             __unkeyed-2 = ":Noice dismiss<CR>";
-            desc = "Noice dismiss";
+            desc = "Dismiss";
+          }
+          {
+            __unkeyed-1 = "<leader>nh";
+            __unkeyed-2 = ":Noice history<CR>";
+            desc = "History";
           }
           {
             __unkeyed-1 = "<leader>l";
@@ -375,6 +385,56 @@
             __unkeyed-1 = "<leader>fs";
             __unkeyed-2 = ":ClangdSwitchSourceHeader<CR>";
             desc = "Switch source header";
+          }
+          {
+            __unkeyed-1 = "<leader>o";
+            group = "Opencode";
+            icon = "󰚩";
+            mode = [ "n" "v" ];
+          }
+          {
+            __unkeyed-1 = "<leader>oa";
+            __unkeyed-2 =
+              "<Cmd>lua require('opencode').ask('@this: ', { submit = true })<CR>";
+            desc = "Ask";
+            mode = [ "n" "v" ];
+          }
+          {
+            __unkeyed-1 = "<leader>os";
+            __unkeyed-2 = "<Cmd>lua require('opencode').select()<CR>";
+            desc = "Action";
+            mode = [ "n" "v" ];
+          }
+          {
+            __unkeyed-1 = "<leader>ot";
+            __unkeyed-2 = "<Cmd>lua require('opencode').toggle()<CR>";
+            desc = "Toggle";
+          }
+          {
+            __unkeyed-1 = "<leader>oo";
+            __unkeyed-2 = {
+              __raw = ''
+                function()
+                  local op = require('opencode').operator('@this ')
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(op, true, false, true), 'm', true)
+                end
+              '';
+            };
+            desc = "Add Range";
+            mode = [ "n" "v" ];
+          }
+          {
+            __unkeyed-1 = "<leader>ol";
+            __unkeyed-2 = {
+              __raw = ''
+                function()
+                  local op = require('opencode').operator('@this ') .. '_'
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(op, true, false, true), 'm', true)
+                end
+              '';
+            };
+            desc = "Add Line";
+            expr = true;
           }
           {
             __unkeyed-1 = "<leader>/";

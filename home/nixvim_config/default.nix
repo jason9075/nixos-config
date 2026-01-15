@@ -54,6 +54,14 @@
             buffers = { follow_current_file.enabled = true; };
           };
         };
+        snacks = {
+          enable = true;
+          settings = {
+            input.enabled = true;
+            picker.enabled = true;
+            terminal.enabled = true;
+          };
+        };
         indent-blankline.enable = true;
         web-devicons.enable = true;
         image = {
@@ -91,6 +99,21 @@
           settings.suggestion = {
             enabled = true;
             autoTrigger = true;
+          };
+        };
+        opencode = {
+          enable = true;
+          settings = {
+            provider = {
+              enabled = "kitty";
+              cmd = [
+                "opencode"
+                "--port"
+              ];
+              kitty = {
+                args = [ "--class" "opencode" ];
+              };
+            };
           };
         };
         # copilot-vim.enable = config.nixvim_config.copilot.enable;
@@ -138,6 +161,8 @@
         bullets-vim # markdown bullets
         vim-jinja
       ];
+      extraPackages = with pkgs; [ lsof ];
+
 
     };
   };
