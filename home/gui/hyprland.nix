@@ -96,6 +96,7 @@ in {
         "$mod, P, exec, pypr toggle calendar                            # Calendar scratchpad"
         "$mod, I, exec, pypr toggle htop                                # htop scratchpad"
         "$mod, N, exec, pypr toggle nvtop                               # nvtop scratchpad"
+        "$mod, O, exec, pypr toggle opencode                            # Opencode scratchpad"
 
         "$mod, 1, workspace, 1                                          # Switch to workspace 1"
         "$mod, 2, workspace, 2                                          # Switch to workspace 2"
@@ -193,6 +194,13 @@ in {
     size = "80% 85%"
     margin = 50
     lazy = true
+    
+    [scratchpads.opencode]
+    animation = ""
+    command = "kitty --class opencode --hold sh -c 'opencode --port 4097'"
+    class = "opencode"
+    size = "95% 95%"
+    margin = 20
 
   '';
 

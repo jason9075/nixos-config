@@ -41,17 +41,4 @@ in {
   # This variable fixes electron apps in wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # NVIDIA Specific Environment Variables
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
-
-  # XDG Portals
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-    config.common.default = "*";
-  };
 }

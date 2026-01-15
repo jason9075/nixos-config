@@ -104,12 +104,9 @@
         opencode = {
           enable = true;
           settings = {
+            port = 4097;
             provider = {
               enabled = "kitty";
-              cmd = [
-                "opencode"
-                "--port"
-              ];
               kitty = {
                 args = [ "--class" "opencode" ];
               };
@@ -162,7 +159,6 @@
         vim-jinja
       ];
       extraPackages = with pkgs; [ lsof ];
-
 
     };
   };
