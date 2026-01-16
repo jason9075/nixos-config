@@ -14,11 +14,26 @@
 
       colorscheme = "nordfox";
 
-      autoCmd = [{
-        command = "set filetype=bash";
-        event = [ "BufNewFile" "BufRead" ];
-        pattern = "*.sh";
-      }];
+      autoCmd = [
+        {
+          command = "set filetype=bash";
+          event = [ "BufNewFile" "BufRead" ];
+          pattern = "*.sh";
+        }
+        {
+          event = [ "FileType" ];
+          pattern = [ "markdown" "text" ];
+          callback = {
+            __raw = ''
+              function()
+                vim.opt_local.wrap = true
+                vim.opt_local.linebreak = true
+                vim.opt_local.breakindent = true
+              end
+            '';
+          };
+        }
+      ];
 
       opts = {
         termguicolors = true;
@@ -129,6 +144,7 @@
         # git
         gitsigns.enable = true;
         # fugitive.enable = true;
+        lazygit.enable = true;
         diffview.enable = true;
 
         noice.enable = true;

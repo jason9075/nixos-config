@@ -279,6 +279,11 @@
             __unkeyed-2 = ":DiffviewFileHistory<CR>";
             desc = "Diffview file history";
           }
+          {
+            __unkeyed-1 = "<leader>gl";
+            __unkeyed-2 = ":LazyGit<CR>";
+            desc = "LazyGit";
+          }
           # Show
           {
             __unkeyed-1 = "<leader>s";
