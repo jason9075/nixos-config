@@ -107,6 +107,10 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprshutdown = {
+      url = "github:hyprwm/hyprshutdown";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -114,7 +118,7 @@
     };
 
     antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
+      url = "github:jacopone/antigravity-nix/v1.14.2-6046590149459968";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

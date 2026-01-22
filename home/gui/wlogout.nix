@@ -16,7 +16,7 @@ let
     }
     {
       label = "logout";
-      action = "loginctl terminate-user $USER";
+      action = "hyprshutdown";
       text = "Logout (e)";
       keybind = "e";
     }

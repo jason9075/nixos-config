@@ -1,11 +1,10 @@
-{ lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 let
   startupScript = pkgs.writeShellScriptBin "start" ''
-    sleep 15
+    sleep 3
     nm-applet &
     mako &
-    waybar &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
     eww daemon
@@ -17,8 +16,6 @@ let
     $HOME/nixos-config/scripts/swww_randomize.sh
     $HOME/nixos-config/scripts/check_firefox_profile.sh chatgpt
     $HOME/nixos-config/scripts/check_firefox_profile.sh calendar
-    # sleep 10
-    # eww open quote
   '';
 in {
 
@@ -92,11 +89,12 @@ in {
         "$mod SHIFT, K, resizeactive, 0 -80                             # Resize window up"
         "$mod SHIFT, J, resizeactive, 0 80                              # Resize window down"
         # Scratchpads
-        "$mod, C, exec, pypr toggle chatgpt                             # ChatGPT scratchpad"
+        "$mod, C, exec, pypr toggle chat_ai                             # AI chat browser scratchpad"
         "$mod, P, exec, pypr toggle calendar                            # Calendar scratchpad"
         "$mod, I, exec, pypr toggle htop                                # htop scratchpad"
         "$mod, N, exec, pypr toggle nvtop                               # nvtop scratchpad"
-        "$mod, O, exec, pypr toggle opencode                            # Opencode scratchpad"
+        "$mod, O, exec, pypr toggle kitty                               # kitty scratchpad"
+        "$mod, Y, exec, pypr toggle yazi                                # yazi scratchpad"
 
         "$mod, 1, workspace, 1                                          # Switch to workspace 1"
         "$mod, 2, workspace, 2                                          # Switch to workspace 2"
@@ -129,6 +127,14 @@ in {
       # use "hyprctl clients" to show class
       # https://wiki.hyprland.org/Configuring/Window-Rules/
       windowrule = [
+        "float on, match:class ^(chat_ai_app)$"
+        "float on, match:class ^(calendar_app)$"
+        "float on, match:class ^(htop)$"
+        "float on, match:class ^(nvtop)$"
+        "float on, match:class ^(code_pane)$"
+        "float on, match:class ^(yazi)$"
+        "size (monitor_w*0.80) (monitor_h*0.85), match:class ^(chat_ai_app)$"
+        "size (monitor_w*0.80) (monitor_h*0.85), match:class ^(calendar_app)$"
         "workspace 10, match:class ^(kitty)$"
         "workspace 10, match:class ^(code-url-handler)$" # vscode url handler
         # "workspace 9, match:class ^(.*qutebrowser)$"
@@ -164,19 +170,16 @@ in {
     [pyprland]
     plugins = ["scratchpads"]
 
-    [scratchpads.chatgpt]
-    animation = ""
-    command = "firefox --name=chatgpt_app --no-remote -P chatgpt https://gemini.google.com"
-    class = "chatgpt_app"
-    size = "80% 85%"
-    margin = 50
+    [scratchpads.chat_ai]
+    command = "firefox --name=chat_ai_app --no-remote -P chatgpt https://gemini.google.com"
+    class = "chat_ai_app"
+    # size = "80% 85%"
 
     [scratchpads.calendar]
     animation = "fromLeft"
     command = "firefox --name=calendar_app --no-remote -P calendar https://calendar.google.com/calendar"
     class = "calendar_app"
     size = "80% 85%"
-    margin = 50
     lazy = true
 
     [scratchpads.htop]
@@ -195,14 +198,20 @@ in {
     margin = 50
     lazy = true
     
-    [scratchpads.opencode]
-    animation = ""
-    command = "kitty --class opencode --hold sh -c 'opencode --port 4097'"
-    class = "opencode"
-    size = "95% 95%"
-    margin = 20
+    [scratchpads.kitty]
+    command = "kitty --class code_pane --hold"
+    class = "code_pane"
+    size = "90% 90%"
+    lazy = true
+
+    [scratchpads.yazi]
+    animation = "fromTop"
+    command = "kitty --class yazi yazi"
+    class = "yazi"
+    size = "80% 90%"
+    lazy = true
 
   '';
 
-  home.packages = with pkgs; [ hyprpicker networkmanagerapplet ];
+  home.packages = with pkgs; [ hyprpicker networkmanagerapplet inputs.hyprshutdown.packages.${pkgs.system}.default];
 }

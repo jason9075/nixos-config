@@ -146,8 +146,8 @@
 
   services.fstrim.enable = true;
 
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # Open ports in the firewall. 8000 for web development
+  networking.firewall.allowedTCPPorts = [ 22 8000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

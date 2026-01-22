@@ -85,6 +85,7 @@ in {
     kitty
     tmux
     fastfetch
+    yazi
     tree
     russ
     taskwarrior3

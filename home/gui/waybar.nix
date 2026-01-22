@@ -472,5 +472,9 @@ in {
   home.file.".config/waybar/config".text = waybarConfig;
   home.file.".config/waybar/style.css".text = waybarStyle;
 
-  programs.waybar = { enable = true; };
+  programs.waybar = {
+    enable = true;
+    systemd.enable = true;
+    systemd.target = "hyprland-session.target";
+  };
 }

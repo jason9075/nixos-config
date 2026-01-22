@@ -91,6 +91,18 @@
         action = "<CMD>lua require('luasnip').change_choice(1)<CR>";
         options.silent = true;
       }
+      {
+        mode = [ "n" "x" ];
+        key = "c";
+        action = ''"_c'';
+        options.desc = "Change without yanking";
+      }
+      {
+        mode = [ "n" "x" ];
+        key = "C";
+        action = ''"_C'';
+        options.desc = "Change to end of line without yanking";
+      }
     ];
     plugins = {
       which-key = {
@@ -368,7 +380,8 @@
           }
           {
             __unkeyed-1 = "<leader>fF";
-            __unkeyed-2 = "<cmd>lua require('fzf-lua').files({ fd_opts = \"--hidden --no-ignore --exclude .git\" })<CR>";
+            __unkeyed-2 = ''
+              <cmd>lua require('fzf-lua').files({ fd_opts = "--hidden --no-ignore --exclude .git" })<CR>'';
             desc = "Find files (include ignored)";
           }
           {
@@ -378,7 +391,8 @@
           }
           {
             __unkeyed-1 = "<leader>fG";
-            __unkeyed-2 = "<cmd>lua require('fzf-lua').live_grep({ rg_opts = \"--hidden --no-ignore --glob '!.git/*'\" })<CR>";
+            __unkeyed-2 = ''
+              <cmd>lua require('fzf-lua').live_grep({ rg_opts = "--hidden --no-ignore --glob '!.git/*'" })<CR>'';
             desc = "Find grep (include ignored)";
           }
           {
