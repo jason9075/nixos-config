@@ -92,6 +92,7 @@ in {
     libwebp
     gh
     # gh-copilot
+    aichat
     gemini-cli
 
     # GUI
