@@ -7,7 +7,7 @@ let
     mako &
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
-    eww daemon
+    eww daemon &
     swww-daemon --format xrgb &
     pypr &
     sleep 1

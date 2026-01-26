@@ -147,7 +147,7 @@
           :windowtype "dock"
           :exclusive false
           (box :class "main-container"
-            (label :class "clock" :text time)
+            (label :class "clock" :text {CLOCK_DATA.time})
           )
         )
         ;;Quote
@@ -223,6 +223,7 @@
           :geometry (geometry :x "20px"
                               :y "20px"
                               :width "150px"
+                              :height "0%"
                               :anchor "bottom right")
           :stacking "bg"
           :windowtype "dock"
