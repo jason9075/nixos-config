@@ -27,8 +27,8 @@
 
         ;; ENV VARS
         (defpoll UPTIME :interval "1m" "$HOME/nixos-config/scripts/uptime.sh &")
-        (defpoll IP_ADDR :interval "24h" "ip -4 -br address | grep UP | awk '{ print $3 }'")
-        (defpoll NET_INTERFACE :interval "24h" "ip -4 -br address | grep UP | awk '{ print $1}'")
+        (defpoll IP_ADDR :interval "24h" "ip -4 -br address | grep UP | grep -vE '^(lo|docker|veth|br-)' | awk '{ print $3 }' | head -n 1")
+        (defpoll NET_INTERFACE :interval "24h" "ip -4 -br address | grep UP | grep -vE '^(lo|docker|veth|br-)' | awk '{ print $1}' | head -n 1")
         (defpoll NIXOS_VERSION :interval "24h"
           "nixos-version | sed -E 's/^([0-9]+\\.[0-9]+)\\.[0-9]+\\.[a-z0-9]+ (.*)/\\1 \\2/'")
 
@@ -100,7 +100,7 @@
             (box :orientation "h" :width 100
               (graph :class "network-graph-down"
                      :thickness 2
-                     :value {round(EWW_NET[NET_INTERFACE].NET_DOWN, 1)}
+                     :value {round(EWW_NET[NET_INTERFACE].NET_DOWN / 1000, 1)}
                      :time-range "2m"
                      :min 0
                      :max 101
