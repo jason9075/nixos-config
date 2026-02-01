@@ -68,8 +68,9 @@ in {
     neofetch
     tree
     russ
-    taskwarrior3
     libwebp
+    nmap
+    samba
 
     # GUI
     hyprland

@@ -90,6 +90,7 @@ in {
     russ
     taskwarrior3
     libwebp
+    gdu
     gh
     # gh-copilot
     aichat
