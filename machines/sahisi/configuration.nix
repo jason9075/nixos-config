@@ -136,6 +136,7 @@
       pkgs.gnumake
       pkgs.coreutils
       pkgs.bash
+      pkgs.just
     ];
 
     serviceConfig = {
@@ -143,7 +144,7 @@
       User = "sahisi";
       Group = "users";
       WorkingDirectory = "/home/sahisi/sa-hi-si-erp";
-      ExecStart = "${pkgs.gnumake}/bin/make run";
+      ExecStart = "${pkgs.just}/bin/just run";
       Restart = "on-failure";
       RestartSec = 5;
     };

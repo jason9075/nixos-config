@@ -48,6 +48,7 @@ in {
     ansible
     entr
     gcc # for neovim tree-sitter
+    just
 
     # CLI
     htop
