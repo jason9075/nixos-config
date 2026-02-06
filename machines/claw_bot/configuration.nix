@@ -112,13 +112,18 @@
   # X11 & i3 Configuration
   services.xserver = {
     enable = true;
-    windowManager.i3 = {
-      enable = true;
-    };
-    displayManager.startx.enable = true; # Or use lightdm/gdm? Let's use startx or simple display manager.
-    # Usually we want a display manager.
-    # displayManager.gdm.enable = true; 
-    # Let's assume default unless specified. Or just enable one. 
+    
+    windowManager.i3.enable = true;
+
+    # Use LightDM as the display manager
+    displayManager.lightdm.enable = true;
+    
+    # Auto-login for the bot user
+    displayManager.autoLogin.enable = true;
+    displayManager.autoLogin.user = userSettings.username;
+
+    # Set default session to i3
+    displayManager.defaultSession = "none+i3";
   };
   # User request: "Level 1 (Direct CLI): ... Level 2 (IPC Control) ... Level 3 (OpenClaw Visual)"
   
