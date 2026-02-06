@@ -70,7 +70,7 @@
     description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [ firefox ];
+    packages = with pkgs; [ ];
   };
 
   # nh

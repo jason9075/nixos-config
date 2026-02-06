@@ -30,21 +30,14 @@ in {
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
     ../../home/cli/mu.nix
-    ../../home/cli/dict # Dictionary
     ../../home/nixvim_config
 
     # GUI
-    # ../../home/gui/hyprland.nix # Disabled for i3
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
-    # ../../home/gui/waybar.nix # Hyprland specific usually
-    # ../../home/gui/swaylock.nix # Hyprland specific usually
     ../../home/gui/rofi.nix # Useful for i3 as well
     ../../home/gui/mako.nix
     ../../home/gui/zathura.nix # PDF Viewer
-
-    # Audio
-    ../../home/audio/mpd.nix
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
@@ -67,18 +60,15 @@ in {
   };
 
   nixvim_config.copilot.enable = true;
-  # eww_config.pomodoro.enable = true; # May need wayland?
-  # eww_config.widgets.enable = true;
 
   home.packages = with pkgs; [
     # Development
     gnumake
-    # postman
+    postman
     ansible
     vpnc
     entr
-    nodejs # for github copilot
-    gcc # for neovim tree-sitter
+    gcc
     opencode
     zed-editor
 
@@ -97,49 +87,29 @@ in {
     yq
     fzf
     kitty
-    tmux
-    fastfetch
     yazi
     tree
     russ
-    taskwarrior3
     libwebp
     gdu
-    gh
-    # gh-copilot
-    aichat
-    gemini-cli
 
     # GUI
-    # hyprland
-    # pyprland
-    # hyprcursor
-    # swww
-    # swayidle
-    # grim # Screenshot - replaced by scrot in systemPackages, but good to have
-    # slurp # Screenshot
-    # swappy # Window switcher
     imv # Image Viewer
     font-manager
-    # plantuml
-    # gparted
-    # anydesk
 
     # Communication
-    # slack
-    # zoom-us
-    # discord
-    # webcord
+    slack
+    zoom-us
+    discord
 
     # Network
     google-chrome
-    firefox
     wireguard-tools
     networkmanager
     networkmanager-vpnc
 
     # Multimedia
-    # gimp
+    gimp
     pavucontrol
     # obs-studio
     vlc
@@ -149,10 +119,8 @@ in {
     # Misc
     wl-clipboard
     wtype
-    tree-sitter
     cachix
 
-    inputs.antigravity-nix.packages.x86_64-linux.default
   ];
 
 }
