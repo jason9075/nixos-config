@@ -10,6 +10,7 @@ echo "3) taoyuan-dad"
 echo "4) home-msi"
 echo "5) vbox"
 echo "6) sahisi"
+echo "7) claw_bot"
 while true; do
   echo "Enter the number of your choice: "
   read -r choice
@@ -20,6 +21,7 @@ while true; do
     4) MACHINE="home-msi"; break;;
     5) MACHINE="vbox"; break;;
     6) MACHINE="sahisi"; break;;
+    7) MACHINE="claw_bot"; break;;
     *) echo "Invalid option, please select again.";;
   esac
 done
