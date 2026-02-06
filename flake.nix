@@ -123,5 +123,10 @@
     };
 
     stylix.url = "github:danth/stylix";
+    
+    openclaw = {
+      url = "github:openclaw/nix-openclaw";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

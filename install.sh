@@ -86,4 +86,4 @@ echo "Installing system..."
 sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system
 
 echo "Installing user..."
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $NIX_CFG_PATH#user
+nix --extra-experimental-features nix-command --extra-experimental-features flakes run home-manager/master -- switch --flake $NIX_CFG_PATH#user

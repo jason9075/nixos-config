@@ -48,7 +48,24 @@ in {
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
+    
+    inputs.openclaw.homeManagerModules.default
   ];
+  
+  programs.openclaw.enable = true;
+
+  xsession.windowManager.i3 = {
+    enable = true;
+    extraConfig = ''
+      # Post-launch setup for OpenClaw
+      for_window [class="OpenClaw-Target"] move to workspace 9
+      
+      # Remove borders
+      new_window none
+      new_float none
+    '';
+  };
+
   nixvim_config.copilot.enable = true;
   # eww_config.pomodoro.enable = true; # May need wayland?
   # eww_config.widgets.enable = true;

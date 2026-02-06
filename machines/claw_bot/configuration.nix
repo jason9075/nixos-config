@@ -114,14 +114,6 @@
     enable = true;
     windowManager.i3 = {
       enable = true;
-      extraConfig = ''
-        # Post-launch setup for OpenClaw
-        for_window [class="OpenClaw-Target"] move to workspace 9
-        
-        # Remove borders
-        new_window none
-        new_float none
-      '';
     };
     displayManager.startx.enable = true; # Or use lightdm/gdm? Let's use startx or simple display manager.
     # Usually we want a display manager.
