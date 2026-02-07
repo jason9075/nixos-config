@@ -144,9 +144,20 @@
       for_window [class="OpenClaw-Target"] move to workspace 9
       new_window none
       new_float none
+      
+      # Enhance Focus Visibility
+      default_border pixel 3
+      client.focused          #bf616a #bf616a #d8dee9 #bf616a   #bf616a
+      client.focused_inactive #2e3440 #2e3440 #d8dee9 #2e3440   #2e3440
+      client.unfocused        #2e3440 #2e3440 #d8dee9 #2e3440   #2e3440
+      client.urgent           #2e3440 #900000 #ffffff #900000   #900000
+      client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+      client.background       #ffffff
 
       # Bar
       bar {
+        position top
         status_command ${pkgs.i3status}/bin/i3status
         tray_output primary
       }
@@ -218,5 +229,7 @@
   
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [ libxcrypt-legacy ];
+
+  programs.dconf.enable = true;
 
 }
