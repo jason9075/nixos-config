@@ -176,6 +176,7 @@
 
       # Auto-start Applications
       exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
+      exec --no-startup-id ${pkgs.xorg.xset}/bin/xset s off -dpms
 
       # Power Menu Mode (Shutdown/Reboot)
       set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
