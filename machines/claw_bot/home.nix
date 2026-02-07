@@ -77,6 +77,7 @@ in {
     zoom-us
     discord
     telegram-desktop
+    inputs.erosanix.packages.${pkgs.system}.line
 
     # Network
     chromium

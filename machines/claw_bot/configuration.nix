@@ -151,6 +151,9 @@
       bindsym $mod+Shift+c reload
       bindsym $mod+Shift+r restart
 
+      # Fullscreen
+      bindsym $mod+m fullscreen toggle
+
 
       # Window Rules for OpenClaw
       for_window [class="OpenClaw-Target"] move to workspace 9
