@@ -43,6 +43,7 @@ in {
     ../../home/keyboards/fcitx.nix
     
     #inputs.openclaw.homeManagerModules.default
+    ../../home/services/openclaw.nix
   ];
   
   #programs.openclaw.enable = true;
