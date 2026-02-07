@@ -5,7 +5,7 @@
 It may missing hardware config. Need time to figure out
 
 ```bash
-nix-shell -p git --command "nix run github:jason9075/nixos-config --extra-experimental-features nix-command --extra-experimental-features flakes"
+nix-shell -p git --command "nix run github:jason9075/nixos-config --no-write-lock-file --extra-experimental-features 'nix-command flakes'"
 ```
 
 Alias
