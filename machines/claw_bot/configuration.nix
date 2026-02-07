@@ -122,6 +122,12 @@
       bindsym $mod+t exec ${pkgs.kitty}/bin/kitty
       bindsym $mod+q kill
       bindsym $mod+d exec ${pkgs.dmenu}/bin/dmenu_run
+
+      # Focus
+      bindsym $mod+h focus left
+      bindsym $mod+j focus down
+      bindsym $mod+k focus up
+      bindsym $mod+l focus right
       
       # Rofi
       bindsym $mod+f exec ${pkgs.rofi}/bin/rofi -show drun
@@ -132,7 +138,7 @@
       # Reload/Restart
       bindsym $mod+Shift+c reload
       bindsym $mod+Shift+r restart
-      bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
 
       # Window Rules for OpenClaw
       for_window [class="OpenClaw-Target"] move to workspace 9

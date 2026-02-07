@@ -8,6 +8,8 @@ This directory contains the NixOS configuration for `claw_bot`, a specialized ma
 - **Terminal**: `Super+t`
 - **Application Launcher**: `Super+f` (Rofi)
 - **Close Window**: `Super+q`
+- **Focus Window**: `Super + h/j/k/l`
+- **Move/Resize**: `Super` + Mouse Left/Right Click
 - **Wifi**: System Tray interaction (via `nm-applet`)
 - **Power Menu (Shutdown/Reboot)**: `Super+Shift+e` -> Follow on-screen prompts (e.g., `Shift+s` to shutdown).
 - **Core Function**: Headless/Automated browser tasks via OpenClaw.
