@@ -2,19 +2,14 @@
 
 with pkgs;
 let
-  # Patch trick: https://www.reddit.com/r/NixOS/comments/13bo4fw/how_to_set_flags_for_application/
-  patchDesktop = pkg: appName: from: to:
-    (pkgs.lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" { } ''
-      ${coreutils}/bin/mkdir -p $out/share/applications
-      ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop ''));
 in {
   home.username = userSettings.username;
   home.homeDirectory = "/home/${userSettings.username}";
 
   home.sessionVariables = {
     TERMINAL = userSettings.term;
-    EDITOR = userSettings.editor;
-    BROWSER = userSettings.browser;
+    EDITOR = "zed-editor";
+    BROWSER = "chromium";
   };
 
   home.stateVersion = "24.05";
@@ -45,10 +40,7 @@ in {
     ../../home/services/openclaw.nix
   ];
   
-  #programs.openclaw.enable = true;
-
-
-  nixvim_config.copilot.enable = true;
+  nixvim_config.copilot.enable = false;
 
   home.packages = with pkgs; [
     # Development
@@ -84,20 +76,17 @@ in {
     slack
     zoom-us
     discord
+    telegram-desktop
 
     # Network
-    google-chrome
-    wireguard-tools
+    chromium
     networkmanager
     networkmanager-vpnc
 
     # Multimedia
     gimp
     pavucontrol
-    # obs-studio
     vlc
-    # shotcut # Video Editor
-    # audacity
 
     # Misc
     wl-clipboard

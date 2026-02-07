@@ -70,7 +70,6 @@ in {
 
     # CLI
     htop
-    nvtopPackages.full
     ripgrep
     fd
     bat

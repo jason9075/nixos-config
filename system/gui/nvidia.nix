@@ -39,4 +39,8 @@
   hardware.graphics.extraPackages = with pkgs; [
     nvidia-vaapi-driver
   ];
+
+  environment.systemPackages = with pkgs; [
+    nvtopPackages.full
+  ];
 }
