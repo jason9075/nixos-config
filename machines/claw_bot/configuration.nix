@@ -69,10 +69,10 @@
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
-  services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   # Define a user account.
@@ -219,15 +219,13 @@
       }
       bindsym $mod+Shift+e mode "$mode_system"
     '';
+  };
 
-    displayManager.sddm.enable = true;
-    
-    # Auto-login for the bot user
-    displayManager.autoLogin.enable = true;
-    displayManager.autoLogin.user = userSettings.username;
-
-    # Set default session to i3
-    displayManager.defaultSession = "none+i3";
+  services.displayManager = {
+    sddm.enable = true;
+    autoLogin.enable = true;
+    autoLogin.user = userSettings.username;
+    defaultSession = "none+i3";
   };
   # User request: "Level 1 (Direct CLI): ... Level 2 (IPC Control) ... Level 3 (OpenClaw Visual)"
   

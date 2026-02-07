@@ -9,7 +9,7 @@ in {
 
   programs.openclaw = {
     enable = true;
-    documents = ./openclaw/docs;
+    # documents = ./openclaw/docs;
 
     config = {
       agents.defaults = {
@@ -31,5 +31,8 @@ in {
 
     instances.default.enable = true;
   };
+  
+  # Ensure the service starts with the graphical session
+  systemd.user.services.openclaw-gateway.Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
 
 }
