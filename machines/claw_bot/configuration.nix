@@ -234,6 +234,8 @@
   nix.settings.auto-optimise-store = true;
   nix.settings.warn-dirty = false;
   nix.settings.allowed-users = [ "root" userSettings.username ];
+  nix.settings.substituters = [ "https://cache.nixos.org/" "https://cache.garnix.io" ];
+  nix.settings.trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [ libxcrypt-legacy ];

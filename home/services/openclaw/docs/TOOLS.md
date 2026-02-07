@@ -1,5 +1,4 @@
-# Tools
+# TOOLS.md
 
-This file defines the tools available to OpenClaw.
+This file is managed by Nix. A plugin report is appended below.
 
-(Placeholder content - update with your tool definitions)

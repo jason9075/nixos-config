@@ -32,58 +32,42 @@ This directory contains the NixOS configuration for `claw_bot`, a specialized ma
     Or manually:
     ```bash
     nixos-rebuild switch --flake .#system
-    # Ensure flake.nix has machine = "claw_bot"
     ```
 
-## Post-Installation Setup
+## OpenClaw Setup (Nix-Managed)
 
-### 1. Telegram Integration (OpenClaw)
-To control this bot via Telegram:
+This machine uses a Nix-managed OpenClaw service defined in `../../home/services/openclaw.nix`.
 
-1.  **Create Bot**: Chat with [@BotFather](https://t.me/botfather) on Telegram to create a new bot and get your **API Token**.
-2.  **Link Provider**:
-    Run the following command on `claw_bot`:
-    ```bash
-    openclaw providers add --provider telegram --token "YOUR_BOT_TOKEN_HERE"
-    ```
-3.  **Start Chatting**: Message your bot on Telegram. You may need to verify the pairing code if prompted.
+### 1. Secret Setup
+The following files **must** exist in `~/.secrets/` for the configuration to build:
+- `openai_key`: Your API key.
+- `telegram_token`: Your @BotFather token.
+- `gateway_token`: The pairing token.
 
-### 2. Browser Authentication
+### 2. Activation
+To apply the OpenClaw settings (personality, tools, agents):
+1. Stage changes: `git add .`
+2. Apply: `nh home switch --flake .#user -- --impure`
+3. Restart: `systemctl --user restart openclaw-gateway`
+
+### 3. Documents (The AI's Brain)
+The AI's personality and knowledge are stored in `../../home/services/openclaw/docs/`:
+- `SOUL.md`: Core personality.
+- `USER.md`: What it knows about you (Jason).
+- `AGENTS.md`: Definition of specific agent behaviors.
+
+## Browser Authentication
 OpenClaw uses your user session. To allow it to access your accounts:
-
-1.  Log in to the machine as your user.
-2.  Open **Firefox** or **Chrome**.
-3.  Log in to necessary services (Google, ERP, etc.).
-4.  Close the browser.
-    *OpenClaw will now inherit these session cookies.*
+1. Log in to the machine as your user.
+2. Open **Firefox** or **Chrome**.
+3. Log in to necessary services (Google, ERP, etc.).
+4. Close the browser.
 
 ## i3wm Rules (Workspace 9)
-This configuration enforces strict window management for automation stability:
 - **Workspace 9**: Dedicated to automated tasks (OpenClaw targets).
 - **Fullscreen**: Automation targets should be fullscreen to reduce visual noise.
-- **No Borders**: Borders are removed to improve CV accuracy.
-
-## Managing Cost & Tokens (Service Control)
-To prevent the bot from consuming API tokens when not in use, you can stop the background service.
-
-**Check Status**:
-```bash
-systemctl --user status openclaw
-```
-
-**Stop Bot** (Save Tokens):
-```bash
-systemctl --user stop openclaw
-```
-
-**Start Bot**:
-```bash
-systemctl --user start openclaw
-```
 
 ## Troubleshooting
-- **Build Failures**: Check if `nix-command` experimental feature is enabled (the install script handles this).
-- **OpenClaw Service**: Check logs:
-    ```bash
-    journalctl --user -u openclaw -f
-    ```
+- **Check Status**: `systemctl --user status openclaw-gateway`
+- **Check Logs**: `journalctl --user -u openclaw-gateway -f`
+- **Gateway Log**: `tail -f /tmp/openclaw/openclaw-gateway.log`

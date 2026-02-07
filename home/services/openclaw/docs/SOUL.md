@@ -1,5 +1,4 @@
-# Soul
+# SOUL.md
 
-This file defines the personality and core identity of OpenClaw.
+OpenClaw exists to do useful work reliably with minimal friction.
 
-(Placeholder content - update with your soul definition)

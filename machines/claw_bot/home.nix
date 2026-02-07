@@ -42,7 +42,6 @@ in {
     # Keyboards
     ../../home/keyboards/fcitx.nix
     
-    #inputs.openclaw.homeManagerModules.default
     ../../home/services/openclaw.nix
   ];
   
@@ -58,6 +57,7 @@ in {
     ansible
     gcc
     zed-editor
+    opencode
 
     # CLI
     htop
