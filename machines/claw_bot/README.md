@@ -5,6 +5,11 @@ This directory contains the NixOS configuration for `claw_bot`, a specialized ma
 ## Purpose
 - **OS**: NixOS (X11)
 - **Window Manager**: i3wm (Tiling)
+- **Terminal**: `Super+t`
+- **Application Launcher**: `Super+f` (Rofi)
+- **Close Window**: `Super+q`
+- **Wifi**: System Tray interaction (via `nm-applet`)
+- **Power Menu (Shutdown/Reboot)**: `Super+Shift+e` -> Follow on-screen prompts (e.g., `Shift+s` to shutdown).
 - **Core Function**: Headless/Automated browser tasks via OpenClaw.
 
 ## Installation

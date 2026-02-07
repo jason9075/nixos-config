@@ -119,8 +119,8 @@
       set $mod Mod4
 
       # Basic Bindings
-      bindsym $mod+Return exec ${pkgs.kitty}/bin/kitty
-      bindsym $mod+Shift+q kill
+      bindsym $mod+t exec ${pkgs.kitty}/bin/kitty
+      bindsym $mod+q kill
       bindsym $mod+d exec ${pkgs.dmenu}/bin/dmenu_run
       
       # Rofi
@@ -138,6 +138,29 @@
       for_window [class="OpenClaw-Target"] move to workspace 9
       new_window none
       new_float none
+
+      # Bar
+      bar {
+        status_command ${pkgs.i3status}/bin/i3status
+        tray_output primary
+      }
+
+      # Auto-start Applications
+      exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
+
+      # Power Menu Mode (Shutdown/Reboot)
+      set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+      mode "$mode_system" {
+          bindsym l exec --no-startup-id ${pkgs.i3lock}/bin/i3lock, mode "default"
+          bindsym e exec --no-startup-id i3-msg exit, mode "default"
+          bindsym s exec --no-startup-id systemctl suspend, mode "default"
+          bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+          bindsym r exec --no-startup-id systemctl reboot, mode "default"
+          bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+          bindsym Return mode "default"
+          bindsym Escape mode "default"
+      }
+      bindsym $mod+Shift+e mode "$mode_system"
     '';
 
     displayManager.sddm.enable = true;
@@ -165,6 +188,10 @@
     # OpenClaw Dependencies
     python311Packages.pyautogui
     python311Packages.pillow
+    
+    # GUI Utils
+    networkmanagerapplet
+    i3lock
   ];
 
   services.openssh = {
