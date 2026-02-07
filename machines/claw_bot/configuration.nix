@@ -111,6 +111,34 @@
     enable = true;
     
     windowManager.i3.enable = true;
+    windowManager.i3.configFile = pkgs.writeText "i3.conf" ''
+      # i3 config file (v4)
+      font pango:monospace 8
+
+      # Mod Key
+      set $mod Mod4
+
+      # Basic Bindings
+      bindsym $mod+Return exec ${pkgs.kitty}/bin/kitty
+      bindsym $mod+Shift+q kill
+      bindsym $mod+d exec ${pkgs.dmenu}/bin/dmenu_run
+      
+      # Rofi
+      bindsym $mod+f exec ${pkgs.rofi}/bin/rofi -show drun
+
+      # Floating modifier
+      floating_modifier $mod
+
+      # Reload/Restart
+      bindsym $mod+Shift+c reload
+      bindsym $mod+Shift+r restart
+      bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+      # Window Rules for OpenClaw
+      for_window [class="OpenClaw-Target"] move to workspace 9
+      new_window none
+      new_float none
+    '';
 
     displayManager.sddm.enable = true;
     

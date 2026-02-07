@@ -47,23 +47,6 @@ in {
   
   #programs.openclaw.enable = true;
 
-  xsession.windowManager.i3 = {
-    enable = true;
-    config = {
-      modifier = "Mod4";
-      keybindings = pkgs.lib.mkOptionDefault {
-        "Mod4+f" = "exec rofi -show drun";
-      };
-    };
-    extraConfig = ''
-      # Post-launch setup for OpenClaw
-      for_window [class="OpenClaw-Target"] move to workspace 9
-      
-      # Remove borders
-      new_window none
-      new_float none
-    '';
-  };
 
   nixvim_config.copilot.enable = true;
 
