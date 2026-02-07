@@ -51,7 +51,14 @@ To apply the OpenClaw settings (personality, tools, agents):
 3. Restart: `systemctl --user restart openclaw-gateway`
 
 ### 3. Documents (The AI's Brain)
-The AI's personality and knowledge are stored in `../../home/services/openclaw/docs/`:
+The AI's personality and knowledge are stored in `~/.openclaw/docs`.
+
+The sample templates are located in `../../home/services/openclaw/docs/`. To initialize your brain, copy them:
+```bash
+mkdir -p ~/.openclaw/docs
+cp -r ../../home/services/openclaw/docs/* ~/.openclaw/docs/
+```
+You can now edit these files freely without rebuilding your configuration:
 - `SOUL.md`: Core personality.
 - `USER.md`: What it knows about you (Jason).
 - `AGENTS.md`: Definition of specific agent behaviors.
