@@ -42,13 +42,19 @@ in {
     # Keyboards
     ../../home/keyboards/fcitx.nix
     
-    inputs.openclaw.homeManagerModules.default
+    #inputs.openclaw.homeManagerModules.default
   ];
   
-  programs.openclaw.enable = true;
+  #programs.openclaw.enable = true;
 
   xsession.windowManager.i3 = {
     enable = true;
+    config = {
+      modifier = "Mod4";
+      keybindings = pkgs.lib.mkOptionDefault {
+        "Mod4+f" = "exec rofi -show drun";
+      };
+    };
     extraConfig = ''
       # Post-launch setup for OpenClaw
       for_window [class="OpenClaw-Target"] move to workspace 9
@@ -66,18 +72,12 @@ in {
     gnumake
     postman
     ansible
-    vpnc
-    entr
     gcc
-    opencode
     zed-editor
 
     # CLI
     htop
-    nvtopPackages.full
-    ripgrep
     fd
-    bat
     wget
     killall
     zip
@@ -91,7 +91,6 @@ in {
     tree
     russ
     libwebp
-    gdu
 
     # GUI
     imv # Image Viewer
