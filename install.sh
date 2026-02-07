@@ -59,7 +59,7 @@ update_or_clone "$NIX_CFG_PATH" "https://github.com/jason9075/nixos-config"
 update_or_clone "$HOME/.dotfiles" "https://github.com/jason9075/dotfiles"
 
 # Generate hardware config for new system
-sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/system/hardware-configuration.nix > /dev/null
+sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/machines/$MACHINE/hardware-configuration.nix > /dev/null
 [ ! -f /etc/nixos/hardware-configuration.nix ] && sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
 
 # Check if uefi or bios

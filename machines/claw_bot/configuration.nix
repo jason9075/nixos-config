@@ -81,9 +81,6 @@
   };
 
   # Color scheme
-  stylix.enable = true;
-  stylix.image = ./wallpaper.png; # dummy image, user needs to ensure this exists or I will create one
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
   console = {
     earlySetup = true;
     packages = with pkgs; [ terminus_font powerline-fonts ];
