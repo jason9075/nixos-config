@@ -2,9 +2,6 @@
 
 let
   user = config.home.username;
-  # Read tokens at evaluation time (requires --impure)
-  gatewayToken = lib.removeSuffix "\n" (builtins.readFile "/home/${user}/.secrets/gateway_token");
-  openaiKey = lib.removeSuffix "\n" (builtins.readFile "/home/${user}/.secrets/openai_key");
 in {
   imports = [
     inputs.openclaw.homeManagerModules.openclaw
@@ -28,15 +25,6 @@ in {
         bind = "loopback";
         auth = {
           mode = "token";
-          token = gatewayToken;
-        };
-      };
-
-      channels.telegram = {
-        tokenFile = "/home/${user}/.secrets/telegram_token";
-        allowFrom = [ 522953908 ]; 
-        groups = {
-          "*" = { requireMention = true; };
         };
       };
     };
@@ -44,8 +32,4 @@ in {
     instances.default.enable = true;
   };
 
-  # Direct injection into the systemd service environment for OpenAI Key
-  systemd.user.services.openclaw-gateway.Service.Environment = [
-    "OPENAI_API_KEY=${openaiKey}"
-  ];
 }
