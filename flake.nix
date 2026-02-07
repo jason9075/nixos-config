@@ -27,6 +27,7 @@
       pkgs = import inputs.nixpkgs {
         system = systemSettings.system;
         config = { allowUnfree = true; };
+        overlays = [ inputs.openclaw.overlays.default ];
       };
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
