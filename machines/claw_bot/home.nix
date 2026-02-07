@@ -77,10 +77,8 @@ in {
     zoom-us
     discord
     telegram-desktop
-    inputs.erosanix.packages.${pkgs.system}.line
 
     # Network
-    chromium
     networkmanager
     networkmanager-vpnc
 
@@ -95,5 +93,12 @@ in {
     cachix
 
   ];
+
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      { id = "ophjlpahpchlmihnnnihgmmeilfjmjjc"; } # LINE
+    ];
+  };
 
 }
