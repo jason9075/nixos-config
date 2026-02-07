@@ -112,8 +112,7 @@
     
     windowManager.i3.enable = true;
 
-    # Use LightDM as the display manager
-    displayManager.lightdm.enable = true;
+    displayManager.sddm.enable = true;
     
     # Auto-login for the bot user
     displayManager.autoLogin.enable = true;
