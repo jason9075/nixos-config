@@ -23,9 +23,11 @@ fi
 if [ ! -f "$NPM_GLOBAL/bin/openclaw" ]; then
     echo "Installing OpenClaw via NPM..."
     npm install -g openclaw
+elif [[ "$1" == "--update" || "$1" == "-u" ]]; then
+    echo "Updating OpenClaw..."
+    npm install -g openclaw@latest
 else
-    echo "OpenClaw is already installed. Updating..."
-    npm install -g openclaw
+    echo "OpenClaw is installed. Skipping npm install (use --update to force update)."
 fi
 
 # 3. Deploy Documents (The Brain)
