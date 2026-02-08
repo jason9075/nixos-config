@@ -55,7 +55,7 @@ in {
       # Disable Nix mode so it behaves like a standard install
       Environment = [ 
         "OPENCLAW_NIX_MODE=0"
-        "PATH=${npmGlobalDir}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
+        "PATH=${npmGlobalDir}/bin:${pkgs.nodejs}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
         # Ensure native modules can find libraries at runtime
         "LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.openssl.out}/lib"
       ];
