@@ -85,6 +85,25 @@ systemctl --user status openclaw-gateway
 journalctl --user -u openclaw-gateway -f
 ```
 
+### 🧠 Watch the "Thinking" Process
+To see what the agent is doing, thinking, or deciding in real-time:
+
+**Method 1: System Logs (Recommended)**
+Shows the high-level decision loop.
+```bash
+journalctl --user -u openclaw-gateway -f
+```
+
+**Method 2: Detailed Debug Logs**
+Shows raw internal logs, helpful for debugging specific tool errors.
+```bash
+tail -f /tmp/openclaw/openclaw-*.log
+```
+
+**Method 3: Visual Canvas**
+If the canvas is enabled, you can view the agent's visual output here:
+- URL: `http://127.0.0.1:18789/__openclaw__/canvas/`
+
 ### Manual Run (Debug)
 If the service fails, try running OpenClaw manually to see errors:
 ```bash
@@ -101,3 +120,50 @@ Or manually:
 npm install -g openclaw@latest
 systemctl --user restart openclaw-gateway
 ```
+
+## Advanced Capabilities: The Visual Desktop Agent
+
+To transform OpenClaw into an active operator (Visual Desktop Agent) capable of "seeing" and "acting" (e.g., checking LINE, managing windows), configure your `docs/*.md` as follows:
+
+### 1. Enable Vision & Control (TOOLS.md)
+Teach it to use the installed Linux automation tools:
+- **Vision**: `scrot -o /tmp/view.png` (Screenshot)
+- **Navigation**: `i3-msg workspace number 9` (Switch Workspace)
+- **Action**: `xdotool mousemove X Y click 1` (Click), `xdotool type "text"` (Type)
+- **Reporting**: Use Telegram integration to report findings.
+
+### 2. Define Persona (SOUL.md)
+- **Identity**: "You are the Operator of this NixOS machine. You have full desktop control."
+- **Environment**: "You operate in an i3wm tiling manager. Workspace 9 is your dedicated automation area."
+
+### 3. Workflow Examples (AGENTS.md)
+Define SOPs for complex tasks like "Check LINE":
+1.  **Switch**: Go to the workspace containing LINE.
+2.  **See**: Take a screenshot.
+3.  **Analyze**: Read the text/UI from the image.
+4.  **Act/Report**: If important messages are found, summarize them and send a Telegram notification to the user.
+
+## Cost Management (Start/Stop)
+
+Since OpenClaw uses LLM APIs (OpenAI, Anthropic, etc.), running it 24/7 with proactive agents might incur costs.
+
+### Stop Service (Save Money)
+To completely stop the agent when not in use:
+```bash
+systemctl --user stop openclaw-gateway
+# Optional: Stop the node service too if running separately
+systemctl --user stop openclaw-node
+```
+
+### Start Service
+To resume operations:
+```bash
+systemctl --user start openclaw-gateway
+```
+
+### Auto-Start Behavior
+By default, the service is enabled to start on login. To disable auto-start:
+```bash
+systemctl --user disable openclaw-gateway
+```
+Then you can start it manually only when needed.

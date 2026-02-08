@@ -23,6 +23,7 @@ in {
     xorg.xwininfo
     xclip
     jq
+    fswebcam
   ];
   
   # 2. Configure npm to use local prefix
