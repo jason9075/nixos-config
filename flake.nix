@@ -27,7 +27,7 @@
       pkgs = import inputs.nixpkgs {
         system = systemSettings.system;
         config = { allowUnfree = true; };
-        overlays = [ inputs.openclaw.overlays.default ];
+        overlays = [ ];
       };
       pkgs-stable = import inputs.nixpkgs-stable {
         system = systemSettings.system;
@@ -124,10 +124,5 @@
     };
 
     stylix.url = "github:danth/stylix";
-    
-    openclaw = {
-      url = "github:openclaw/nix-openclaw";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 }
