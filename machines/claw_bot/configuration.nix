@@ -204,6 +204,7 @@
       # Auto-start Applications
       exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
       exec --no-startup-id ${pkgs.xorg.xset}/bin/xset s off -dpms
+      exec_always --no-startup-id ${pkgs.feh}/bin/feh --bg-fill ${../../assets/tuxclaw.jpg}
 
       # Power Menu Mode (Shutdown/Reboot)
       set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -230,7 +231,7 @@
   # User request: "Level 1 (Direct CLI): ... Level 2 (IPC Control) ... Level 3 (OpenClaw Visual)"
   
   environment.systemPackages = with pkgs; [ 
-    vim git wayland pulseaudio 
+    vim git pulseaudio feh
     
     # Core Automation Tools
     xdotool

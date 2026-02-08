@@ -88,8 +88,7 @@ in {
     vlc
 
     # Misc
-    wl-clipboard
-    wtype
+    xclip
     cachix
 
   ];
