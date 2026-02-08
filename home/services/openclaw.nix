@@ -71,11 +71,38 @@ in {
       # Disable Nix mode so it behaves like a standard install
       Environment = [ 
         "OPENCLAW_NIX_MODE=0"
-        "PATH=${npmGlobalDir}/bin:${pkgs.nodejs}/bin:${pkgs.which}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
-        # Ensure native modules can find libraries at runtime
-        "LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.openssl.out}/lib"
+        "PATH=${npmGlobalDir}/bin:${config.home.profileDirectory}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
       ];
       ExecStart = "${npmGlobalDir}/bin/openclaw gateway run";
+      Restart = "always";
+      RestartSec = "5s";
+    };
+  };
+
+  # 7. OpenClaw Node Host (Nix Managed)
+  # Replaces 'openclaw node install' with a properly environment-configured service
+  systemd.user.services.openclaw-node = {
+    Unit = {
+      Description = "OpenClaw Node Host (NPM/Nix)";
+      After = [ "network.target" "openclaw-gateway.service" ];
+      # Only start if binary exists
+      ConditionFileIsExecutable = "${npmGlobalDir}/bin/openclaw";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      # Inherits sessionVariables, but we explicitly set crucial ones to be safe
+      Environment = [ 
+        "OPENCLAW_NIX_MODE=0"
+        "PATH=${npmGlobalDir}/bin:${config.home.profileDirectory}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
+        "OPENCLAW_LOG_PREFIX=node"
+      ];
+      
+      # Using the same parameters as the auto-generated one
+      ExecStart = "${npmGlobalDir}/bin/openclaw node run --host 127.0.0.1 --port 18789";
       Restart = "always";
       RestartSec = "5s";
     };
