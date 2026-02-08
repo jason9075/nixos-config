@@ -3,7 +3,7 @@ set -e
 
 # Configuration
 DOCS_SOURCE="$HOME/nixos-config/home/services/openclaw/docs"
-DOCS_TARGET="$HOME/.openclaw/docs"
+DOCS_TARGET="$HOME/.openclaw/workspace"
 SKILLS_SOURCE="$HOME/nixos-config/home/services/openclaw/skills"
 SKILLS_TARGET="$HOME/.openclaw/skills"
 NPM_GLOBAL="$HOME/.npm-global"
