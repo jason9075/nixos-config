@@ -39,7 +39,16 @@ in {
     prefix=${npmGlobalDir}
   '';
 
-  # 5. Systemd service using the npm-installed binary
+  # 5. Global Environment for Systemd User Services
+  # This ensures both the Gateway AND the Node Host (started via 'openclaw node install')
+  # have access to the correct PATH and libraries.
+  systemd.user.sessionVariables = {
+    PATH = "${npmGlobalDir}/bin:${pkgs.nodejs}/bin:${pkgs.which}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin:$PATH";
+    OPENCLAW_NIX_MODE = "0";
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.openssl.out}/lib";
+  };
+
+  # 6. Systemd service using the npm-installed binary
   systemd.user.services.openclaw-gateway = {
     Unit = {
       Description = "OpenClaw Gateway (NPM)";
