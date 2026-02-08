@@ -1,18 +1,52 @@
-{ pkgs, inputs, config, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 let
-  user = config.home.username;
+  npmGlobalDir = "${config.home.homeDirectory}/.npm-global";
 in {
-  imports = [
-    inputs.openclaw.homeManagerModules.openclaw
+  # 1. Provide build tools for native npm modules
+  home.packages = with pkgs; [
+    nodejs
+    python3
+    gnumake
+    gcc
+    pkg-config
+    libsecret
   ];
-
-  programs.openclaw = {
-    enable = true;
-    instances.default.enable = true;
+  
+  # 2. Configure npm to use local prefix
+  home.sessionVariables = {
+    NPM_CONFIG_PREFIX = npmGlobalDir;
+    PATH = "${npmGlobalDir}/bin:$PATH";
   };
   
-  # Ensure the service starts with the graphical session
-  systemd.user.services.openclaw-gateway.Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
+  # 3. Ensure npm global directory exists
+  home.activation = {
+    createNpmGlobalDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      run ${pkgs.coreutils}/bin/mkdir -p ${npmGlobalDir}
+    '';
+  };
 
+  # 4. Systemd service using the npm-installed binary
+  systemd.user.services.openclaw-gateway = {
+    Unit = {
+      Description = "OpenClaw Gateway (NPM)";
+      After = [ "graphical-session.target" "network.target" ];
+      # Only start if the npm package is actually installed
+      ConditionFileIsExecutable = "${npmGlobalDir}/bin/openclaw";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      Environment = [
+        "OPENCLAW_NIX_MODE=0"
+        "PATH=${npmGlobalDir}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
+      ];
+      ExecStart = "${npmGlobalDir}/bin/openclaw gateway run";
+      Restart = "always";
+      RestartSec = "5s";
+    };
+  };
 }
