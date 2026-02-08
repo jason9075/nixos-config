@@ -17,6 +17,12 @@ in {
     xdotool
     scrot
     which
+    i3
+    xorg.xrandr
+    xorg.xdpyinfo
+    xorg.xwininfo
+    xclip
+    jq
   ];
   
   # 2. Configure npm to use local prefix
@@ -43,7 +49,7 @@ in {
   # This ensures both the Gateway AND the Node Host (started via 'openclaw node install')
   # have access to the correct PATH and libraries.
   systemd.user.sessionVariables = {
-    PATH = "${npmGlobalDir}/bin:${pkgs.nodejs}/bin:${pkgs.which}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin:$PATH";
+    PATH = "${npmGlobalDir}/bin:${config.home.profileDirectory}/bin:/run/current-system/sw/bin:/bin:/usr/bin";
     OPENCLAW_NIX_MODE = "0";
     LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.openssl.out}/lib";
   };
