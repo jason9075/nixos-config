@@ -269,7 +269,20 @@
   nix.settings.trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ libxcrypt-legacy ];
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+    libuv
+    libuuid
+    libiconv
+    libxml2
+  ];
 
   programs.dconf.enable = true;
 

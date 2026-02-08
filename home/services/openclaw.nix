@@ -11,12 +11,19 @@ in {
     gcc
     pkg-config
     libsecret
+    cmake
+    
+    # 針對本地執行需要的截圖與控制工具
+    xdotool
+    scrot
   ];
   
   # 2. Configure npm to use local prefix
   home.sessionVariables = {
     NPM_CONFIG_PREFIX = npmGlobalDir;
     PATH = "${npmGlobalDir}/bin:$PATH";
+    # Force npm/node-gyp to use system libraries where possible
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.libsecret.dev}/lib/pkgconfig";
   };
   
   # 3. Ensure npm global directory exists
@@ -25,8 +32,13 @@ in {
       run ${pkgs.coreutils}/bin/mkdir -p ${npmGlobalDir}
     '';
   };
+  
+  # 4. Write .npmrc to make prefix setting persistent for npm
+  home.file.".npmrc".text = ''
+    prefix=${npmGlobalDir}
+  '';
 
-  # 4. Systemd service using the npm-installed binary
+  # 5. Systemd service using the npm-installed binary
   systemd.user.services.openclaw-gateway = {
     Unit = {
       Description = "OpenClaw Gateway (NPM)";
@@ -40,9 +52,12 @@ in {
     };
 
     Service = {
-      Environment = [
+      # Disable Nix mode so it behaves like a standard install
+      Environment = [ 
         "OPENCLAW_NIX_MODE=0"
         "PATH=${npmGlobalDir}/bin:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin:${pkgs.coreutils}/bin"
+        # Ensure native modules can find libraries at runtime
+        "LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.openssl.out}/lib"
       ];
       ExecStart = "${npmGlobalDir}/bin/openclaw gateway run";
       Restart = "always";
