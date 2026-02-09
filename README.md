@@ -79,3 +79,25 @@ Delete Gereration
 ```bash
 sudo nix-env --profile /nix/var/nix/profiles/system/ --delete-generations <number>
 ```
+
+## VPN Setup
+
+The VPN toggle script (`scripts/astra_vpn_toggle.sh`) uses `vpnc` and `NetworkManager`. It requires a configuration file to avoid hardcoding sensitive information.
+
+### Configuration
+
+Create a file at `~/.config/astra-vpn-secret` with the following content (replace values with your actual settings):
+
+```bash
+gateway="<vpn.gateway.address>"
+group_name="<group-name>"
+username="<your-username>"
+```
+
+### Password Management
+
+The script integrates with the system keyring via `libsecret` and `zenity`:
+
+1.  **First Run:** It will prompt you for the Group Password via a GUI window.
+2.  **Subsequent Runs:** It will automatically retrieve the password from your secure keyring.
+3.  **Reset:** To clear the saved password, run: `secret-tool clear service astra-vpn`

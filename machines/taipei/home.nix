@@ -61,12 +61,15 @@ in {
     gnumake
     postman
     ansible
+    libsecret
+    zenity
+    seahorse
     vpnc
     entr
     nodejs # for github copilot
     gcc # for neovim tree-sitter
     opencode
-    zed-editor
+    just
 
     # CLI
     htop
@@ -94,6 +97,7 @@ in {
     # gh-copilot
     aichat
     gemini-cli
+    zed-editor
 
     # GUI
     hyprland

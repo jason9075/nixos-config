@@ -55,7 +55,21 @@
     LC_TIME = systemSettings.locale;
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      default-runtime = "runc";
+      runtimes = {
+        nvidia = {
+          path =
+            "${pkgs.nvidia-container-toolkit}/bin/nvidia-container-toolkit";
+        };
+      };
+    };
+  };
+
+  # Issac Sim
+  hardware.nvidia-container-toolkit.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -123,6 +137,8 @@
     ];
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
@@ -147,7 +163,7 @@
   services.fstrim.enable = true;
 
   # Open ports in the firewall. 8000 for web development
-  networking.firewall.allowedTCPPorts = [ 22 8000 ];
+  networking.firewall.allowedTCPPorts = [ 22 8000 37020 37021 9876 8211 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
