@@ -50,6 +50,12 @@ in {
     gcc
     zed-editor
     opencode
+    just
+    imagemagick
+    grim
+    xdotool
+    ydotool
+    scrot
 
     # CLI
     htop
