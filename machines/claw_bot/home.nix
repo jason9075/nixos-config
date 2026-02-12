@@ -107,7 +107,7 @@ in {
   };
 
   # Fcitx5 settings
-  xdg.configFile."fcitx5/config".text = ''
+  xdg.configFile."fcitx/config".text = ''
     TriggerKey=SUPER_SPACE
   '';
 
