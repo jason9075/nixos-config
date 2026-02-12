@@ -97,6 +97,7 @@ in {
     xclip
     cachix
 
+    inputs.antigravity-nix.packages.x86_64-linux.default
   ];
 
   programs.chromium = {
