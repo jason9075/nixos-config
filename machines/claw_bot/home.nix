@@ -106,4 +106,11 @@ in {
     ];
   };
 
+  # Fcitx5 settings
+  xdg.configFile."fcitx5/config".text = ''
+    [Hotkey]
+    # Trigger Keys
+    TriggerKeys=Super+space
+  '';
+
 }
