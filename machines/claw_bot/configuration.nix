@@ -259,7 +259,7 @@
 
   services.fstrim.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 22 8000 ];
+  networking.firewall.allowedTCPPorts = [ 22 8000 18789 3000 8080 ];
 
   system.stateVersion = "24.05";
 
