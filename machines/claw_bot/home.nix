@@ -35,7 +35,6 @@ in {
     ../../home/gui/zathura.nix # PDF Viewer
 
     # Keyboards
-    ../../home/keyboards/fcitx.nix
     
     ../../home/services/openclaw.nix
   ];

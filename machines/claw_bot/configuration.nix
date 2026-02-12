@@ -7,6 +7,7 @@
     ../../system/gui/thunar.nix
     ../../system/gui/fonts
     ../../system/keyboards/keyd.nix
+    ../../system/keyboards/fcitx.nix
   ];
 
   # Bootloader.
@@ -202,6 +203,7 @@
       }
 
       # Auto-start Applications
+      exec --no-startup-id ${pkgs.fcitx5}/bin/fcitx5 -d
       exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
       exec --no-startup-id ${pkgs.xorg.xset}/bin/xset s off -dpms
       exec_always --no-startup-id ${pkgs.feh}/bin/feh --bg-fill ${../../assets/tuxclaw.jpg}
