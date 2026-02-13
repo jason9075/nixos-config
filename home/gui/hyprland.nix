@@ -93,7 +93,8 @@ in {
         "$mod, C, exec, pypr toggle chat_ai                             # AI chat browser scratchpad"
         "$mod, P, exec, pypr toggle calendar                            # Calendar scratchpad"
         "$mod, I, exec, pypr toggle htop                                # htop scratchpad"
-        "$mod, N, exec, pypr toggle nvtop                               # nvtop scratchpad"
+        "$mod, N, exec, swaync-client -t -sw                            # Toggle notification center"
+        "$mod SHIFT, N, exec, swaync-client -C                          # Clear all notifications"
         "$mod, O, exec, pypr toggle kitty                               # kitty scratchpad"
         "$mod, Y, exec, pypr toggle yazi                                # yazi scratchpad"
 
@@ -131,7 +132,6 @@ in {
         "float on, match:class ^(chat_ai_app)$"
         "float on, match:class ^(calendar_app)$"
         "float on, match:class ^(htop)$"
-        "float on, match:class ^(nvtop)$"
         "float on, match:class ^(code_pane)$"
         "float on, match:class ^(yazi)$"
         "size (monitor_w*0.80) (monitor_h*0.85), match:class ^(chat_ai_app)$"
@@ -150,7 +150,6 @@ in {
         "opacity 1.0 0.93, match:class ^.*zathura$"
         "opacity 0.95 0.88, match:class ^(thunar)$"
         "opacity 0.9 0.7, match:class ^(htop)$"
-        "opacity 0.9 0.7, match:class ^(nvtop)$"
         "idle_inhibit fullscreen, fullscreen 1"
       ];
       workspace = [
@@ -191,14 +190,6 @@ in {
     margin = 50
     lazy = true
 
-    [scratchpads.nvtop]
-    animation = "fromBottom"
-    command = "kitty --class nvtop --hold nvtop"
-    class = "nvtop"
-    size = "80% 85%"
-    margin = 50
-    lazy = true
-    
     [scratchpads.kitty]
     command = "kitty --class code_pane --hold"
     class = "code_pane"
