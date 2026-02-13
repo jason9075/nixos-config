@@ -33,6 +33,7 @@ in {
     ../../home/gui/rofi.nix # Useful for i3 as well
     ../../home/gui/mako.nix
     ../../home/gui/zathura.nix # PDF Viewer
+    ../../home/gui/zed.nix
 
     # Keyboards
     
@@ -47,7 +48,6 @@ in {
     postman
     ansible
     gcc
-    zed-editor
     opencode
     just
     imagemagick

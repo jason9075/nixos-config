@@ -43,6 +43,7 @@ in {
     ../../home/gui/rofi.nix
     ../../home/gui/mako.nix
     ../../home/gui/zathura.nix # PDF Viewer
+    ../../home/gui/zed.nix
     # ../../home/gui/qutebrowser.nix
     # ../../home/gui/vscode.nix
 
@@ -97,7 +98,6 @@ in {
     # gh-copilot
     aichat
     gemini-cli
-    zed-editor
 
     # GUI
     hyprland
