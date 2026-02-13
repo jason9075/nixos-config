@@ -4,7 +4,8 @@ let
   startupScript = pkgs.writeShellScriptBin "start" ''
     sleep 3
     nm-applet &
-    mako &
+    ${lib.optionalString config.services.mako.enable "mako &"}
+    ${lib.optionalString (config.services ? swaync && config.services.swaync.enable) "swaync &"}
     swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
     echo "swww init"
     eww daemon &

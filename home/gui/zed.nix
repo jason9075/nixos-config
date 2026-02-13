@@ -57,6 +57,11 @@
           "down" = "vim::ResizePaneDown";
           "left" = "vim::ResizePaneLeft";
           "right" = "vim::ResizePaneRight";
+
+          # Opencode / AI integration
+          "space o a" = "assistant::InlineAssist";
+          "space o t" = "assistant::ToggleFocus";
+          "space o s" = "assistant::QuoteSelection";
         };
       }
     ];

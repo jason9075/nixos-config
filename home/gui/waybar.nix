@@ -19,6 +19,7 @@ let
       "backlight"
       "pulseaudio"
       "custom/vpn"
+      "custom/notification"
       "tray"
       "custom/power"
     ];
@@ -193,6 +194,26 @@ let
       "on-click" = "sudo vpnc ~/.vpnc/astra.conf";
       "tooltip" = false;
     };
+    "custom/notification" = {
+      "tooltip" = false;
+      "format" = "{icon} ";
+      "format-icons" = {
+        "notification" = "<span foreground='red'><sup></sup></span>";
+        "none" = "";
+        "dnd-notification" = "<span foreground='red'><sup></sup></span>";
+        "dnd-none" = "";
+        "inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+        "inhibited-none" = "";
+        "dnd-inhibited-notification" = "<span foreground='red'><sup></sup></span>";
+        "dnd-inhibited-none" = "";
+      };
+      "return-type" = "json";
+      "exec-if" = "which swaync-client";
+      "exec" = "swaync-client -swb";
+      "on-click" = "swaync-client -t -sw";
+      "on-click-right" = "swaync-client -d -sw";
+      "escape" = true;
+    };
 
   };
   waybarStyle = # css
@@ -348,6 +369,10 @@ let
       }
 
       #custom-vpn {
+        color: @nordblue;
+      }
+
+      #custom-notification {
         color: @nordblue;
       }
 

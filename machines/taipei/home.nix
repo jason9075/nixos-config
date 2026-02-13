@@ -41,7 +41,7 @@ in {
     ../../home/gui/swaylock.nix
     ../../home/gui/wlogout.nix
     ../../home/gui/rofi.nix
-    ../../home/gui/mako.nix
+    ../../home/gui/swaync.nix
     ../../home/gui/zathura.nix # PDF Viewer
     ../../home/gui/zed.nix
     # ../../home/gui/qutebrowser.nix
@@ -91,6 +91,7 @@ in {
     yazi
     tree
     russ
+    lsof
     taskwarrior3
     libwebp
     gdu
