@@ -323,6 +323,11 @@
             desc = "Preview Hunk";
           }
           {
+            __unkeyed-1 = "<leader>st";
+            __unkeyed-2 = ":FzfLua colorschemes<CR>";
+            desc = "Select Theme";
+          }
+          {
             __unkeyed-1 = "<leader>r";
             group = "Refactor";
             icon = "󰷉";
