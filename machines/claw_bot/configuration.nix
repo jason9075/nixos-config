@@ -180,6 +180,13 @@
       # Fullscreen
       bindsym $mod+m fullscreen toggle
 
+      # Open Gemini AI
+      bindsym $mod+c exec firefox --new-window https://gemini.google.com/
+
+      # Notifications (Dunst)
+      bindsym $mod+n exec ${pkgs.dunst}/bin/dunstctl history-pop
+      bindsym $mod+Shift+n exec ${pkgs.dunst}/bin/dunstctl close-all
+
 
       # Window Rules for OpenClaw
       for_window [class="OpenClaw-Target"] move to workspace 9

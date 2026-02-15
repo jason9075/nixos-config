@@ -31,7 +31,7 @@ in {
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
     ../../home/gui/rofi.nix # Useful for i3 as well
-    ../../home/gui/mako.nix
+    ../../home/gui/dunst.nix
     ../../home/gui/zathura.nix # PDF Viewer
     ../../home/gui/zed.nix
 
@@ -71,6 +71,7 @@ in {
     yazi
     tree
     russ
+    plantuml
     libwebp
 
     # GUI
@@ -82,6 +83,7 @@ in {
     zoom-us
     discord
     telegram-desktop
+    firefox
 
     # Network
     networkmanager
