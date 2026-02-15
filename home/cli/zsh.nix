@@ -1,4 +1,4 @@
-{ lib, userSettings, ... }:
+{ pkgs, lib, userSettings, ... }:
 
 let
   beforeRc = lib.mkOrder 550 # bash
@@ -34,10 +34,17 @@ let
       # cd to dir
       export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
       export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+
+      # Use difftastic for git diff
+      # export GIT_EXTERNAL_DIFF=difft
+
+
     '';
 in {
   programs.zsh = {
     enable = true;
+    # 最佳化補全（不要多次 compinit）
+    completionInit = "autoload -Uz compinit && compinit -C";
     shellAliases = {
       ll = "ls -alh";
       v = "nvim";
@@ -72,19 +79,17 @@ in {
     };
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-completions"; }
-        { name = "zsh-users/zsh-history-substring-search"; }
-        { name = "jeffreytse/zsh-vi-mode"; }
-        {
-          name = "romkatv/powerlevel10k";
-          tags = [ "as:theme" "depth:1" ];
-        }
-      ];
-    };
-    initContent = lib.mkMerge [ beforeRc extraRc ];
+
+    plugins = [
+      { name = "zsh-autosuggestions"; src = pkgs.zsh-autosuggestions; }
+      { name = "zsh-syntax-highlighting"; src = pkgs.zsh-syntax-highlighting; }
+      { name = "zsh-completions"; src = pkgs.zsh-completions; }
+      { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
+      { name = "zsh-vi-mode"; src = pkgs.zsh-vi-mode; }
+    ];
+
+    initContent = lib.mkMerge [ beforeRc extraRc ("source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme") ];
+
   };
   home.file.".p10k.zsh".source = ./p10k_config.zsh;
 
