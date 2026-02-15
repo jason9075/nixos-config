@@ -20,20 +20,36 @@ let
 
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-      # FZF
-      source "$(fzf-share)/key-bindings.zsh"
-      source "$(fzf-share)/completion.zsh"
+       # FZF（極致優化：延遲載入綁定）
+       FZF_LOADED=0
+       lazy-load-fzf() {
+         if [[ $FZF_LOADED -eq 0 ]]; then
+           FZF_LOADED=1
+           source "$(fzf-share)/key-bindings.zsh"
+           source "$(fzf-share)/completion.zsh"
+         fi
+       }
+       for key in ctrl-t alt-c; do
+         bindkey "^$key" lazy-load-fzf
+       done
 
       export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden --exclude vendor --exclude external'
       export FZF_DEFAULT_OPTS='--reverse --no-height --color=bg+:#343d46,gutter:-1,pointer:#bf616a,info:#ebcb8b,hl:#0dbc79,hl+:#23d18b'
-
-      # find files
       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
       export FZF_CTRL_T_OPTS='--preview "bat --color=always {}" --bind "alt-n:preview-down,alt-p:preview-up,alt-s:toggle-sort"'
-
-      # cd to dir
       export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
       export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+
+      # Zoxide（極致優化：延遲載入）
+      ZOXIDE_LOADED=0
+      lazy-load-zoxide() {
+        if [[ $ZOXIDE_LOADED -eq 0 ]]; then
+          ZOXIDE_LOADED=1
+          eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+        fi
+        command z "$@"
+      }
+      alias z=lazy-load-zoxide
 
       # Use difftastic for git diff
       # export GIT_EXTERNAL_DIFF=difft
