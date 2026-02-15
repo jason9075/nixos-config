@@ -132,8 +132,9 @@
       set $mod Mod4
 
       # Basic Bindings
-      bindsym $mod+t exec ${pkgs.kitty}/bin/kitty
+      bindsym $mod+t exec env GLFW_IM_MODULE=ibus ${pkgs.kitty}/bin/kitty
       bindsym $mod+q kill
+
       bindsym $mod+d exec ${pkgs.dmenu}/bin/dmenu_run
 
       # Focus
@@ -203,7 +204,6 @@
       }
 
       # Auto-start Applications
-      exec --no-startup-id ${pkgs.fcitx5}/bin/fcitx5 -d
       exec --no-startup-id ${pkgs.networkmanagerapplet}/bin/nm-applet
       exec --no-startup-id ${pkgs.xorg.xset}/bin/xset s off -dpms
       exec_always --no-startup-id ${pkgs.feh}/bin/feh --bg-fill ${../../assets/tuxclaw.jpg}
@@ -258,6 +258,12 @@
   };
 
   services.fstrim.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
+  };
 
   networking.firewall.allowedTCPPorts = [ 22 8000 18789 3000 8080 ];
 

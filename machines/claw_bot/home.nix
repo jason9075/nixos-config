@@ -36,7 +36,7 @@ in {
     ../../home/gui/zed.nix
 
     # Keyboards
-    
+    ../../home/keyboards/fcitx.nix
     ../../home/services/openclaw.nix
   ];
   

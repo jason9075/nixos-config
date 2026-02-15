@@ -100,4 +100,10 @@ The script integrates with the system keyring via `libsecret` and `zenity`:
 
 1.  **First Run:** It will prompt you for the Group Password via a GUI window.
 2.  **Subsequent Runs:** It will automatically retrieve the password from your secure keyring.
-3.  **Reset:** To clear the saved password, run: `secret-tool clear service astra-vpn`
+
+## Nix Build Artifacts
+
+When running `nix build` or `home-manager build`, a symlink named `result` is created in the project root.
+
+- **Purpose:** Points to the build output in `/nix/store`, preventing garbage collection of that specific build.
+- **Cleanup:** Safe to delete (`rm result`) at any time. This allows the Garbage Collector to free the associated disk space eventually.
