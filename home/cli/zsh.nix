@@ -41,13 +41,10 @@ let
       export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 
       # Zoxide（極致優化：延遲載入）
-      ZOXIDE_LOADED=0
       lazy-load-zoxide() {
-        if [[ $ZOXIDE_LOADED -eq 0 ]]; then
-          ZOXIDE_LOADED=1
-          eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
-        fi
-        command z "$@"
+        unalias z 2>/dev/null
+        eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+        z "$@"
       }
       alias z=lazy-load-zoxide
 
@@ -72,10 +69,10 @@ in {
       icat = "kitty +kitten icat";
       # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
       update = ''
-        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh home switch -c user --'';
+        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh home switch --'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
-        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch -H system --'';
+        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch --'';
       nixdev = "nix develop --command zsh";
       # delete old generations
       nixdel = "nix-env --delete-generations 7d";

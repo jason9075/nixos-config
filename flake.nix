@@ -1,75 +1,233 @@
 {
   description = "Jason Kuan's flake file";
 
-  outputs = inputs@{ self, ... }:
+outputs = inputs@{ self, ... }:
     let
-      # ---- SYSTEM SETTINGS ---- #
-      systemSettings = {
-        system = "x86_64-linux";
-        hostname = "nixos"; # for ssh ex: ssh <user>@<hostname>
-        machine = "taipei";
+      # Shared settings for all machines
+      defaultSettings = {
         timezone = "Asia/Taipei";
         locale = "zh_TW.UTF-8";
-        bootMode = "uefi"; # uefi or bios
-        bootMountPath = "/boot"; # boot mount point
-        grubDevice = ""; # only used for legacy bios mode
+        bootMountPath = "/boot";
+        grubDevice = "";
+        bootMode = "uefi";
       };
-      # ----- USER SETTINGS ----- #
-      userSettings = {
-        username = "jason9075"; # username
-        name = "Jason Kuan"; # display on login screen
-        email = "jason9075@gmail.com"; # email
-        dotfilesDir = "~/.dotfiles";
-        browser = "firefox"; # Default browser
-        term = "kitty"; # Default terminal
-        editor = "nvim"; # Default editor
+      users = {
+         clawbot = {
+           username = "clawbot";
+           name = "Jason Kuan";
+           email = "jason9075@gmail.com";
+           term = "kitty";
+         };
+        taipei = {
+          username = "jason";
+          name = "Jason Kuan";
+          email = "jason9075@gmail.com";
+        };
+        vbox = {
+          username = "vbox";
+          name = "Hello VirtualBox";
+          email = "vbox@localhost";
+        };
+        home-msi = {
+          username = "kuan";
+          name = "Hello Kuan";
+          email = "kuan@localhost";
+        };
+        taoyuan = {
+          username = "kuan";
+          name = "Kuan";
+          email = "kuan@localhost";
+        };
+        taoyuan-dad = {
+          username = "kuan";
+          name = "Kuan";
+          email = "kuan@localhost";
+        };
+        sahisi = {
+          username = "sahisi";
+          name = "上海興";
+          email = "sahisi@localhost";
+        };
       };
       pkgs = import inputs.nixpkgs {
-        system = systemSettings.system;
+        system = "x86_64-linux";
         config = { allowUnfree = true; };
         overlays = [ ];
       };
       pkgs-stable = import inputs.nixpkgs-stable {
-        system = systemSettings.system;
+        system = "x86_64-linux";
         config = { allowUnfree = true; };
       };
       home-manager = inputs.home-manager-unstable;
 
-      # Systems that can run tests:
       supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
-
-      # Function to generate a set based on supported systems:
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-
-      # Attribute set of nixpkgs for each system:
       nixpkgsFor =
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
     in {
-      nixosConfigurations = {
-        system = inputs.nixpkgs.lib.nixosSystem {
+       nixosConfigurations = {
+         clawbot = inputs.nixpkgs.lib.nixosSystem {
+           inherit pkgs;
+           system = "x86_64-linux";
+           modules = [
+             ./machines/clawbot/configuration.nix
+             inputs.stylix.nixosModules.stylix
+           ];
+           specialArgs = {
+             inherit pkgs-stable;
+             systemSettings = defaultSettings;
+             userSettings = users.clawbot;
+           };
+         };
+        taipei = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = systemSettings.system;
+          system = "x86_64-linux";
           modules = [
-            (./. + "/machines" + ("/" + systemSettings.machine)
-              + "/configuration.nix")
+            ./machines/taipei/configuration.nix
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
             inherit pkgs-stable;
-            inherit systemSettings;
-            inherit userSettings;
+            systemSettings = defaultSettings;
+            userSettings = users.taipei;
+          };
+        };
+        vbox = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          system = "x86_64-linux";
+          modules = [
+            ./machines/vbox/configuration.nix
+            inputs.stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit pkgs-stable;
+            systemSettings = defaultSettings;
+            userSettings = users.vbox;
+          };
+        };
+        home-msi = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          system = "x86_64-linux";
+          modules = [
+            ./machines/home-msi/configuration.nix
+            inputs.stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit pkgs-stable;
+            systemSettings = defaultSettings;
+            userSettings = users.home-msi;
+          };
+        };
+        taoyuan = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          system = "x86_64-linux";
+          modules = [
+            ./machines/taoyuan/configuration.nix
+            inputs.stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit pkgs-stable;
+            systemSettings = defaultSettings;
+            userSettings = users.taoyuan;
+          };
+        };
+        taoyuan-dad = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          system = "x86_64-linux";
+          modules = [
+            ./machines/taoyuan-dad/configuration.nix
+            inputs.stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit pkgs-stable;
+            systemSettings = defaultSettings;
+            userSettings = users.taoyuan-dad;
+          };
+        };
+        sahisi = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          system = "x86_64-linux";
+          modules = [
+            ./machines/sahisi/configuration.nix
+            inputs.stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit pkgs-stable;
+            systemSettings = defaultSettings;
+            userSettings = users.sahisi;
           };
         };
       };
-      homeConfigurations.user = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          (./. + "/machines" + ("/" + systemSettings.machine) + "/home.nix")
-        ];
-        extraSpecialArgs = {
-          inherit pkgs-stable;
-          inherit inputs;
-          inherit userSettings;
+       homeConfigurations = {
+         clawbot = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+           pkgs = pkgs;
+           extraSpecialArgs = {
+             inherit inputs pkgs pkgs-stable;
+             userSettings = users.clawbot;
+           };
+           modules = [
+             ./machines/clawbot/home.nix
+           ];
+         };
+        taipei = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = {
+            inherit inputs pkgs pkgs-stable;
+            userSettings = users.taipei;
+          };
+          modules = [
+            ./machines/taipei/home.nix
+          ];
+        };
+        vbox = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = {
+            inherit inputs pkgs pkgs-stable;
+            userSettings = users.vbox;
+          };
+          modules = [
+            ./machines/vbox/home.nix
+          ];
+        };
+        home-msi = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = {
+            inherit inputs pkgs pkgs-stable;
+            userSettings = users.home-msi;
+          };
+          modules = [
+            ./machines/home-msi/home.nix
+          ];
+        };
+        taoyuan = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = {
+            inherit inputs pkgs pkgs-stable;
+            userSettings = users.taoyuan;
+          };
+          modules = [
+            ./machines/taoyuan/home.nix
+          ];
+        };
+        taoyuan-dad = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = {
+            inherit inputs pkgs pkgs-stable;
+            userSettings = users.taoyuan-dad;
+          };
+          modules = [
+            ./machines/taoyuan-dad/home.nix
+          ];
+        };
+        sahisi = inputs.home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          extraSpecialArgs = {
+            inherit inputs pkgs pkgs-stable;
+            userSettings = users.sahisi;
+          };
+          modules = [
+            ./machines/sahisi/home.nix
+          ];
         };
       };
       packages = forAllSystems (system:

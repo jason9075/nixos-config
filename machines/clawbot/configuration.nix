@@ -21,7 +21,7 @@
   boot.loader.grub.device =
     systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
-  networking.hostName = systemSettings.hostname;
+  networking.hostName = "clawbot";
 
   # Enable networking
   networking.networkmanager.enable = true;

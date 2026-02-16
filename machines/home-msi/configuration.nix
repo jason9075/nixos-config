@@ -36,7 +36,7 @@
   };
   powerManagement.enable = false;
 
-  networking.hostName = "kuan";
+  networking.hostName = "home-msi";
 
   # Enable networking
   networking.networkmanager.enable = true;

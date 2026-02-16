@@ -1,6 +1,6 @@
 # Claw Bot Machine Configuration
 
-This directory contains the NixOS configuration for `claw_bot`, a specialized machine designed for automation using [OpenClaw](https://github.com/openclaw/openclaw).
+This directory contains the NixOS configuration for `clawbot`, a specialized machine designed for automation using [OpenClaw](https://github.com/openclaw/openclaw).
 
 ## Purpose
 - **OS**: NixOS (X11)
@@ -27,7 +27,7 @@ This directory contains the NixOS configuration for `claw_bot`, a specialized ma
     From the root of `nixos-config`:
     ```bash
     ./install.sh
-    # Select option "claw_bot"
+    # Select option "clawbot"
     ```
     Or manually:
     ```bash

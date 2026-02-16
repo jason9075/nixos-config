@@ -27,7 +27,7 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
-  networking.hostName = "nixos-kuan33400";
+  networking.hostName = "taoyuan-dad";
 
   # Enable networking
   networking.networkmanager.enable = true;

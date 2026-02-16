@@ -1,89 +1,73 @@
 #!/bin/sh
 
+# Static NixOS multi-host flake installer (no edits to flake.nix)
 NIX_CFG_PATH=~/nixos-config
 
-# Prompt for machine selection
-echo "Please select your machine:"
-echo "1) taipei"
-echo "2) taoyuan"
-echo "3) taoyuan-dad"
-echo "4) home-msi"
-echo "5) vbox"
-echo "6) sahisi"
-echo "7) claw_bot"
-while true; do
-  echo "Enter the number of your choice: "
-  read -r choice
-  case "$choice" in
-    1) MACHINE="taipei"; break;;
-    2) MACHINE="taoyuan"; break;;
-    3) MACHINE="taoyuan-dad"; break;;
-    4) MACHINE="home-msi"; break;;
-    5) MACHINE="vbox"; break;;
-    6) MACHINE="sahisi"; break;;
-    7) MACHINE="claw_bot"; break;;
-    *) echo "Invalid option, please select again.";;
-  esac
+# List of supported machines (must match flake.nix attributes and machines/<machine> dirs)
+machines="taipei taoyuan taoyuan-dad home-msi vbox sahisi clawbot"
+
+echo "Please select your machine host configuration:"
+select opt in $machines; do
+  if [ -n "$opt" ]; then
+    MACHINE="$opt"
+    break
+  fi
 done
 
-# dotfiles
-if [ -d ~/nixos-config ]; then
-    echo "Updating nixos-config..."
-    nix-shell -p git --command "git -C ~/nixos-config pull"
-else
-    echo "Cloning nixos-config..."
-    nix-shell -p git --command "git clone https://github.com/jason9075/nixos-config ~/nixos-config"
+# Check if corresponding machine config exists
+if [ ! -d "$NIX_CFG_PATH/machines/$MACHINE" ]; then
+  echo "ERROR: Config directory $NIX_CFG_PATH/machines/$MACHINE does not exist. Aborting."
+  exit 1
 fi
-if [ -d ~/.dotfiles ]; then
-    echo "Updating dotfiles..."
-    nix-shell -p git --command "git -C ~/.dotfiles pull"
-else
-    echo "Cloning dotfiles..."
-    nix-shell -p git --command "git clone https://github.com/jason9075/dotfiles ~/.dotfiles"
-fi
-# Function to update or clone a repository
+
+# Ensure git repos are up-to-date
 update_or_clone() {
   local dir=$1
   local repo=$2
   if [ -d "$dir" ]; then
     echo "Updating $dir..."
-    nix-shell -p git --command "git -C $dir pull"
+    nix-shell -p git --run "git -C $dir pull"
   else
     echo "Cloning $repo..."
-    nix-shell -p git --command "git clone $repo $dir"
+    nix-shell -p git --run "git clone $repo $dir"
   fi
 }
 
-# Update or clone repositories
 update_or_clone "$NIX_CFG_PATH" "https://github.com/jason9075/nixos-config"
 update_or_clone "$HOME/.dotfiles" "https://github.com/jason9075/dotfiles"
 
-# Generate hardware config for new system
-sudo nixos-generate-config --show-hardware-config | sudo tee $NIX_CFG_PATH/machines/$MACHINE/hardware-configuration.nix > /dev/null
-[ ! -f /etc/nixos/hardware-configuration.nix ] && sudo nixos-generate-config --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
-
-# Check if uefi or bios
-if [ -d /sys/firmware/efi/efivars ]; then
-    boot_mode="uefi"
-else
-    boot_mode="bios"
-    grub_device=$(lsblk -no pkname "$(findmnt / -o SOURCE -n)" | tail -n 1)
-    sed -i "s/grubDevice = \".*\";/grubDevice = \"\/dev\/$grub_device\";/" $NIX_CFG_PATH/flake.nix
+# Generate hardware config if missing
+if [ ! -f "$NIX_CFG_PATH/machines/$MACHINE/hardware-configuration.nix" ]; then
+  echo "Generating new hardware-configuration.nix for $MACHINE..."
+  sudo nixos-generate-config --show-hardware-config | sudo tee "$NIX_CFG_PATH/machines/$MACHINE/hardware-configuration.nix" > /dev/null
 fi
-sed -i "s/bootMode = \".*\";/bootMode = \"$boot_mode\";/" $NIX_CFG_PATH/flake.nix
+if [ ! -f /etc/nixos/hardware-configuration.nix ]; then
+  sudo nixos-generate-config --root / --show-hardware-config | sudo tee /etc/nixos/hardware-configuration.nix > /dev/null
+fi
 
-# Patch flake.nix with different username/name
-sed -i "0,/jason9075/s//$(whoami)/" $NIX_CFG_PATH/flake.nix
+# Check that hostname matches $MACHINE
+sys_host=$(hostname)
+if [ "$sys_host" != "$MACHINE" ]; then
+  echo "WARNING: Your hostname is '$sys_host', but you selected machine '$MACHINE'."
+  echo "Your flake-based install WILL NOT work unless your hostname matches the machine attribute."
+  echo "You can set the hostname now with: sudo hostnamectl set-hostname '$MACHINE'"
+  read -p "Proceed anyway? (y/N): " yn
+  case $yn in
+    [Yy]*) ;;
+    *) exit 2;;
+  esac
+fi
 
-# Set the selected machine in flake.nix
-sed -i "0,/taipei/s//$MACHINE/" $NIX_CFG_PATH/flake.nix
+# NixOS system install
+set -e
 
-# Confirm flake.nix before install
-vim $NIX_CFG_PATH/flake.nix
+echo "Starting NixOS installation for $MACHINE..."
+sudo nixos-rebuild switch --flake "$NIX_CFG_PATH#$MACHINE"
 
-# Install System and User
-echo "Installing system..."
-sudo nixos-rebuild switch --flake $NIX_CFG_PATH#system
+# Home manager (optional, skip if not present)
+if grep -q "home-manager" "$NIX_CFG_PATH/flake.nix"; then
+  echo "Installing home-manager configs for $MACHINE (if defined)..."
+  nix run nixpkgs#home-manager -- switch --flake "$NIX_CFG_PATH#$MACHINE"
+fi
 
-echo "Installing user..."
-nix --extra-experimental-features nix-command --extra-experimental-features flakes run home-manager/master -- switch --flake $NIX_CFG_PATH#user
+echo "Install complete. You are now using static flake configuration for machine: $MACHINE"
