@@ -20,18 +20,14 @@ let
 
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-       # FZF（極致優化：延遲載入綁定）
-       FZF_LOADED=0
-       lazy-load-fzf() {
-         if [[ $FZF_LOADED -eq 0 ]]; then
-           FZF_LOADED=1
-           source "$(fzf-share)/key-bindings.zsh"
-           source "$(fzf-share)/completion.zsh"
-         fi
-       }
-       for key in ctrl-t alt-c; do
-         bindkey "^$key" lazy-load-fzf
-       done
+      # Fix Ctrl-p and other bindings for zsh-vi-mode
+      function zvm_after_init() {
+        zvm_bindkey insert '^p' up-line-or-history
+        zvm_bindkey insert '^n' down-line-or-history
+        zvm_bindkey insert '^r' fzf-history-widget
+        zvm_bindkey insert '^t' fzf-file-widget
+      }
+      zvm_after_init_commands+=(zvm_after_init)
 
       export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden --exclude vendor --exclude external'
       export FZF_DEFAULT_OPTS='--reverse --no-height --color=bg+:#343d46,gutter:-1,pointer:#bf616a,info:#ebcb8b,hl:#0dbc79,hl+:#23d18b'
@@ -54,11 +50,17 @@ let
 
     '';
 in {
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
     # 最佳化補全（不要多次 compinit）
     completionInit = "autoload -Uz compinit && compinit -C";
     shellAliases = {
+
       ll = "ls -alh";
       v = "nvim";
       lg = "lazygit";
