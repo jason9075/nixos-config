@@ -23,7 +23,7 @@
   boot.loader.grub.device =
     systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
-  networking.hostName = systemSettings.hostname;
+  networking.hostName = "taipei";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -68,7 +68,7 @@
     };
   };
 
-  # Issac Sim
+  # Isaac Sim
   hardware.nvidia-container-toolkit.enable = true;
 
   # Enable CUPS to print documents.

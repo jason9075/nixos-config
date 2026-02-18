@@ -1,7 +1,7 @@
 {
   description = "Jason Kuan's flake file";
 
-outputs = inputs@{ self, ... }:
+  outputs = inputs@{ self, ... }:
     let
       # Shared settings for all machines
       defaultSettings = {
@@ -12,16 +12,19 @@ outputs = inputs@{ self, ... }:
         bootMode = "uefi";
       };
       users = {
-         clawbot = {
-           username = "clawbot";
-           name = "Jason Kuan";
-           email = "jason9075@gmail.com";
-           term = "kitty";
-         };
-        taipei = {
-          username = "jason";
+        clawbot = {
+          username = "clawbot";
           name = "Jason Kuan";
           email = "jason9075@gmail.com";
+          term = "kitty";
+        };
+        taipei = {
+          username = "jason9075";
+          name = "Jason Kuan";
+          email = "jason9075@gmail.com";
+          term = "kitty";
+          editor = "nvim";
+          browser = "firefox";
         };
         vbox = {
           username = "vbox";
@@ -58,27 +61,26 @@ outputs = inputs@{ self, ... }:
         system = "x86_64-linux";
         config = { allowUnfree = true; };
       };
-      home-manager = inputs.home-manager-unstable;
 
       supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor =
         forAllSystems (system: import inputs.nixpkgs { inherit system; });
     in {
-       nixosConfigurations = {
-         clawbot = inputs.nixpkgs.lib.nixosSystem {
-           inherit pkgs;
-           system = "x86_64-linux";
-           modules = [
-             ./machines/clawbot/configuration.nix
-             inputs.stylix.nixosModules.stylix
-           ];
-           specialArgs = {
-             inherit pkgs-stable;
-             systemSettings = defaultSettings;
-             userSettings = users.clawbot;
-           };
-         };
+      nixosConfigurations = {
+        clawbot = inputs.nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          system = "x86_64-linux";
+          modules = [
+            ./machines/clawbot/configuration.nix
+            inputs.stylix.nixosModules.stylix
+          ];
+          specialArgs = {
+            inherit pkgs-stable;
+            systemSettings = defaultSettings;
+            userSettings = users.clawbot;
+          };
+        };
         taipei = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
           system = "x86_64-linux";
@@ -158,77 +160,24 @@ outputs = inputs@{ self, ... }:
           };
         };
       };
-       homeConfigurations = {
-         clawbot = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-           pkgs = pkgs;
-           extraSpecialArgs = {
-             inherit inputs pkgs pkgs-stable;
-             userSettings = users.clawbot;
-           };
-           modules = [
-             ./machines/clawbot/home.nix
-           ];
-         };
-        taipei = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            inherit inputs pkgs pkgs-stable;
-            userSettings = users.taipei;
+      homeConfigurations = let
+        mkHome = machineName: userConf:
+          inputs.home-manager-unstable.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit inputs pkgs pkgs-stable;
+              userSettings = userConf;
+            };
+            modules = [ ./machines/${machineName}/home.nix ];
           };
-          modules = [
-            ./machines/taipei/home.nix
-          ];
-        };
-        vbox = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            inherit inputs pkgs pkgs-stable;
-            userSettings = users.vbox;
-          };
-          modules = [
-            ./machines/vbox/home.nix
-          ];
-        };
-        home-msi = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            inherit inputs pkgs pkgs-stable;
-            userSettings = users.home-msi;
-          };
-          modules = [
-            ./machines/home-msi/home.nix
-          ];
-        };
-        taoyuan = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            inherit inputs pkgs pkgs-stable;
-            userSettings = users.taoyuan;
-          };
-          modules = [
-            ./machines/taoyuan/home.nix
-          ];
-        };
-        taoyuan-dad = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            inherit inputs pkgs pkgs-stable;
-            userSettings = users.taoyuan-dad;
-          };
-          modules = [
-            ./machines/taoyuan-dad/home.nix
-          ];
-        };
-        sahisi = inputs.home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = {
-            inherit inputs pkgs pkgs-stable;
-            userSettings = users.sahisi;
-          };
-          modules = [
-            ./machines/sahisi/home.nix
-          ];
-        };
+      in {
+        "jason9075@taipei" = mkHome "taipei" users.taipei;
+        "vbox@vbox"        = mkHome "vbox" users.vbox;
+        "kuan@home-msi"    = mkHome "home-msi" users.home-msi;
+        "kuan@taoyuan"     = mkHome "taoyuan" users.taoyuan;
+        "kuan@taoyuan-dad" = mkHome "taoyuan-dad" users.taoyuan-dad;
+        "sahisi@sahisi"    = mkHome "sahisi" users.sahisi;
+        "clawbot@clawbot"  = mkHome "clawbot" users.clawbot;
       };
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
