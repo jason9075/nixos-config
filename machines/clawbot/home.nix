@@ -77,6 +77,7 @@ in {
     # GUI
     imv # Image Viewer
     font-manager
+    dbeaver-bin
 
     # Communication
     slack
