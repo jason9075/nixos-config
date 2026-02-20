@@ -40,11 +40,15 @@
           username = "kuan";
           name = "Kuan";
           email = "kuan@localhost";
+          term = "kitty";
+          editor = "nvim";
         };
         taoyuan-dad = {
-          username = "kuan";
+          username = "jason9075";
           name = "Kuan";
           email = "kuan@localhost";
+          term = "kitty";
+          editor = "nvim";
         };
         sahisi = {
           username = "sahisi";
@@ -172,12 +176,12 @@
           };
       in {
         "jason9075@taipei" = mkHome "taipei" users.taipei;
-        "vbox@vbox"        = mkHome "vbox" users.vbox;
-        "kuan@home-msi"    = mkHome "home-msi" users.home-msi;
-        "kuan@taoyuan"     = mkHome "taoyuan" users.taoyuan;
-        "kuan@taoyuan-dad" = mkHome "taoyuan-dad" users.taoyuan-dad;
-        "sahisi@sahisi"    = mkHome "sahisi" users.sahisi;
-        "clawbot@clawbot"  = mkHome "clawbot" users.clawbot;
+        "vbox@vbox" = mkHome "vbox" users.vbox;
+        "kuan@home-msi" = mkHome "home-msi" users.home-msi;
+        "kuan@taoyuan" = mkHome "taoyuan" users.taoyuan;
+        "jason9075@taoyuan-dad" = mkHome "taoyuan-dad" users.taoyuan-dad;
+        "sahisi@sahisi" = mkHome "sahisi" users.sahisi;
+        "clawbot@clawbot" = mkHome "clawbot" users.clawbot;
       };
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
