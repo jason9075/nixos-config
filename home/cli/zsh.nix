@@ -26,8 +26,13 @@ let
         zvm_bindkey insert '^n' down-line-or-history
         zvm_bindkey insert '^r' fzf-history-widget
         zvm_bindkey insert '^t' fzf-file-widget
+
       }
       zvm_after_init_commands+=(zvm_after_init)
+
+      # Fallback bindings
+      bindkey '^p' up-line-or-history
+      bindkey '^n' down-line-or-history
 
       export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden --exclude vendor --exclude external'
       export FZF_DEFAULT_OPTS='--reverse --no-height --color=bg+:#343d46,gutter:-1,pointer:#bf616a,info:#ebcb8b,hl:#0dbc79,hl+:#23d18b'
