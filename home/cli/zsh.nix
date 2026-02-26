@@ -80,7 +80,16 @@ in {
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
         NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch --'';
-      nixdev = "nix develop --command zsh";
+      ndev = "nix develop . --offline --no-update-lock-file --command zsh";
+      # 強制 direnv 重新讀取環境 (當你改了 flake.nix 卻沒自動觸發時)
+      dr = "direnv reload";
+      # 授權當前目錄的 .envrc (專案初始或新拉 repo 時必備)
+      da = "direnv allow";
+      # 更新 flake.lock 並強制重載
+      fup = "nix flake update && direnv reload";
+      # 清除當前專案的 direnv 快取與 GC Root 刪除後執行系統 GC 才會真正釋放空間
+      dclean = ''
+        rm -rf .direnv && echo "Done. Run nixgc to free space."'';
       # delete old generations
       nixdel = "nix-env --delete-generations 7d";
       nixdelsys =
@@ -101,14 +110,33 @@ in {
     syntaxHighlighting.enable = true;
 
     plugins = [
-      { name = "zsh-autosuggestions"; src = pkgs.zsh-autosuggestions; }
-      { name = "zsh-syntax-highlighting"; src = pkgs.zsh-syntax-highlighting; }
-      { name = "zsh-completions"; src = pkgs.zsh-completions; }
-      { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
-      { name = "zsh-vi-mode"; src = pkgs.zsh-vi-mode; }
+      {
+        name = "zsh-autosuggestions";
+        src = pkgs.zsh-autosuggestions;
+      }
+      {
+        name = "zsh-syntax-highlighting";
+        src = pkgs.zsh-syntax-highlighting;
+      }
+      {
+        name = "zsh-completions";
+        src = pkgs.zsh-completions;
+      }
+      {
+        name = "zsh-history-substring-search";
+        src = pkgs.zsh-history-substring-search;
+      }
+      {
+        name = "zsh-vi-mode";
+        src = pkgs.zsh-vi-mode;
+      }
     ];
 
-    initContent = lib.mkMerge [ beforeRc extraRc ("source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme") ];
+    initContent = lib.mkMerge [
+      beforeRc
+      extraRc
+      ("source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme")
+    ];
 
   };
   home.file.".p10k.zsh".source = ./p10k_config.zsh;

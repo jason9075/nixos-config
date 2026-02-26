@@ -57,6 +57,7 @@
 
       # Plugins
       plugins = {
+        direnv.enable = true;
         mini.enable = true; # multiple mini functions
         bufferline.enable = true;
         lualine.enable = true;

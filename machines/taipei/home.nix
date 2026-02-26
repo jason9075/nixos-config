@@ -22,6 +22,13 @@ in {
   programs.home-manager.enable = true;
   programs.zoxide.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    # 可選：讓 direnv 的訊息安靜一點
+    # config.global.hide_env_diff = true;
+  };
+
   imports = [
     inputs.nixvim.homeModules.nixvim
 
@@ -123,6 +130,7 @@ in {
 
     # Network
     google-chrome
+    chromium
     firefox
     wireguard-tools
     networkmanager
