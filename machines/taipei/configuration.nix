@@ -24,6 +24,7 @@
     systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
   networking.hostName = "taipei";
+  networking.enableIPv6 = false;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -182,5 +183,11 @@
   # use for nvidia physx
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [ libxcrypt-legacy ];
+
+  fileSystems."/home/jason9075/data" = {
+    device = "/dev/disk/by-uuid/d497f145-bc34-4ae5-83a3-05b7386ec412";
+    fsType = "ext4";
+    options = [ "defaults" "user" "rw" ];
+  };
 
 }

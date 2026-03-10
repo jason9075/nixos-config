@@ -19,7 +19,30 @@ in {
 
   home.stateVersion = "24.05";
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "video/mp4" = [ "vlc.desktop" ];
+      "video/mpeg" = [ "vlc.desktop" ];
+      "video/x-matroska" = [ "vlc.desktop" ];
+
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/png" = [ "imv.desktop" ];
+      "image/gif" = [ "imv.desktop" ];
+
+      "text/html" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+
+      "application/pdf" = [ "firefox.desktop" ];
+
+      "inode/directory" = [ "thunar.desktop" ];
+      "application/x-directory" = [ "thunar.desktop" ];
+    };
+  };
+ 
   programs.home-manager.enable = true;
+
   programs.zoxide.enable = true;
 
   programs.direnv = {
@@ -77,6 +100,7 @@ in {
     nodejs # for github copilot
     gcc # for neovim tree-sitter
     opencode
+    claude-code
     just
 
     # CLI
@@ -143,7 +167,7 @@ in {
     obs-studio
     vlc
     shotcut # Video Editor
-    # blender
+    blender
     # davinci-resolve # Video Editor
     audacity
     # piper-tts # text-to-speech
