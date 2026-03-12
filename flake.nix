@@ -80,7 +80,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.clawbot;
           };
@@ -93,7 +93,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.taipei;
           };
@@ -106,7 +106,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.vbox;
           };
@@ -119,7 +119,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.home-msi;
           };
@@ -132,7 +132,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.taoyuan;
           };
@@ -145,7 +145,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.taoyuan-dad;
           };
@@ -158,7 +158,7 @@
             inputs.stylix.nixosModules.stylix
           ];
           specialArgs = {
-            inherit pkgs-stable;
+            inherit inputs pkgs-stable;
             systemSettings = defaultSettings;
             userSettings = users.sahisi;
           };

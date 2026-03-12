@@ -1,4 +1,4 @@
-{ pkgs, userSettings, lib, ... }:
+{ pkgs, userSettings, lib, inputs, ... }:
 
 let
   tuigreetOptions = [
@@ -33,6 +33,7 @@ in {
   # Desktop environment & window manager
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
   };
   environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
