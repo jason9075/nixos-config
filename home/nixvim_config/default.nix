@@ -42,6 +42,9 @@
         clipboard = "unnamedplus";
         completeopt = "menuone,noselect";
         timeoutlen = 300;
+        foldlevel = 99;
+        foldlevelstart = 99;
+        foldenable = true;
 
         tabstop = 4;
         shiftwidth = 4;
@@ -62,6 +65,7 @@
         bufferline.enable = true;
         lualine.enable = true;
         project-nvim.enable = true;
+        nvim-ufo.enable = true;
         neo-tree = {
           enable = true;
           settings = {

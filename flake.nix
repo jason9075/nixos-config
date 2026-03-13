@@ -59,7 +59,7 @@
       pkgs = import inputs.nixpkgs {
         system = "x86_64-linux";
         config = { allowUnfree = true; };
-        overlays = [ ];
+        overlays = [ inputs.claude-code.overlays.default ];
       };
       pkgs-stable = import inputs.nixpkgs-stable {
         system = "x86_64-linux";
@@ -235,5 +235,10 @@
     };
 
     stylix.url = "github:danth/stylix";
+
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
