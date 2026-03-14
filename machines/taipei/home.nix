@@ -40,6 +40,10 @@ in {
       "application/x-directory" = [ "thunar.desktop" ];
     };
   };
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+  };
  
   programs.home-manager.enable = true;
 

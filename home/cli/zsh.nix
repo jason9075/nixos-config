@@ -76,10 +76,10 @@ in {
       icat = "kitty +kitten icat";
       # old: cd ~/nixos-config/ && home-manager switch --flake .#user && cd -
       update = ''
-        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh home switch --'';
+        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh home switch'';
       # old: cd ~/nixos-config/ && sudo nixos-rebuild switch --flake .#system && cd -
       updatesys = ''
-        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch --'';
+        NH_FLAKE="/home/${userSettings.username}/nixos-config" nh os switch'';
       ndev = "nix develop . --offline --no-update-lock-file --command zsh";
       # 強制 direnv 重新讀取環境 (當你改了 flake.nix 卻沒自動觸發時)
       dr = "direnv reload";
@@ -105,6 +105,7 @@ in {
       # docker
       dps =
         "docker ps --format 'table {{.Names}}	{{.RunningFor}}	{{.Status}}	{{.Image}}	{{.ID}}	{{.Size}}' -a";
+      ns = "notify-send";
     };
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;

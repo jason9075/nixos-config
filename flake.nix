@@ -59,7 +59,10 @@
       pkgs = import inputs.nixpkgs {
         system = "x86_64-linux";
         config = { allowUnfree = true; };
-        overlays = [ inputs.claude-code.overlays.default ];
+        overlays = [
+          inputs.claude-code.overlays.default
+          inputs.opencode-nix.overlays.default
+        ];
       };
       pkgs-stable = import inputs.nixpkgs-stable {
         system = "x86_64-linux";
@@ -238,6 +241,11 @@
 
     claude-code = {
       url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    opencode-nix = {
+      url = "github:jason9075/opencode-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
