@@ -323,6 +323,15 @@
             desc = "Preview Hunk";
           }
           {
+            __unkeyed-1 = "<leader>sw";
+            __unkeyed-2 = {
+              __raw = ''
+                function() vim.opt.wrap = not vim.o.wrap end
+              '';
+            };
+            desc = "Toggle wrap";
+          }
+          {
             __unkeyed-1 = "<leader>st";
             __unkeyed-2 = ":FzfLua colorschemes<CR>";
             desc = "Select Theme";
