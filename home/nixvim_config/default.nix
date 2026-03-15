@@ -65,7 +65,16 @@
         bufferline.enable = true;
         lualine.enable = true;
         project-nvim.enable = true;
-        nvim-ufo.enable = true;
+        nvim-ufo = {
+          enable = true;
+          settings = {
+            provider_selector.__raw = ''
+              function(bufnr, filetype, buftype)
+                return {'treesitter', 'indent'}
+              end
+            '';
+          };
+        };
         neo-tree = {
           enable = true;
           settings = {
