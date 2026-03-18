@@ -7,13 +7,16 @@ in {
   home.homeDirectory = "/home/sahisi";
 
   home.sessionVariables = {
-    TERMINAL = userSettings.term;
-    EDITOR = userSettings.editor;
+    TERMINAL = "kitty";
+    EDITOR = "nvim";
     BROWSER = "google-chrome";
   };
 
   home.stateVersion = "24.05";
 
+  xdg.portal = {
+    config.common.default = "*";
+  };
   programs.home-manager.enable = true;
 
 
