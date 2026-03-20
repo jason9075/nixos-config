@@ -17,6 +17,16 @@ in {
   programs.home-manager.enable = true;
   programs.zoxide.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+  };
+
   imports = [
     inputs.nixvim.homeModules.nixvim
 
