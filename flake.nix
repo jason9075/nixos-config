@@ -77,7 +77,6 @@
       nixosConfigurations = {
         clawbot = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/clawbot/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -90,7 +89,6 @@
         };
         taipei = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/taipei/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -103,7 +101,6 @@
         };
         vbox = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/vbox/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -116,7 +113,6 @@
         };
         home-msi = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/home-msi/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -129,7 +125,6 @@
         };
         taoyuan = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/taoyuan/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -142,7 +137,6 @@
         };
         taoyuan-dad = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/taoyuan-dad/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -155,7 +149,6 @@
         };
         sahisi = inputs.nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          system = "x86_64-linux";
           modules = [
             ./machines/sahisi/configuration.nix
             inputs.stylix.nixosModules.stylix
@@ -233,7 +226,17 @@
     };
 
     antigravity-nix = {
-      url = "github:jacopone/antigravity-nix/v1.18.4-5780041996042240";
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    codex-nix = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    fabric = {
+      url = "github:danielmiessler/fabric";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

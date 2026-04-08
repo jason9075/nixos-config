@@ -26,6 +26,9 @@ in {
       "video/mpeg" = [ "vlc.desktop" ];
       "video/x-matroska" = [ "vlc.desktop" ];
 
+      "audio/mpeg" = [ "vlc.desktop" ];
+      "audio/mp3" = [ "vlc.desktop" ];
+
       "image/jpeg" = [ "imv.desktop" ];
       "image/png" = [ "imv.desktop" ];
       "image/gif" = [ "imv.desktop" ];
@@ -87,7 +90,7 @@ in {
     # Keyboards
     ../../home/keyboards/fcitx.nix
   ];
-  nixvim_config.copilot.enable = true;
+  nixvim_config.copilot.enable = false;
   eww_config.pomodoro.enable = true;
   eww_config.widgets.enable = true;
 
@@ -134,6 +137,7 @@ in {
     # gh-copilot
     aichat
     gemini-cli
+    cloudflared
 
     # GUI
     hyprland
@@ -149,6 +153,7 @@ in {
     plantuml
     gparted
     anydesk
+    mdbook
 
     # Communication
     slack
@@ -163,6 +168,7 @@ in {
     wireguard-tools
     networkmanager
     networkmanager-vpnc
+    httptoolkit
 
     # Multimedia
     # pkgs-stable.gimp # 25.11 unstable breaks gimp
@@ -184,6 +190,8 @@ in {
     cachix
 
     inputs.antigravity-nix.packages.x86_64-linux.default
+    inputs.codex-nix.packages.x86_64-linux.default
+    inputs.fabric.packages.${pkgs.system}.default
   ];
 
 }

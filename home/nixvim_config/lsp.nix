@@ -50,7 +50,7 @@
       sources = {
         formatting = {
           gofmt.enable = true;
-          nixfmt.enable = true;
+          nixfmt_rfc_style.enable = true;
           hclfmt.enable = true;
           prettierd.enable = true;
           djlint.enable = true;
