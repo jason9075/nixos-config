@@ -148,7 +148,8 @@
     # treesitter-textobjects.enable = true;
     # treesitter-refactor.enable = true;
     # syntax highlight for nix config
-    hmts.enable = true;
+    # hmts.nvim broken with Neovim 0.12.1: node:parent() returns nil in new treesitter API
+    hmts.enable = false;
     plantuml-syntax.enable = true;
   };
 
