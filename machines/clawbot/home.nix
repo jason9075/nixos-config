@@ -65,6 +65,8 @@ in {
     xdotool
     ydotool
     scrot
+    codex
+    gemini-cli
 
     # CLI
     htop
