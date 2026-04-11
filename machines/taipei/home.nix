@@ -154,6 +154,7 @@ in {
     gparted
     anydesk
     mdbook
+    mdbook-plantuml
 
     # Communication
     slack
