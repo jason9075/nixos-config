@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 # This script will randomly go through the files of a directory, setting it
 # up as the wallpaper at regular intervals
@@ -20,8 +21,11 @@ fi
 
 RANDOME_PIC=${PICS[ $RANDOM % ${#PICS[@]} ]}
 
-swww query || swww init
+if ! awww query 2>/dev/null; then
+    awww-daemon &
+    sleep 1
+fi
 
-swww img ${RANDOME_PIC} --transition-fps ${TRANSITION_FPS} --transition-type any --transition-duration ${TRANSITION_DUR}
+awww img ${RANDOME_PIC} --transition-fps ${TRANSITION_FPS} --transition-type any --transition-duration ${TRANSITION_DUR}
 
 cp ${RANDOME_PIC} $HOME/Pictures/current-wallpaper.jpg

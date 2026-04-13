@@ -6,10 +6,10 @@ let
     nm-applet &
     ${lib.optionalString config.services.mako.enable "mako &"}
     ${lib.optionalString (config.services ? swaync && config.services.swaync.enable) "swaync &"}
-    swayidle -w timeout 600 'swaylock -f' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
-    echo "swww init"
+    swayidle -w timeout 600 '$HOME/nixos-config/scripts/smart_lock.sh' timeout 900 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep "swaylock -f" &
+    echo "awww init"
     eww daemon &
-    swww-daemon --format xrgb &
+    awww-daemon --format xrgb &
     pypr &
     sleep 1
     ${lib.optionalString config.eww_config.widgets.enable "eww open widgets"}
@@ -206,5 +206,5 @@ in {
 
   '';
 
-  home.packages = with pkgs; [ hyprpicker networkmanagerapplet inputs.hyprshutdown.packages.${pkgs.system}.default];
+  home.packages = with pkgs; [ hyprpicker networkmanagerapplet playerctl inputs.hyprshutdown.packages.${pkgs.stdenv.hostPlatform.system}.default];
 }

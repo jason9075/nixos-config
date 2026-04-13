@@ -75,7 +75,7 @@ in {
     # GUI
     hyprland
     pyprland
-    swww
+    awww
     swayidle
     grim # Screenshot
     slurp # Screenshot

@@ -143,7 +143,7 @@ in {
     hyprland
     pyprland
     hyprcursor
-    swww
+    awww
     swayidle
     grim # Screenshot
     slurp # Screenshot
@@ -192,7 +192,7 @@ in {
 
     inputs.antigravity-nix.packages.x86_64-linux.default
     inputs.codex-nix.packages.x86_64-linux.default
-    inputs.fabric.packages.${pkgs.system}.default
+    inputs.fabric.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
 }

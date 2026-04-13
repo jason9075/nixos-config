@@ -85,7 +85,7 @@ in {
     hyprland
     pyprland
     hyprcursor
-    swww
+    awww
     swayidle
     grim # Screenshot
     slurp # Screenshot
