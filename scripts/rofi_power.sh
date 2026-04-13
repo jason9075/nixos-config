@@ -3,7 +3,7 @@
 chosen=$(echo -e " Lock\n Logout\n Reboot\n Shutdown" | rofi -dmenu -i -p "Power Menu")
 
 case "$chosen" in
-  " Lock") swaylock ;;
+  " Lock") hyprlock ;;
   " Logout") loginctl terminate-user $USER ;;
   " Reboot") systemctl reboot ;;
   " Shutdown") systemctl poweroff ;;

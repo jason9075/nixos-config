@@ -35,7 +35,7 @@ in {
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
     ../../home/gui/waybar.nix
-    ../../home/gui/swaylock.nix
+    ../../home/gui/hyprlock.nix
     ../../home/gui/wlogout.nix
     ../../home/gui/rofi.nix
     ../../home/gui/mako.nix

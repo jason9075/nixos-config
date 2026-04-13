@@ -4,7 +4,7 @@ let
   wlogoutLayout = [
     {
       label = "lock";
-      action = "swaylock";
+      action = "hyprlock";
       text = "Lock (l)";
       keybind = "l";
     }
