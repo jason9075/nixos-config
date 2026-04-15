@@ -48,7 +48,6 @@ in {
 
     # Keyboards
     ../../home/keyboards/fcitx.nix
-    ../../home/services/openclaw.nix
   ];
   
   nixvim_config.copilot.enable = false;

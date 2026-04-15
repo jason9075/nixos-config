@@ -67,6 +67,7 @@ in {
     ../../home/cli/git.nix
     ../../home/cli/lazygit.nix
     ../../home/cli/mu.nix
+    ../../home/cli/visidata.nix
     ../../home/cli/dict # Dictionary
     ../../home/nixvim_config
 

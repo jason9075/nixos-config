@@ -188,8 +188,6 @@
       bindsym $mod+Shift+n exec ${pkgs.dunst}/bin/dunstctl close-all
 
 
-      # Window Rules for OpenClaw
-      for_window [class="OpenClaw-Target"] move to workspace 9
       new_window none
       new_float none
       
@@ -237,9 +235,7 @@
     autoLogin.user = userSettings.username;
     defaultSession = "none+i3";
   };
-  # User request: "Level 1 (Direct CLI): ... Level 2 (IPC Control) ... Level 3 (OpenClaw Visual)"
-  
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     vim git pulseaudio feh
     
     # Core Automation Tools
@@ -249,10 +245,6 @@
     
     # App Launcher
     rofi
-    
-    # OpenClaw Dependencies
-    python311Packages.pyautogui
-    python311Packages.pillow
     
     # GUI Utils
     networkmanagerapplet
