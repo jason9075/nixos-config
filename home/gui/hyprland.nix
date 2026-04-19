@@ -167,7 +167,7 @@ in {
   };
 
   # # https://hyprland-community.github.io/pyprland/scratchpads.html
-  home.file.".config/hypr/pyprland.toml".text = ''
+  home.file.".config/pypr/config.toml".text = ''
     [pyprland]
     plugins = ["scratchpads"]
 
