@@ -107,8 +107,8 @@
     clean.extraArgs = "--keep-since 14d --keep 3";
   };
 
-  # Swaylock
-  security.pam.services.swaylock = { };
+  # Hyprlock
+  security.pam.services.hyprlock = { };
 
   # Color scheme
   stylix.enable = true;

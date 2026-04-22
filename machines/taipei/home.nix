@@ -131,6 +131,7 @@ in {
     tree
     russ
     lsof
+    psmisc # fuser
     taskwarrior3
     libwebp
     gdu
