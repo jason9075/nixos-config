@@ -225,15 +225,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    codex-nix = {
-      url = "github:sadjow/codex-cli-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     fabric = {
       url = "github:danielmiessler/fabric";
@@ -242,6 +233,7 @@
 
     stylix.url = "github:danth/stylix";
 
+    # coding agent
     claude-code = {
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -249,6 +241,16 @@
 
     opencode-nix = {
       url = "github:jason9075/opencode-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    codex-nix = {
+      url = "github:sadjow/codex-cli-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

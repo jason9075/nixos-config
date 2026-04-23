@@ -87,6 +87,12 @@ in {
       da = "direnv allow";
       # 更新 flake.lock 並強制重載
       fup = "nix flake update && direnv reload";
+      # 只更新常用 CLI inputs
+      fupcli = ''
+        nix flake lock --update-input codex-nix \
+          --update-input antigravity-nix \
+          --update-input claude-code \
+          --update-input opencode-nix && direnv reload'';
       # 清除當前專案的 direnv 快取與 GC Root 刪除後執行系統 GC 才會真正釋放空間
       dclean = ''
         rm -rf .direnv && echo "Done. Run nixgc to free space."'';
