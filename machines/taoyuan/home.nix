@@ -132,6 +132,7 @@ in {
     wl-clipboard
     wtype
     tree-sitter
+    inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
   ];
 
 }
