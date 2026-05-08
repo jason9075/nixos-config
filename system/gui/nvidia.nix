@@ -41,7 +41,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    nvtopPackages.full
+    nvtopPackages.nvidia
   ];
 
   nix.settings.extra-substituters = [ "https://cache.nixos-cuda.org" ];
