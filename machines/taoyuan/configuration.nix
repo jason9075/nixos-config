@@ -25,6 +25,7 @@
   networking.hostName = "taoyuan";
 
   networking.networkmanager.enable = true;
+  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 
   time.timeZone = systemSettings.timezone;
   time.hardwareClockInLocalTime = true;
