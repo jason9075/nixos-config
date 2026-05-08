@@ -500,6 +500,6 @@ in {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    systemd.targets = [ "hyprland-session.target" ];
+    systemd.target = "hyprland-session.target";
   };
 }
