@@ -175,10 +175,6 @@
   nix.settings.auto-optimise-store = true;
   nix.settings.warn-dirty = false;
   nix.settings.allowed-users = [ "root" userSettings.username ];
-  nix.settings.substituters = [ "https://cache.nixos-cuda.org" ];
-  nix.settings.trusted-public-keys = [
-    "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-  ];
 
   # use for nvidia physx
   programs.nix-ld.enable = true;

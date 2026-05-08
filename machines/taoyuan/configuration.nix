@@ -85,9 +85,5 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.allowed-users = [ "root" userSettings.username ];
-  nix.settings.substituters = [ "https://cuda-maintainers.cachix.org" ];
-  nix.settings.trusted-public-keys = [
-    "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-  ];
 
 }

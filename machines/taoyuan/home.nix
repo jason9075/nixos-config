@@ -18,6 +18,34 @@ in {
 
   home.stateVersion = "24.05";
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "video/mp4" = [ "vlc.desktop" ];
+      "video/mpeg" = [ "vlc.desktop" ];
+      "video/x-matroska" = [ "vlc.desktop" ];
+
+      "audio/mpeg" = [ "vlc.desktop" ];
+      "audio/mp3" = [ "vlc.desktop" ];
+
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/png" = [ "imv.desktop" ];
+      "image/gif" = [ "imv.desktop" ];
+
+      "text/html" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+
+      "application/pdf" = [ "firefox.desktop" ];
+
+      "inode/directory" = [ "thunar.desktop" ];
+      "application/x-directory" = [ "thunar.desktop" ];
+    };
+  };
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+  };
   programs.home-manager.enable = true;
 
   imports = [
