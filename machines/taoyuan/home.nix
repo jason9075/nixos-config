@@ -49,7 +49,7 @@ in {
   programs.home-manager.enable = true;
 
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
 
     # CLI
     ../../home/cli/zsh.nix
@@ -73,7 +73,6 @@ in {
     ../../home/keyboards/fcitx.nix
 
   ];
-  nixvim_config.copilot.enable = true;
 
   home.packages = with pkgs; [
     # Development
@@ -98,6 +97,7 @@ in {
     kitty
     tree
     nmap
+    claude-code
 
     # GUI
     hyprland

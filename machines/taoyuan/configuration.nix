@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, systemSettings, userSettings, ... }:
+{ config, pkgs, pkgs-stable, systemSettings, userSettings, ... }:
 
 {
   imports = [
@@ -75,6 +75,8 @@
   };
 
   security.pam.services.hyprlock = { };
+
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
 
   environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
 
