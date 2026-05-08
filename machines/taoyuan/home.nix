@@ -68,7 +68,6 @@ in {
     yq
     fzf
     kitty
-    neofetch
     tree
     nmap
 
@@ -76,7 +75,6 @@ in {
     hyprland
     pyprland
     awww
-    swayidle
     grim # Screenshot
     slurp # Screenshot
     swappy # Window switcher

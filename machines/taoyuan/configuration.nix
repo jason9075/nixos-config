@@ -73,7 +73,7 @@
     clean.extraArgs = "--keep-since 14d --keep 3";
   };
 
-  security.pam.services.swaylock = { };
+  security.pam.services.hyprlock = { };
 
   environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
 
