@@ -138,10 +138,10 @@
       settings = {
         auto_install = true;
         indent.enable = true;
-        highlight = {
-          enable = true;
-          disable = [ "htmldjango" "jinja" "jinja2"];
-        };
+      };
+      highlight = {
+        enable = true;
+        disable = [ "htmldjango" "jinja" "jinja2"];
       };
     };
     treesitter-context.enable = true;
