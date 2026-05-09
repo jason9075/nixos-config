@@ -79,7 +79,12 @@
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
 
-  environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
+  environment.systemPackages = with pkgs; [ vim git wayland pulseaudio lm_sensors smartmontools ];
+
+  services.smartd = {
+    enable = true;
+    autodetect = true;
+  };
 
   services.openssh.enable = true;
 

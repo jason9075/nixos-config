@@ -133,6 +133,7 @@ in {
     wtype
     tree-sitter
     inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
+    inputs.codex-nix.packages.x86_64-linux.default
   ];
 
 }
