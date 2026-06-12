@@ -13,7 +13,19 @@
           key = "<c-a>";
           description = "Pick AI commit";
           command = ''
-            aichat "Please suggest 3 commit messages, given the following diff:
+            bash <<'BASH'
+            set -euo pipefail
+
+            AI_OUT=$(mktemp)
+            COMMIT_MSG_FILE=$(mktemp)
+
+            cleanup() {
+              rm -f "$AI_OUT" "$COMMIT_MSG_FILE"
+            }
+            trap cleanup EXIT
+
+            PROMPT="$(cat <<EOF
+            Please suggest 3 commit messages, given the following diff:
 
             \`\`\`diff
             $(git diff --cached)
@@ -48,7 +60,6 @@
             update: add search function
             refactor: extract common code to \`utils/wait.ts\`
 
-
             **Instructions:**
 
             - Take a moment to understand the changes made in the diff.
@@ -59,18 +70,35 @@
 
             Keep in mind you will suggest 3 commit messages. Only 1 will be used. It's better to push yourself (esp to synthesize to a higher level) and maybe wrong about some of the 3 commits because only one needs to be good. I'm looking for your best commit, not the best average commit. It's better to cover more scenarios than include a lot of overlap.
 
-            Write your 3 commit messages below in the format shown in Output Template section above." \
-              | fzf --height 40% --border --ansi --preview "echo {}" --preview-window=up:wrap \
-              | xargs -I {} bash -c '
-                  COMMIT_MSG_FILE=$(mktemp)
-                  echo "{}" > "$COMMIT_MSG_FILE"
-                  ''${EDITOR:-vim} "$COMMIT_MSG_FILE"
-                  if [ -s "$COMMIT_MSG_FILE" ]; then
-                      git commit -F "$COMMIT_MSG_FILE"
-                  else
-                      echo "Commit message is empty, commit aborted."
-                  fi
-                  rm -f "$COMMIT_MSG_FILE"'
+            Write your 3 commit messages below in the format shown in Output Template section above.
+            EOF
+            )"
+
+            # === AI provider：換工具只需改下面這一行 ===
+            # 條件：吃一個 prompt 字串、把純文字結果印到 stdout（一行一個 commit message）
+            #   claude: claude -p "$PROMPT"
+            #   gemini: gemini --output-format text "$PROMPT"
+            #   aichat: aichat "$PROMPT"
+            claude -p "$PROMPT" < /dev/null > "$AI_OUT"
+
+            selected=$(tr -d '\r' < "$AI_OUT" | sed '/^[[:space:]]*$/d' | \
+              fzf --height 40% --border --ansi --no-mouse \
+                --preview "printf '%s\n' {}" --preview-window=up:wrap)
+
+            if [ -z "$selected" ]; then
+              exit 0
+            fi
+
+            printf '%s\n' "$selected" > "$COMMIT_MSG_FILE"
+            # stdin 是 heredoc 不是 terminal，editor 要明確接回 /dev/tty 才能互動
+            ''${EDITOR:-vim} "$COMMIT_MSG_FILE" < /dev/tty > /dev/tty
+
+            if [ -s "$COMMIT_MSG_FILE" ]; then
+              git commit -F "$COMMIT_MSG_FILE"
+            else
+              echo "Commit message is empty, commit aborted."
+            fi
+            BASH
           '';
           context = "files";
           output = "terminal";

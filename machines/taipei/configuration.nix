@@ -155,7 +155,7 @@
   services.fstrim.enable = true;
 
   # Open ports in the firewall. 8000 for web development
-  networking.firewall.allowedTCPPorts = [ 22 8000 37020 37021 9876 8211 8080 ];
+  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -176,7 +176,7 @@
       glib               # opencv
       libGL              # opencv
       libGLU
-      xorg.libX11        # opencv GUI 後端（即使不用 GUI，import 時會 dlopen）
+      libx11             # opencv GUI 後端（即使不用 GUI，import 時會 dlopen）
       glibc
       openssl
       bzip2
