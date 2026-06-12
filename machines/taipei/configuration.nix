@@ -58,18 +58,9 @@
 
   virtualisation.docker = {
     enable = true;
-    daemon.settings = {
-      default-runtime = "runc";
-      runtimes = {
-        nvidia = {
-          path =
-            "${pkgs.nvidia-container-toolkit}/bin/nvidia-container-toolkit";
-        };
-      };
-    };
+    daemon.settings.features.cdi = true;
   };
 
-  # Isaac Sim
   hardware.nvidia-container-toolkit.enable = true;
 
   # Enable CUPS to print documents.
@@ -142,7 +133,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim git wayland pulseaudio nvtopPackages.full ];
+  environment.systemPackages = with pkgs; [ vim git wayland pulseaudio ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -164,7 +155,7 @@
   services.fstrim.enable = true;
 
   # Open ports in the firewall. 8000 for web development
-  networking.firewall.allowedTCPPorts = [ 22 8000 37020 37021 9876 8211 ];
+  networking.firewall.allowedTCPPorts = [ 22 8000 37020 37021 9876 8211 8080 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -178,7 +169,19 @@
 
   # use for nvidia physx
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ libxcrypt-legacy ];
+  programs.nix-ld.libraries = with pkgs; [ 
+      libxcrypt-legacy
+      stdenv.cc.cc.lib   # libstdc++ — torch / numpy 必需
+      zlib               # 各種 wheel
+      glib               # opencv
+      libGL              # opencv
+      libGLU
+      xorg.libX11        # opencv GUI 後端（即使不用 GUI，import 時會 dlopen）
+      glibc
+      openssl
+      bzip2
+      xz
+    ];
 
   fileSystems."/home/jason9075/data" = {
     device = "/dev/disk/by-uuid/d497f145-bc34-4ae5-83a3-05b7386ec412";

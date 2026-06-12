@@ -157,6 +157,8 @@ in {
     anydesk
     mdbook
     mdbook-plantuml
+    obsidian
+    freecad
 
     # Communication
     slack
@@ -184,7 +186,7 @@ in {
     # davinci-resolve # Video Editor
     audacity
     # piper-tts # text-to-speech
-    # meshlab
+    meshlab
 
     # Misc
     wl-clipboard

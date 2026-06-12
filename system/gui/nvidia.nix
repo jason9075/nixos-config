@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-stable, ... }:
 
 {
   # Enable graphics driver in NixOS unstable/NixOS
@@ -40,9 +40,7 @@
     nvidia-vaapi-driver
   ];
 
-  environment.systemPackages = with pkgs; [
-    nvtopPackages.nvidia
-  ];
+  environment.systemPackages = [ pkgs-stable.nvtopPackages.nvidia ];
 
   nix.settings.extra-substituters = [ "https://cache.nixos-cuda.org" ];
   nix.settings.extra-trusted-public-keys = [
