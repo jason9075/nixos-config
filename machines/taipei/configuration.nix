@@ -8,7 +8,7 @@
     ../../system/gui/hyprland.nix
     ../../system/gui/thunar.nix
     ../../system/gui/fonts
-    ../../system/gui/steam.nix
+    # ../../system/gui/steam.nix
     ../../system/keyboards/keyd.nix
   ];
 
@@ -86,7 +86,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input"];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
@@ -155,7 +155,7 @@
   services.fstrim.enable = true;
 
   # Open ports in the firewall. 8000 for web development
-  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 ];
+  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 7333 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

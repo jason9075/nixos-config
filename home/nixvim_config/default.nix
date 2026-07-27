@@ -180,6 +180,10 @@
 
         markdown-preview.enable = true;
         markview.enable = true;
+        outline = {
+          enable = true;
+          settings.outline_window.position = "right";
+        };
       };
 
       extraPlugins = with pkgs.vimPlugins; [
@@ -188,6 +192,7 @@
         plenary-nvim # testing
         nvim-bufdel # buffer management
         bullets-vim # markdown bullets
+        vim-table-mode # markdown table auto-align
         vim-jinja
       ];
       extraPackages = with pkgs; [ lsof ];

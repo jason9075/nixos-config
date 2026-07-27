@@ -7,6 +7,7 @@
       servers = {
         pyright = { enable = true; };
         bashls = { enable = true; };
+        marksman = { enable = true; };
         dockerls = { enable = true; };
         gopls = { enable = true; };
         clangd = {
