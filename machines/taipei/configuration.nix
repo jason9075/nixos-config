@@ -152,10 +152,15 @@
     ports = [ 22 ];
   };
 
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
+
   services.fstrim.enable = true;
 
   # Open ports in the firewall. 8000 for web development
-  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 7333 ];
+  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 8081 8082 7333 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
