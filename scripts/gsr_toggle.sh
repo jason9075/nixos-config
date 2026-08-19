@@ -7,6 +7,9 @@ set -euo pipefail
 PIDFILE="${XDG_RUNTIME_DIR:-/tmp}/gpu-screen-recorder.pid"
 OUTDIR="$HOME/Videos/recordings"
 WAYBAR_SIGNAL="RTMIN+8"
+# Mix desktop audio and mic into a single track (gpu-screen-recorder merges
+# sources separated by "|" instead of adding a second audio stream).
+AUDIO_SOURCE="default_output|default_input"
 
 if ! command -v gpu-screen-recorder >/dev/null 2>&1; then
   notify-send "Screen Recording" "gpu-screen-recorder is not installed"
@@ -46,7 +49,7 @@ else
 
   mkdir -p "$OUTDIR"
   OUTFILE="${OUTDIR}/$(date +%Y-%m-%d_%H-%M-%S).mp4"
-  gpu-screen-recorder -w "$MONITOR" -f 60 -a default_output -o "$OUTFILE" &>/tmp/gpu-screen-recorder.log &
+  gpu-screen-recorder -w "$MONITOR" -f 60 -a "$AUDIO_SOURCE" -o "$OUTFILE" &>/tmp/gpu-screen-recorder.log &
   NEWPID=$!
   printf '%s\n%s\n' "$NEWPID" "$OUTFILE" > "$PIDFILE"
   notify-send "Screen Recording" "Started -> ${OUTFILE}"
