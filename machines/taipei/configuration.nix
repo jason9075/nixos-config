@@ -101,6 +101,10 @@
   # Hyprlock
   security.pam.services.hyprlock = { };
 
+  # gpu-screen-recorder: setcap wrapper for gsr-kms-server so recording
+  # doesn't need a polkit/root prompt each time.
+  programs.gpu-screen-recorder.enable = true;
+
   # Color scheme
   stylix.enable = true;
   stylix.image = ./wallpaper.png; # dummy image

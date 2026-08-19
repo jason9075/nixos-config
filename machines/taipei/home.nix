@@ -159,6 +159,8 @@ in {
     mdbook
     mdbook-plantuml
     obsidian
+    gpu-screen-recorder
+    gpu-screen-recorder-gtk
     freecad
 
     # Communication

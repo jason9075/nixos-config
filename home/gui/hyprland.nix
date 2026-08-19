@@ -97,6 +97,7 @@ in {
         "$mod SHIFT, N, exec, swaync-client -C                          # Clear all notifications"
         "$mod, O, exec, pypr toggle kitty                               # kitty scratchpad"
         "$mod, Y, exec, pypr toggle yazi                                # yazi scratchpad"
+        "$mod, R, exec, gpu-screen-recorder-gtk                         # Screen recorder GUI"
 
         "$mod, 1, workspace, 1                                          # Switch to workspace 1"
         "$mod, 2, workspace, 2                                          # Switch to workspace 2"

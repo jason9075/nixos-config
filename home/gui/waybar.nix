@@ -9,8 +9,13 @@ let
     "margin-right" = 10;
 
     "modules-left" = [ "hyprland/workspaces" "custom/mpd" ];
-    "modules-center" =
-      [ "clock" "custom/wallpaper" "custom/colorpicker" "custom/keybindings" ];
+    "modules-center" = [
+      "clock"
+      "custom/wallpaper"
+      "custom/record"
+      "custom/colorpicker"
+      "custom/keybindings"
+    ];
     "modules-right" = [
       "cpu"
       "temperature"
@@ -157,6 +162,15 @@ let
       "format-icons" = "󰸉";
       "on-click" = "~/nixos-config/scripts/swww_randomize.sh";
       "tooltip-format" = "Change Wallpaper";
+    };
+    "custom/record" = {
+      "exec" = "~/nixos-config/scripts/gsr_status.sh";
+      "exec-if" = "which gpu-screen-recorder";
+      "return-type" = "json";
+      "interval" = 2;
+      "signal" = 8;
+      "on-click" = "~/nixos-config/scripts/gsr_toggle.sh";
+      "tooltip" = true;
     };
     "custom/colorpicker" = {
       "format" = " {icon} ";
@@ -362,6 +376,14 @@ let
 
       #custom-colorpicker {
         color: @nordblue;
+      }
+
+      #custom-record.idle {
+        color: @nordblue;
+      }
+
+      #custom-record.recording {
+        color: @alert;
       }
 
       #custom-keybindings {
