@@ -200,6 +200,7 @@ in {
 
     inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-cli
     inputs.codex-nix.packages.x86_64-linux.default
+    inputs.herdr.packages.x86_64-linux.default
     inputs.fabric.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 

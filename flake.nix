@@ -254,6 +254,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Terminal workspace manager for AI coding agents (not in nixpkgs)
+    herdr = {
+      url = "github:herdrdev/herdr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-utils.url = "github:numtide/flake-utils";
 
     claude-desktop = {
