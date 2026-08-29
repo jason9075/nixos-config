@@ -45,7 +45,13 @@ in {
   };
   xdg.portal = {
     enable = true;
-    config.common.default = "*";
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common = {
+      default = "gtk";
+      "org.freedesktop.impl.portal.Screenshot" = "hyprland";
+      "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
+      "org.freedesktop.impl.portal.GlobalShortcuts" = "hyprland";
+    };
   };
  
   programs.home-manager.enable = true;
@@ -75,7 +81,7 @@ in {
     ../../home/gui/hyprland.nix
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
-    ../../home/gui/waybar.nix
+    ../../home/gui/ags.nix
     ../../home/gui/hyprlock.nix
     ../../home/gui/wlogout.nix
     ../../home/gui/rofi.nix
@@ -94,6 +100,7 @@ in {
   nixvim_config.copilot.enable = false;
   eww_config.pomodoro.enable = true;
   eww_config.widgets.enable = true;
+  hyprland_config.barToggleCommand = "ags request toggle-bar";
 
   home.packages = with pkgs; [
     # Development

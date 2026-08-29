@@ -220,6 +220,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Taipei uses AGS v3 as its status bar. Pin the API because AGS releases
+    # have intentionally introduced incompatible configuration changes.
+    ags = {
+      url = "github:Aylur/ags/v3.1.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";

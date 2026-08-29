@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
+  cfg = config.waybar_config;
   waybarConfig = builtins.toJSON {
     "layer" = "top";
     "height" = 36;
@@ -16,18 +17,18 @@ let
       "custom/colorpicker"
       "custom/keybindings"
     ];
-    "modules-right" = [
-      "cpu"
-      "temperature"
-      "memory"
-      "disk"
-      "backlight"
-      "pulseaudio"
-      "custom/vpn"
-      "custom/notification"
-      "tray"
-      "custom/power"
-    ];
+    "modules-right" =
+      [ "cpu" ]
+      ++ lib.optionals cfg.temperature.enable [ "temperature" ]
+      ++ [ "memory" "disk" ]
+      ++ lib.optionals cfg.backlight.enable [ "backlight" ]
+      ++ [
+        "pulseaudio"
+        "custom/vpn"
+        "custom/notification"
+        "tray"
+        "custom/power"
+      ];
 
     "hyprland/workspaces" = {
       "on-click" = "activate";
@@ -87,6 +88,9 @@ let
       "interval" = 2;
       "format" = "{temperatureC}°C ";
       "format-icons" = [ "" "" "" ];
+    } // lib.optionalAttrs (cfg.temperature.hwmonPathAbs != null) {
+      "hwmon-path-abs" = cfg.temperature.hwmonPathAbs;
+      "input-filename" = cfg.temperature.inputFilename;
     };
     "cpu" = {
       "interval" = 2;
@@ -202,7 +206,7 @@ let
     };
     "custom/vpn" = {
       # "exec"= "~/nixos-config/scripts/vpn_status.sh";
-      "format" = "{icon} {}";
+      "format" = "{icon} {text}";
       "format-icons" = "󰖂 ";
       # "on-click"= "~/nixos-config/scripts/rofi_vpn.sh";
       "on-click" = "sudo vpnc ~/.vpnc/astra.conf";
@@ -516,12 +520,39 @@ let
       }
     '';
 in {
-  home.file.".config/waybar/config".text = waybarConfig;
-  home.file.".config/waybar/style.css".text = waybarStyle;
+  options.waybar_config = {
+    temperature = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable the Waybar temperature module.";
+      };
+      hwmonPathAbs = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "Stable absolute hwmon device path used by Waybar.";
+      };
+      inputFilename = lib.mkOption {
+        type = lib.types.str;
+        default = "temp1_input";
+        description = "Temperature input file within the hwmon device.";
+      };
+    };
+    backlight.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable the Waybar backlight module.";
+    };
+  };
 
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-    systemd.target = "hyprland-session.target";
+  config = {
+    home.file.".config/waybar/config".text = waybarConfig;
+    home.file.".config/waybar/style.css".text = waybarStyle;
+
+    programs.waybar = {
+      enable = true;
+      systemd.enable = true;
+      systemd.target = "hyprland-session.target";
+    };
   };
 }

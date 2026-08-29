@@ -20,6 +20,16 @@
       timeout = 5;
       timeout-low = 5;
       timeout-critical = 0;
+      widgets = [ "title" "dnd" "notifications" ];
+      "widget-config" = {
+        notifications.vexpand = true;
+        title = {
+          text = "Notifications";
+          "clear-all-button" = true;
+          "button-text" = "Clear All";
+        };
+        dnd.text = "Do Not Disturb";
+      };
     };
     style = ''
       /* Minimal Nord Theme for SwayNC */
@@ -78,7 +88,6 @@
 
       .notification-default-action:hover,
       .notification-action:hover {
-        -gtk-icon-effect: none;
         background: #5e81ac; /* Nord10 */
       }
 
