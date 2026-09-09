@@ -62,6 +62,28 @@
         overlays = [
           inputs.claude-code.overlays.default
           inputs.opencode-nix.overlays.default
+          (final: prev: {
+            # nixpkgs bumped rustdesk 1.4.6 -> 1.4.9 upstream (2026-09), and
+            # the Sciter UI's native translate() bridge broke somewhere in
+            # that range: buttons render with blank labels while layout/CSS
+            # stays intact. Pin back to the last known-good release until
+            # nixpkgs/rustdesk sort out the Sciter regression.
+            rustdesk = prev.rustdesk.overrideAttrs (old: rec {
+              version = "1.4.6";
+              src = prev.fetchFromGitHub {
+                owner = "rustdesk";
+                repo = "rustdesk";
+                tag = version;
+                fetchSubmodules = true;
+                hash = "sha256-2MZOM+SHDrjFhCIHcFB7zABpwC7hNtS0XNFx2FpaqIE=";
+              };
+              cargoDeps = prev.rustPlatform.fetchCargoVendor {
+                inherit src;
+                name = "rustdesk-${version}-vendor";
+                hash = "sha256-BYVqeuARE+B1AZLH0s5KlYz2/4qTB18LzzgiGBLXRYg=";
+              };
+            });
+          })
         ];
       };
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -190,6 +212,9 @@
             text = ''${./install.sh} "$@"'';
           };
         });
+      # scratch: iterate on overlay hashes with
+      # `nix build .#legacyPackages.x86_64-linux.rustdesk`
+      legacyPackages.x86_64-linux = pkgs;
     };
 
   inputs = {

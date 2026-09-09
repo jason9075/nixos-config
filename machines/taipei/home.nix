@@ -31,6 +31,9 @@ in {
 
       "audio/mpeg" = [ "vlc.desktop" ];
       "audio/mp3" = [ "vlc.desktop" ];
+      "audio/x-wav" = [ "vlc.desktop" ];
+      "audio/wav" = [ "vlc.desktop" ];
+      "audio/vnd.wave" = [ "vlc.desktop" ];
 
       "image/jpeg" = [ "imv.desktop" ];
       "image/png" = [ "imv.desktop" ];
@@ -165,6 +168,7 @@ in {
     plantuml
     gparted
     anydesk
+    rustdesk
     mdbook
     mdbook-plantuml
     obsidian

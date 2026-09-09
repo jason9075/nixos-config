@@ -51,7 +51,7 @@
       sources = {
         formatting = {
           gofmt.enable = true;
-          nixfmt_rfc_style.enable = true;
+          nixfmt.enable = true;
           hclfmt.enable = true;
           prettierd.enable = true;
           djlint.enable = true;
@@ -142,7 +142,7 @@
       };
       highlight = {
         enable = true;
-        disable = [ "htmldjango" "jinja" "jinja2"];
+        disable = [ "csv" "htmldjango" "jinja" "jinja2" "tsv" ];
       };
     };
     treesitter-context.enable = true;

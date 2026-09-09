@@ -27,15 +27,25 @@
         }
         {
           event = [ "FileType" ];
+          pattern = [ "csv" "tsv" ];
+          callback = {
+            __raw = ''
+              function()
+                vim.treesitter.stop(0)
+                vim.b.ts_highlight = nil
+                vim.bo.syntax = vim.bo.filetype
+              end
+            '';
+          };
+        }
+        {
+          event = [ "FileType" ];
           pattern = [ "markdown" "text" ];
           callback = {
             __raw = ''
               function()
-                vim.opt_local.wrap = true
-                vim.opt_local.linebreak = true
-                vim.opt_local.breakindent = true
+                vim.opt_local.wrap = false
                 vim.opt_local.conceallevel = 2
-                vim.opt_local.concealcursor = "nc"
               end
             '';
           };
@@ -130,25 +140,25 @@
         colorizer.enable = true;
         # typescrip commentstring
         ts-context-commentstring.enable = true;
-        copilot-lua = {
-          enable = config.nixvim_config.copilot.enable;
-          settings.suggestion = {
-            enabled = true;
-            autoTrigger = true;
-          };
-        };
-        opencode = {
-          enable = true;
-          settings = {
-            port = 4097;
-            provider = {
-              enabled = "kitty";
-              kitty = {
-                args = [ "--class" "opencode" ];
-              };
-            };
-          };
-        };
+        # copilot-lua = {
+        #   enable = config.nixvim_config.copilot.enable;
+        #   settings.suggestion = {
+        #     enabled = true;
+        #     autoTrigger = true;
+        #   };
+        # };
+        # opencode = {
+        #   enable = true;
+        #   settings = {
+        #     port = 4097;
+        #     provider = {
+        #       enabled = "kitty";
+        #       kitty = {
+        #         args = [ "--class" "opencode" ];
+        #       };
+        #     };
+        #   };
+        # };
         # copilot-vim.enable = config.nixvim_config.copilot.enable;
 
         luasnip = {
@@ -185,11 +195,23 @@
 
         markdown-preview.enable = true;
         markview.enable = true;
-        outline = {
-          enable = true;
-          settings.outline_window.position = "right";
-        };
+        # outline.nvim was dropped from nixvim; not replacing it.
       };
+
+      # refactoring.nvim depends on lewis6991/async.nvim, which also exposes a
+      # top-level `require('async')` — same module name as nvim-ufo's
+      # kevinhwang91/promise-async. Whichever plugin lands first on the
+      # packpath wins that name, and async.nvim's table isn't callable the
+      # way ufo expects, crashing every fold update with
+      # "attempt to call upvalue 'async' (a table value)".
+      # `package.preload` is checked before any packpath search, so registering
+      # promise-async's loader there pins `require('async')` to it regardless
+      # of packpath scan order or which plugin resolves the name first.
+      extraConfigLuaPre = ''
+        package.preload['async'] = function()
+          return dofile('${pkgs.vimPlugins.promise-async}/lua/async.lua')
+        end
+      '';
 
       extraPlugins = with pkgs.vimPlugins; [
         nightfox-nvim # colorscheme
@@ -197,7 +219,8 @@
         plenary-nvim # testing
         nvim-bufdel # buffer management
         bullets-vim # markdown bullets
-        vim-table-mode # markdown table auto-align
+        rainbow_csv # color CSV/TSV columns
+        # vim-table-mode # commented out to avoid conflict with markview table rendering
         vim-jinja
       ];
       extraPackages = with pkgs; [ lsof ];
