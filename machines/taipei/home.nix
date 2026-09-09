@@ -18,6 +18,9 @@ in {
   };
 
   home.stateVersion = "24.05";
+  # nixpkgs-unstable已切到下個 release cycle，home-manager master 的版號字串
+  # 暫時落後，屬正常過渡期落差，非配置錯誤。
+  home.enableNixpkgsReleaseCheck = false;
 
   xdg.mimeApps = {
     enable = true;
@@ -145,7 +148,6 @@ in {
     gh
     # gh-copilot
     aichat
-    gemini-cli
     cloudflared
     tokei
 

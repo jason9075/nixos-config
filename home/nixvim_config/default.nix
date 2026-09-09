@@ -12,6 +12,11 @@
     programs.nixvim = {
       enable = true;
 
+      # `nixpkgs.source` wants a path to a Nixpkgs tree, not "flake"/"legacy".
+      # Point it at the same Nixpkgs instance already in scope so nixvim
+      # doesn't re-import a second copy (silences the version-mismatch warning).
+      nixpkgs.source = pkgs.path;
+
       colorscheme = "nordfox";
 
       autoCmd = [
