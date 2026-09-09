@@ -6,6 +6,7 @@ $border: #4b4950;
 $nord-blue: #81a1c1;
 $nord-yellow: #ebcb8b;
 $nord-gray: #abb1bb;
+$active-green: #8fb666;
 
 window.bar {
   background: transparent;
@@ -85,6 +86,7 @@ menubutton:hover {
 .colorpicker,
 .keybindings,
 .record.idle,
+.meet-audio.idle,
 .notification,
 .cpu,
 .temperature,
@@ -96,6 +98,10 @@ menubutton:hover {
 
 .record.recording {
   color: $alert;
+}
+
+.meet-audio.active {
+  color: $active-green;
 }
 
 .cpu.mid,

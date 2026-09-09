@@ -162,6 +162,42 @@ function Recording() {
   )
 }
 
+const meetAudioRefreshers = new Set<() => void>()
+
+function MeetAudio() {
+  const [status, setStatus] = createState<RecordingState>({
+    text: "  ",
+    class: "idle",
+    tooltip: "System audio -> mic: OFF (click to enable)",
+  })
+
+  async function refresh() {
+    try {
+      const output = await execAsync([script("meet_audio_status.sh")])
+      setStatus(JSON.parse(output) as RecordingState)
+    } catch (error) {
+      console.error("failed to read meet-audio status:", error)
+    }
+  }
+
+  const timer = interval(5_000, refresh)
+  meetAudioRefreshers.add(refresh)
+  onCleanup(() => {
+    timer.cancel()
+    meetAudioRefreshers.delete(refresh)
+  })
+
+  return (
+    <button
+      class={status((value) => `module action meet-audio ${value.class}`)}
+      tooltipText={status((value) => value.tooltip)}
+      onClicked={() => run([script("meet_audio_toggle.sh")])}
+    >
+      <label label={status((value) => value.text)} />
+    </button>
+  )
+}
+
 type AiUsageWindow = {
   label: string
   remaining_percent: number
@@ -586,6 +622,7 @@ function Center() {
         command={[script("swww_randomize.sh")]}
       />
       <Recording />
+      <MeetAudio />
       <ActionButton
         cssClass="colorpicker"
         icon=" 󰴱 "
@@ -676,6 +713,10 @@ app.start({
       }
       case "refresh-recording":
         for (const refresh of recordingRefreshers) refresh()
+        response("ok")
+        return
+      case "refresh-meet-audio":
+        for (const refresh of meetAudioRefreshers) refresh()
         response("ok")
         return
       default:
