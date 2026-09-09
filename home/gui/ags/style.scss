@@ -1,0 +1,169 @@
+$background: rgba(4, 20, 45, 0.5);
+$foreground: #f5f5f5;
+$alert: #bf616a;
+$disabled: #a5a5a5;
+$border: #4b4950;
+$nord-blue: #81a1c1;
+$nord-yellow: #ebcb8b;
+$nord-gray: #abb1bb;
+$active-green: #8fb666;
+
+window.bar {
+  background: transparent;
+  color: $foreground;
+  font-family: "Hack Nerd Font", FontAwesome, Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+}
+
+.bar-layout {
+  background: transparent;
+}
+
+.panel {
+  min-height: 32px;
+  padding: 0 5px;
+  background: $background;
+  border: 1px solid $border;
+  border-radius: 8px;
+}
+
+window.bar label {
+  min-height: 20px;
+  padding-top: 1px;
+  padding-bottom: 2px;
+}
+
+button,
+menubutton {
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+button:hover,
+menubutton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.module {
+  min-height: 0;
+  padding: 0 7px;
+  margin: 3px 1px;
+  color: $foreground;
+}
+
+.workspaces button {
+  min-width: 22px;
+  padding: 0 3px;
+  color: $foreground;
+}
+
+.workspaces button.empty {
+  color: $disabled;
+}
+
+.workspaces button.active {
+  color: $nord-blue;
+}
+
+.workspaces button.urgent {
+  color: $alert;
+}
+
+.clock {
+  color: $nord-blue;
+  font-weight: bold;
+}
+
+.wallpaper,
+.colorpicker,
+.keybindings,
+.record.idle,
+.meet-audio.idle,
+.notification,
+.cpu,
+.temperature,
+.memory,
+.disk,
+.audio {
+  color: $nord-blue;
+}
+
+.record.recording {
+  color: $alert;
+}
+
+.meet-audio.active {
+  color: $active-green;
+}
+
+.cpu.mid,
+.memory.mid {
+  color: $nord-yellow;
+}
+
+.cpu.high,
+.memory.high {
+  color: $alert;
+}
+
+.temperature.critical,
+.disk.high {
+  color: $foreground;
+  background: $alert;
+}
+
+.disk.mid {
+  color: #252428;
+  background: $nord-yellow;
+}
+
+.audio.muted {
+  color: $foreground;
+  background: $alert;
+}
+
+.ai-usage.unavailable image {
+  opacity: 0.55;
+}
+
+.ai-usage-details {
+  min-width: 420px;
+  padding: 12px;
+}
+
+.ai-usage-details button {
+  min-height: 28px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ai-usage-details button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.tray {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.tray-item {
+  padding: 0 3px;
+}
+
+.power {
+  color: $nord-gray;
+}
+
+popover {
+  font-family: "Hack Nerd Font", FontAwesome, Roboto, Helvetica, Arial,
+    sans-serif;
+}

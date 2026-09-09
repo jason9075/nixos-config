@@ -18,6 +18,9 @@ in {
   };
 
   home.stateVersion = "24.05";
+  # nixpkgs-unstable已切到下個 release cycle，home-manager master 的版號字串
+  # 暫時落後，屬正常過渡期落差，非配置錯誤。
+  home.enableNixpkgsReleaseCheck = false;
 
   xdg.mimeApps = {
     enable = true;
@@ -28,6 +31,9 @@ in {
 
       "audio/mpeg" = [ "vlc.desktop" ];
       "audio/mp3" = [ "vlc.desktop" ];
+      "audio/x-wav" = [ "vlc.desktop" ];
+      "audio/wav" = [ "vlc.desktop" ];
+      "audio/vnd.wave" = [ "vlc.desktop" ];
 
       "image/jpeg" = [ "imv.desktop" ];
       "image/png" = [ "imv.desktop" ];
@@ -45,7 +51,13 @@ in {
   };
   xdg.portal = {
     enable = true;
-    config.common.default = "*";
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common = {
+      default = "gtk";
+      "org.freedesktop.impl.portal.Screenshot" = "hyprland";
+      "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
+      "org.freedesktop.impl.portal.GlobalShortcuts" = "hyprland";
+    };
   };
  
   programs.home-manager.enable = true;
@@ -75,7 +87,7 @@ in {
     ../../home/gui/hyprland.nix
     ../../home/gui/gtk.nix
     ../../home/gui/kitty.nix
-    ../../home/gui/waybar.nix
+    ../../home/gui/ags.nix
     ../../home/gui/hyprlock.nix
     ../../home/gui/wlogout.nix
     ../../home/gui/rofi.nix
@@ -94,6 +106,7 @@ in {
   nixvim_config.copilot.enable = false;
   eww_config.pomodoro.enable = true;
   eww_config.widgets.enable = true;
+  hyprland_config.barToggleCommand = "ags request toggle-bar";
 
   home.packages = with pkgs; [
     # Development
@@ -138,7 +151,6 @@ in {
     gh
     # gh-copilot
     aichat
-    gemini-cli
     cloudflared
     tokei
 
@@ -156,6 +168,7 @@ in {
     plantuml
     gparted
     anydesk
+    rustdesk
     mdbook
     mdbook-plantuml
     obsidian

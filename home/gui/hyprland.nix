@@ -1,11 +1,11 @@
 { inputs, lib, config, pkgs, ... }:
 
 let
+  cfg = config.hyprland_config;
   startupScript = pkgs.writeShellScriptBin "start" ''
     sleep 3
     nm-applet &
     ${lib.optionalString config.services.mako.enable "mako &"}
-    ${lib.optionalString (config.services ? swaync && config.services.swaync.enable) "swaync &"}
     echo "awww init"
     eww daemon &
     awww-daemon --format xrgb &
@@ -19,7 +19,16 @@ let
   '';
 in {
 
-  imports = [ ./eww.nix ];
+  imports = [
+    ./eww.nix
+    {
+      options.hyprland_config.barToggleCommand = lib.mkOption {
+        type = lib.types.str;
+        default = "pkill -USR1 waybar";
+        description = "Command used by Super+B to toggle the status bar.";
+      };
+    }
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -64,7 +73,7 @@ in {
         "$mod, V, togglefloating                                        # Toggle floating"
         "$mod, W, exec, /home/jason9075/projects/wkey/wkey              # wkey"
         "$mod SHIFT, W, exec, ~/nixos-config/scripts/swww_randomize.sh  # Randomize wallpaper"
-        "$mod, B, exec, pkill -USR1 waybar                              # Toggle waybar"
+        "$mod, B, exec, ${cfg.barToggleCommand}                         # Toggle status bar"
         "$mod, equal,  exec, pactl -- set-sink-volume 0 +10%            # Volume up"
         "$mod, minus, exec, pactl -- set-sink-volume 0 -10%             # Volume down"
         ''

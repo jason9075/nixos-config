@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, systemSettings, userSettings, ... }:
+{ lib, pkgs, pkgs-stable, systemSettings, userSettings, ... }:
 
 {
   imports = [
@@ -22,6 +22,10 @@
     if (systemSettings.bootMode == "uefi") then false else true;
   boot.loader.grub.device =
     systemSettings.grubDevice; # does nothing if running uefi rather than bios
+
+  # The ESP contains systemd's random seed, so keep it private to root.
+  fileSystems."/boot".options =
+    lib.mkForce [ "fmask=0077" "dmask=0077" ];
 
   networking.hostName = "taipei";
   networking.enableIPv6 = false;
@@ -113,24 +117,6 @@
     earlySetup = true;
     packages = with pkgs; [ terminus_font powerline-fonts ];
     font = "ter-powerline-v24b";
-    colors = [
-      "2e3440"
-      "3b4252"
-      "434c5e"
-      "4c566a"
-      "d8dee9"
-      "e5e9f0"
-      "eceff4"
-      "8fbcbb"
-      "88c0d0"
-      "81a1c1"
-      "5e81ac"
-      "bf616a"
-      "d08770"
-      "ebcb8b"
-      "a3be8c"
-      "b48ead"
-    ];
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -164,7 +150,7 @@
   services.fstrim.enable = true;
 
   # Open ports in the firewall. 8000 for web development
-  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 8081 8082 7333 ];
+  networking.firewall.allowedTCPPorts = [ 8000 37020 37021 9876 8211 8080 8081 8082 7333 21118 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

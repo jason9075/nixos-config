@@ -56,3 +56,9 @@ else
 fi
 
 pkill -"${WAYBAR_SIGNAL}" waybar || true
+
+# AGS uses a request instead of a Unix signal. This is intentionally
+# best-effort so the shared script still works on machines using Waybar.
+if command -v ags >/dev/null 2>&1; then
+  ags request refresh-recording >/dev/null 2>&1 || true
+fi
