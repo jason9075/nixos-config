@@ -7,6 +7,30 @@ let
     (pkgs.lib.hiPrio (runCommand "$patched-desktop-entry-for-${appName}" { } ''
       ${coreutils}/bin/mkdir -p $out/share/applications
       ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop ''));
+
+  # `programs.hyprland` grants the Hyprland binary CAP_SYS_NICE (via
+  # security.wrappers) so the compositor can self-renice to SCHED_RR. Linux
+  # keeps that capability in the *ambient* set, which every exec()'d child
+  # inherits down the whole tree (Hyprland -> terminal -> shell -> discord).
+  # Discord runs through buildFHSEnv, which shells out to bwrap; bwrap refuses
+  # to run for a non-setuid caller that unexpectedly carries capabilities
+  # ("bwrap: Unexpected capabilities but not setuid, old file caps config?").
+  # Re-exec through a throwaway systemd-run unit with an explicit empty
+  # AmbientCapabilities= to strip it before bwrap ever sees it, without
+  # touching Hyprland's own CAP_SYS_NICE. Wraps both `discord` and `Discord`
+  # since the .desktop launcher's Exec= uses the latter.
+  discordCapFix = symlinkJoin {
+    name = "discord-capfix";
+    paths = [ discord ];
+    buildInputs = [ makeWrapper ];
+    postBuild = ''
+      for bin in discord Discord; do
+        rm -f "$out/bin/$bin"
+        makeWrapper ${systemd}/bin/systemd-run "$out/bin/$bin" \
+          --add-flags "--user --quiet --collect -p AmbientCapabilities= -- ${discord}/bin/$bin"
+      done
+    '';
+  };
 in {
   home.username = userSettings.username;
   home.homeDirectory = "/home/${userSettings.username}";
@@ -183,7 +207,7 @@ in {
     # Communication
     slack
     zoom-us
-    discord
+    discordCapFix
     # webcord
 
     # Network
