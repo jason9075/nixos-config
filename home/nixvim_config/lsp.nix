@@ -34,18 +34,19 @@
         };
       };
     };
-    lspkind = {
-      enable = true;
-      settings.cmp = {
-        enable = true;
-        menu = {
-          nvim_lsp = "[LSP]";
-          path = "[Path]";
-          luasnip = "[Snip]";
-          buffer = "[Buf]";
-        };
-      };
-    };
+    # lspkind: icons for the cmp completion menu, which is gone below.
+    # lspkind = {
+    #   enable = true;
+    #   settings.cmp = {
+    #     enable = true;
+    #     menu = {
+    #       nvim_lsp = "[LSP]";
+    #       path = "[Path]";
+    #       luasnip = "[Snip]";
+    #       buffer = "[Buf]";
+    #     };
+    #   };
+    # };
     none-ls = {
       enable = true;
       sources = {
@@ -106,33 +107,26 @@
       };
     };
     otter.enable = true;
+    # Trimmed-down cmp for occasional small manual edits: LSP + path + buffer
+    # words. No snippet source (luasnip stays cut) and no cmp-treesitter.
     cmp = {
       enable = true;
       settings = {
         sources = [
           { name = "nvim_lsp"; }
           { name = "path"; }
-          { name = "luasnip"; }
           {
             name = "buffer";
             keyword_length = 5; # show buffer completion after 5 characters
           }
         ];
-        snippet = {
-          expand = # lua
-            ''
-              function(args)
-                  require('luasnip').lsp_expand(args.body)
-                end
-            '';
-        };
       };
     };
     cmp-buffer.enable = true;
     cmp-nvim-lsp.enable = true;
     cmp-path.enable = true;
-    cmp-treesitter.enable = true;
-    cmp_luasnip.enable = true;
+    # cmp-treesitter.enable = true;
+    # cmp_luasnip.enable = true;
     treesitter = {
       enable = true;
       nixGrammars = true;

@@ -73,24 +73,25 @@
         key = "<C-p>";
         action = "<Nop>";
       }
-      {
-        mode = [ "i" "s" ];
-        key = "<C-k>";
-        action = "<CMD>lua require('luasnip').expand_or_jump()<CR>";
-        options.silent = true;
-      }
-      {
-        mode = [ "i" "s" ];
-        key = "<C-j>";
-        action = "<CMD>lua require('luasnip').jump(-1)<CR>";
-        options.silent = true;
-      }
-      {
-        mode = [ "i" "s" ];
-        key = "<C-l>";
-        action = "<CMD>lua require('luasnip').change_choice(1)<CR>";
-        options.silent = true;
-      }
+      # luasnip stays cut, so its jump/choice keymaps stay commented out too.
+      # {
+      #   mode = [ "i" "s" ];
+      #   key = "<C-k>";
+      #   action = "<CMD>lua require('luasnip').expand_or_jump()<CR>";
+      #   options.silent = true;
+      # }
+      # {
+      #   mode = [ "i" "s" ];
+      #   key = "<C-j>";
+      #   action = "<CMD>lua require('luasnip').jump(-1)<CR>";
+      #   options.silent = true;
+      # }
+      # {
+      #   mode = [ "i" "s" ];
+      #   key = "<C-l>";
+      #   action = "<CMD>lua require('luasnip').change_choice(1)<CR>";
+      #   options.silent = true;
+      # }
       {
         mode = [ "n" "x" ];
         key = "c";
@@ -356,12 +357,7 @@
             __unkeyed-2 = ":lua vim.lsp.buf.rename()<CR>";
             desc = "Rename";
           }
-          {
-            __unkeyed-1 = "<leader>ri";
-            __unkeyed-2 =
-              ":lua require('refactoring').refactor('Inline Variable')<CR>";
-            desc = "Inline";
-          }
+          # refactoring.nvim removed, so "Inline Variable" (<leader>ri) is gone too.
           {
             __unkeyed-1 = "<leader>f";
             group = "Find";

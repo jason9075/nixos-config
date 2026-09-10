@@ -135,7 +135,9 @@
             files = { file_ignore_patterns = [ "vendor" "build" ]; };
           };
         };
-        refactoring.enable = true;
+        # refactoring.nvim: manual refactor tool (extract fn/var). Agent does
+        # this now, not worth the plugin weight.
+        # refactoring.enable = true;
         comment.enable = true;
         colorizer.enable = true;
         # typescrip commentstring
@@ -161,16 +163,18 @@
         # };
         # copilot-vim.enable = config.nixvim_config.copilot.enable;
 
-        luasnip = {
-          enable = true;
-          # TextChangedI will update the other nodes when the first node is updated.
-          settings = { updateevents = "TextChangedI"; };
-          fromLua =
-            [{ paths = "~/nixos-config/home/nixvim_config/lua_snippets"; }];
-          fromVscode =
-            [{ paths = "~/nixos-config/home/nixvim_config/vscode_snippets"; }];
-        };
-        friendly-snippets.enable = true;
+        # Snippet expansion is only useful when hand-typing code; agent-driven
+        # edits don't need it.
+        # luasnip = {
+        #   enable = true;
+        #   # TextChangedI will update the other nodes when the first node is updated.
+        #   settings = { updateevents = "TextChangedI"; };
+        #   fromLua =
+        #     [{ paths = "~/nixos-config/home/nixvim_config/lua_snippets"; }];
+        #   fromVscode =
+        #     [{ paths = "~/nixos-config/home/nixvim_config/vscode_snippets"; }];
+        # };
+        # friendly-snippets.enable = true;
 
         # git
         gitsigns.enable = true;
@@ -184,7 +188,7 @@
           topDown = false;
         };
         tmux-navigator.enable = true;
-        nvim-autopairs.enable = true;
+        # nvim-autopairs.enable = true; # auto-closing brackets: only matters when typing code by hand
         navic.enable = true;
 
         which-key = {
