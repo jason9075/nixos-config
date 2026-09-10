@@ -57,6 +57,10 @@ in {
       "org.freedesktop.impl.portal.Screenshot" = "hyprland";
       "org.freedesktop.impl.portal.ScreenCast" = "hyprland";
       "org.freedesktop.impl.portal.GlobalShortcuts" = "hyprland";
+      # Fallback input-injection path for remote-control tools (RustDesk) when
+      # uinput isn't available: routes through Hyprland's own virtual
+      # pointer/keyboard protocols instead.
+      "org.freedesktop.impl.portal.RemoteDesktop" = "hyprland";
     };
   };
  

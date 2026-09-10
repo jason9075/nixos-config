@@ -95,6 +95,15 @@
     packages = with pkgs; [ firefox ];
   };
 
+  # RustDesk (and other remote-control tools) inject mouse/keyboard input on
+  # Wayland/Hyprland via a virtual uinput device. The kernel module isn't
+  # loaded by default and /dev/uinput is root-only until this udev rule opens
+  # it up to the `input` group the user above already belongs to.
+  boot.kernelModules = [ "uinput" ];
+  services.udev.extraRules = ''
+    KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+  '';
+
   # nh
   programs.nh = {
     enable = true;

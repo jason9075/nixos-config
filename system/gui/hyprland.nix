@@ -35,6 +35,14 @@ in {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     xwayland.enable = true;
+    # Must come from the same flake snapshot as `package` above: Hyprland's
+    # compositor<->portal IPC is internal/unversioned, and pairing this git
+    # build with nixpkgs' own (older/newer, unrelated) xdg-desktop-portal-hyprland
+    # silently breaks ScreenCast/RemoteDesktop portal calls — which is what
+    # made RustDesk fail with the misleading "Wayland requires higher version
+    # of linux distro" error.
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
   environment.variables.WLR_RENDERER_ALLOW_SOFTWARE = "1";
