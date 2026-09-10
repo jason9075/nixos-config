@@ -49,7 +49,13 @@ else
 
   mkdir -p "$OUTDIR"
   OUTFILE="${OUTDIR}/$(date +%Y-%m-%d_%H-%M-%S).mp4"
-  gpu-screen-recorder -w "$MONITOR" -f 60 -a "$AUDIO_SOURCE" -o "$OUTFILE" &>/tmp/gpu-screen-recorder.log &
+  # This GPU's NVENC API version (13.0) trails what gpu-screen-recorder's
+  # bundled FFmpeg requires (13.1), and there's no VAAPI fallback on a
+  # single-NVIDIA-GPU box, so GPU encoding is unavailable outright. Without
+  # this flag gpu-screen-recorder just exits with "no video encoder ...
+  # supported" instead of falling back; CPU (libx264) encoding works fine.
+  gpu-screen-recorder -w "$MONITOR" -f 60 -a "$AUDIO_SOURCE" \
+    -fallback-cpu-encoding yes -o "$OUTFILE" &>/tmp/gpu-screen-recorder.log &
   NEWPID=$!
   printf '%s\n%s\n' "$NEWPID" "$OUTFILE" > "$PIDFILE"
   notify-send "Screen Recording" "Started -> ${OUTFILE}"
