@@ -48,6 +48,11 @@ in {
   };
   programs.home-manager.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   imports = [
     inputs.nixvim.homeModules.nixvim
 
@@ -80,6 +85,7 @@ in {
     postman
     ansible
     vpnc
+    just
 
     # CLI
     htop
@@ -98,6 +104,7 @@ in {
     tree
     nmap
     claude-code
+    wireguard-tools
 
     # GUI
     hyprland
@@ -133,7 +140,8 @@ in {
     wtype
     tree-sitter
     inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
-    inputs.codex-nix.packages.x86_64-linux.default
+    inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-cli
+    inputs.herdr.packages.x86_64-linux.default
   ];
 
 }

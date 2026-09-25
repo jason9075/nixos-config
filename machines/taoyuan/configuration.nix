@@ -27,6 +27,7 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "none";
   networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+  networking.useDHCP = true;
 
   time.timeZone = systemSettings.timezone;
   time.hardwareClockInLocalTime = true;
@@ -63,7 +64,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ firefox ];
   };
